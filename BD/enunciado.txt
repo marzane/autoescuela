@@ -1,0 +1,11 @@
+- Base de datos autoescuela -
+
+Los usuarios tienen un id, nombre, dni único y contraseña. Cada uno accede a la aplicación con su dni y contraseña.
+
+Cada examen tiene 30 preguntas. De cada pregunta se almacena un id, el enunciado, las tres respuestas, la respuesta correcta(si es la 1, 2 o 3)
+ y el nombre de la imagen que se mostrará en pantalla.
+
+Cuando el usuario completa un examen se registra la fecha, el número de preguntas acertadas y falladas y el usuario, 
+y de cada pregunta contestada se registra el examen al que pertecene, la pregunta y el resultado.
+
+Cada resultado de pregunta sólo pertenece a un examen y usuario.
