@@ -1,11 +1,11 @@
 /*******************************************************************************
- BASE DE DATOS DEL PROYECTO
+ BASE DE DATOS AUTOESCUELA
  ******************************************************************************/
 
 /*
-Base de datos: autoescuelaBD
-Usuario: autoescuela
-contraseña: 22cdvABZYCAU
+ Base de datos: autoescuelaBD
+ Usuario: autoescuela
+ contraseña: 22cdvABZYCAU
  */
 
 /*******************************************************************************
@@ -13,48 +13,44 @@ contraseña: 22cdvABZYCAU
  ******************************************************************************/
 
 drop database autoescuelabd;
+
 create database autoescuelabd;
+
 use autoescuelabd;
 
 CREATE TABLE
     USUARIO(
-        NOMBRE VARCHAR(20) NOT NULL,
-        APELLIDOS VARCHAR(30) NOT NULL,
+        NOMBRE VARCHAR(50) NOT NULL,
         DNI VARCHAR(9) NOT NULL,
         PASSWORD VARCHAR(30) NOT NULL,
         ID INT NOT NULL AUTO_INCREMENT,
 
-		PRIMARY KEY (ID)
-    );
+PRIMARY KEY (ID) );
 
 CREATE TABLE
     PREGUNTA(
-	    ENUNCIADO VARCHAR(500) NOT NULL,
+        ENUNCIADO VARCHAR(500) NOT NULL,
         RESPUESTA1 VARCHAR(500) NOT NULL,
         RESPUESTA2 VARCHAR(500) NOT NULL,
         RESPUESTA3 VARCHAR(500) NOT NULL,
         RESPUESTACORRECTA INTEGER NOT NULL,
-        TEMA INTEGER NOT NULL,
         IMAGEN VARCHAR(40),
-		ID INT NOT NULL AUTO_INCREMENT, 
+        ID INT NOT NULL AUTO_INCREMENT,
 
-		PRIMARY KEY (ID)
-);
+PRIMARY KEY (ID) );
 
 CREATE TABLE
     RESULTADOSEXAMEN(
         FECHAHORA TIMESTAMP NOT NULL,
         ACERTADAS INTEGER NOT NULL,
         FALLADAS INTEGER NOT NULL,
-        BLANCO INTEGER NOT NULL,
         USUARIO INT NOT NULL,
-		ID INT NOT NULL AUTO_INCREMENT,
+        ID INT NOT NULL AUTO_INCREMENT,
 
-		PRIMARY KEY (ID),
+PRIMARY KEY (ID), 
 
-        FOREIGN KEY (USUARIO) REFERENCES USUARIO(ID) ON DELETE CASCADE
-);
-
+FOREIGN KEY (USUARIO) REFERENCES USUARIO(ID) ON DELETE CASCADE );
+/*
 CREATE TABLE
     RESULTADOSPREGUNTA(
         EXAMEN INTEGER NOT NULL,
@@ -64,7 +60,7 @@ CREATE TABLE
         FOREIGN KEY (EXAMEN) REFERENCES RESULTADOSEXAMEN(ID) ON DELETE CASCADE,
         FOREIGN KEY (PREGUNTA) REFERENCES PREGUNTA(ID) ON DELETE CASCADE
     );
-
+*/
 /*******************************************************************************
  DATOS DE EJEMPLO
  ******************************************************************************/
@@ -72,99 +68,57 @@ CREATE TABLE
 /********************************************USUARIO**********************************************/
 
 INSERT INTO
-    USUARIO (
-        NOMBRE,
-        APELLIDOS,
-        DNI,
-        PASSWORD
-    )
+    USUARIO (NOMBRE, DNI, PASSWORD)
 VALUES (
-        'Manuel José',
-        'Castro Damas',
+        'Manuel José Castro Damas',
         '00000000M',
         '123456'
     );
 
 INSERT INTO
-    USUARIO (
-        NOMBRE,
-        APELLIDOS,
-        DNI,
-        PASSWORD
-    )
+    USUARIO (NOMBRE, DNI, PASSWORD)
 VALUES (
-        'Raul',
-        'Moya Reyes',
+        'Raul Moya Reyes',
         '11111111A',
         '123456'
     );
 
 INSERT INTO
-    USUARIO (
-        NOMBRE,
-        APELLIDOS,
-        DNI,
-        PASSWORD
-    )
+    USUARIO (NOMBRE, DNI, PASSWORD)
 VALUES (
-        'Agustín',
-        'Ruiz Linares',
+        'Agustín Ruiz Linares',
         '33333333C',
         '123456'
     );
 
 INSERT INTO
-    USUARIO (
-        NOMBRE,
-        APELLIDOS,
-        DNI,
-        PASSWORD
-    )
+    USUARIO (NOMBRE, DNI, PASSWORD)
 VALUES (
-        'Gabriel',
-        'Fernández Moral',
+        'Gabriel Fernández Moral',
         '44444444D',
         '123456'
     );
 
 INSERT INTO
-    USUARIO (
-        NOMBRE,
-        APELLIDOS,
-        DNI,
-        PASSWORD
-    )
+    USUARIO (NOMBRE, DNI, PASSWORD)
 VALUES (
-        'Alberto',
-        'Téllez Aguallo',
+        'Alberto Téllez Aguallo',
         '12222222A',
         '123456'
     );
 
 INSERT INTO
-    USUARIO (
-        NOMBRE,
-        APELLIDOS,
-        DNI,
-        PASSWORD
-    )
+    USUARIO (NOMBRE, DNI, PASSWORD)
 VALUES (
-        'Juan',
-        'Chica Estrella',
+        'Juan Chica Estrella',
         '24444444F',
         '123456'
     );
 
 INSERT INTO
-    USUARIO (
-        NOMBRE,
-        APELLIDOS,
-        DNI,
-        PASSWORD
-    )
+    USUARIO (NOMBRE, DNI, PASSWORD)
 VALUES (
-        'Jose Ramón',
-        'Ureña Ureña',
+        'Jose Ramón Ureña Ureña',
         '32222222W',
         '123456'
     );
@@ -178,7 +132,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -187,7 +140,6 @@ VALUES (
         'Por el carril derecho de la calzada, sin invadir el arcén.',
         'Por el carril derecho de la calzada, aunque deberé desplazarme al arcén cuando obstaculice la marcha normal del resto de los vehículos.',
         1,
-        1,
         'no_image.png'
     );
 
@@ -198,7 +150,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -207,7 +158,6 @@ VALUES (
         'A los vehículos que se aproximen por la izquierda.',
         ' A los vehículos que se aproximen por la derecha.',
         3,
-        1,
         'no_image.png'
     );
 
@@ -218,7 +168,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -227,7 +176,6 @@ VALUES (
         'El paso de animales en libertad.',
         'El paso de animales domésticos.',
         2,
-        1,
         'p1.gif'
     );
 
@@ -238,7 +186,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -247,7 +194,6 @@ VALUES (
         'A 45 kilómetros por hora.',
         'A 50 kilómetros por hora.',
         2,
-        1,
         'no_image.png'
     );
 
@@ -258,7 +204,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -267,7 +212,6 @@ VALUES (
         'Sí, las luces de cruce o de carretera, indistintamente.',
         'No, porque la vía está suficientemente iluminada.',
         1,
-        1,
         'no_image.png'
     );
 
@@ -278,7 +222,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -287,7 +230,6 @@ VALUES (
         'Detenerme sólo cuando sea preciso para ceder el paso.',
         'Circular con precaución, porque me indica la proximidad de un peligro indefinido.',
         2,
-        1,
         'p2.gif'
     );
 
@@ -298,7 +240,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -307,7 +248,6 @@ VALUES (
         'los pasos a nivel.',
         'las calzadas de doble sentido de circulación.',
         2,
-        1,
         'no_image.png'
     );
 
@@ -318,7 +258,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -327,7 +266,6 @@ VALUES (
         'No.',
         '.',
         2,
-        1,
         'no_image.png'
     );
 
@@ -338,7 +276,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -347,7 +284,6 @@ VALUES (
         'No.',
         '.',
         1,
-        1,
         'no_image.png'
     );
 
@@ -358,7 +294,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -367,7 +302,6 @@ VALUES (
         'que no obtaculiza la marcha de los demás vehículos a los que Ud. debe ceder el paso.',
         'que los vehículos que se aproximan van a cederle el paso.',
         2,
-        1,
         'no_image.png'
     );
 
@@ -378,7 +312,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -387,7 +320,6 @@ VALUES (
         'A todos los vehículos de motor.',
         'A las motocicletas.',
         3,
-        1,
         'p3.gif'
     );
 
@@ -398,7 +330,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -407,7 +338,6 @@ VALUES (
         'Moviéndolo de arriba abajo con movimientos cortos y rápidos.',
         'Doblándolo hacia arriba con la palma de la mano extendida.',
         2,
-        1,
         'no_image.png'
     );
 
@@ -418,7 +348,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -426,7 +355,6 @@ VALUES (
         'indica peligro por la proximidad de una curva a la derecha.',
         'prohíbe cambiar de dirección a la derecha.',
         'indica la proximidad de un peligro indeterminado en la vía.',
-        1,
         1,
         'p4.gif'
     );
@@ -438,7 +366,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -447,7 +374,6 @@ VALUES (
         'Sí, aunque no exista paso para peatones.',
         'No, porque tengo preferencia de paso.',
         2,
-        1,
         'no_image.png'
     );
 
@@ -458,7 +384,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -467,7 +392,6 @@ VALUES (
         'girar a la derecha.',
         'cambiar el sentido de la marcha.',
         3,
-        1,
         'p5.gif'
     );
 
@@ -478,7 +402,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -487,7 +410,6 @@ VALUES (
         '1,50 metros, como máximo.',
         'La que estime oportuna, siempre que no sea superior a 1 metro.',
         1,
-        1,
         'no_image.png'
     );
 
@@ -498,7 +420,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -507,7 +428,6 @@ VALUES (
         'Hacerle andar y darle agua.',
         'Darle algún tranquilizante, para que se serene.',
         1,
-        1,
         'no_image.png'
     );
 
@@ -518,7 +438,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -527,7 +446,6 @@ VALUES (
         'Sí, en 20 kilómetros por hora.',
         'Sí, siempre que no se superen los 60 kilómetros por hora.',
         1,
-        1,
         'no_image.png'
     );
 
@@ -538,7 +456,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -547,7 +464,6 @@ VALUES (
         'la luz de cruce, con independencia de las condiciones de visibilidad o iluminación de la vía.',
         'la luz de posición.',
         2,
-        1,
         'p6.gif'
     );
 
@@ -558,7 +474,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -567,7 +482,6 @@ VALUES (
         'No, porque sólo deben encenderse de noche.',
         'Sí, pero sólo si circulo por vías interurbanas.',
         1,
-        1,
         'no_image.png'
     );
 
@@ -578,7 +492,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -587,7 +500,6 @@ VALUES (
         'Las de posición y las de carretera, sustituyendo las de carretera por las de cruce.',
         'Las de posición y, las de cruce y carreteras, indistintamente.',
         1,
-        2,
         'no_image.png'
     );
 
@@ -598,7 +510,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -607,7 +518,6 @@ VALUES (
         '60 kilómetros por hora, circulen o no otros vehículos.',
         '50 kilómetros por hora, circulen o no otros vehículos.',
         1,
-        2,
         'p7.gif'
     );
 
@@ -618,7 +528,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -627,7 +536,6 @@ VALUES (
         'No.',
         'Sí, la señal de emergencia si el vehículo la lleva.',
         3,
-        2,
         'no_image.png'
     );
 
@@ -638,7 +546,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -647,7 +554,6 @@ VALUES (
         'En la intersección, siempre que la posición de mi vehículo no modifique la trayectoria normal de los vehículos que circulen por la vía transversal.',
         'Inmediatamente antes de llegar a la intersección, es decir, en la unión de las dos vías.',
         3,
-        2,
         'p8.gif'
     );
 
@@ -658,7 +564,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -667,7 +572,6 @@ VALUES (
         'Sí.',
         'No, porque, sólo está permitida en vías dentro de poblado.',
         1,
-        2,
         'no_image.png'
     );
 
@@ -678,7 +582,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -687,7 +590,6 @@ VALUES (
         'Sí.',
         'Sí, pero solo para adelantar.',
         1,
-        2,
         'p9.gif'
     );
 
@@ -698,7 +600,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -707,7 +608,6 @@ VALUES (
         'indicar con el indicador de dirección derecho, que permite el adelantamiento.',
         'ceñirse al borde derecho de la calzada.',
         3,
-        2,
         'no_image.png'
     );
 
@@ -718,7 +618,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -726,7 +625,6 @@ VALUES (
         'Por el derecho, aunque si las circunstancias lo permiten podré circular por el central o por el izquierdo.',
         'Por el derecho, únicamente.',
         'Por el central o por el izquierdo, pero nunca por el derecho, que está reservado para el tráfico rápido.',
-        2,
         2,
         'p10.gif'
     );
@@ -738,7 +636,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -747,7 +644,6 @@ VALUES (
         'Sí, pero únicamente cuando se trate de vehículos automóviles.',
         'Sí, porque circula dentro de la vía circular.',
         3,
-        2,
         'no_image.png'
     );
 
@@ -758,7 +654,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -767,7 +662,6 @@ VALUES (
         'Sí, porque en esta vía de varios carriles para el mismo sentido, se puede circular por el que se crea más conveniente.',
         'No, porque deberé circular por el carril de la derecha y sólo utilizaré los restantes cuando las circunstancias del tráfico o de la vía lo aconsejen.',
         3,
-        2,
         'p11.gif'
     );
 
@@ -778,7 +672,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -786,7 +679,6 @@ VALUES (
         'A 110 kilómetros por hora.',
         'No está permitido el adelantamiento porque el turismo que circula delante lo hace a la velocidad máxima permitida para este tipo de vías.',
         'A 120 kilómetros por hora.',
-        2,
         2,
         'no_image.png'
     );
@@ -798,7 +690,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -807,7 +698,6 @@ VALUES (
         'A 60 kilómetros por hora.',
         'A 40 kilómetros por hora.',
         1,
-        2,
         'p12.gif'
     );
 
@@ -818,7 +708,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -827,7 +716,6 @@ VALUES (
         'Sí, estará más cómodo.',
         'Es indiferente.',
         1,
-        2,
         'no_image.png'
     );
 
@@ -838,7 +726,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -847,7 +734,6 @@ VALUES (
         'Cambiarse de carril antes de llegar a la altura del semáforo.',
         'Detenerse porque por ese carril no pueden circular.',
         1,
-        2,
         'p13.gif'
     );
 
@@ -858,7 +744,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -866,7 +751,6 @@ VALUES (
         'celerar para salir lo más pronto posible del peligro.',
         'no frenar ni acelerar y conducir con suavidad.',
         'llevar el pedal del freno ligeramente presionado para que, en caso de necesidad, la frenada sea más rápida.',
-        2,
         2,
         'no_image.png'
     );
@@ -878,7 +762,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -886,7 +769,6 @@ VALUES (
         'Sí, las luces de posición para indicar mi presencia.',
         'Sí, las luces de posición y las de cruce, esté el paso inferior suficientemente o insuficientemente iluminado.',
         'Sí, las luces de posición y las de largo alcance o carretera si el paso inferior está insuficientemente iluminado.',
-        2,
         2,
         'p14.gif'
     );
@@ -898,7 +780,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -906,7 +787,6 @@ VALUES (
         'retirar inmediatamente de la calzada a la víctima.',
         'evitar la modificación del estado de las cosas y de las huellas u otras pruebas para determinar la responsabilidad, salvo que con ello se perjudique la seguridad de los heridos o la circulación.',
         'no tocar, en ningún caso, a la víctima ni al resto de los heridos ni los vehículos hasta que llegue la autoridad.',
-        2,
         2,
         'no_image.png'
     );
@@ -918,7 +798,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -927,7 +806,6 @@ VALUES (
         'Sí, porque aunque el comportamiento no es correcto, deja espacio suficiente en la acera para que pasen los peatones.',
         'No, porque está utilizando parte de la vía reservada a los peatones.',
         3,
-        2,
         'p15.gif'
     );
 
@@ -938,7 +816,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -947,7 +824,6 @@ VALUES (
         'Que por dicho carril sólo pueden circular turismos y motocicletas.',
         'Solamente que debo utilizar la luz de cruce tanto de día como de noche.',
         1,
-        2,
         'no_image.png'
     );
 
@@ -958,7 +834,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -967,7 +842,6 @@ VALUES (
         'Con las señales acústicas o las luminosas utilizando en forma intermitente.',
         'Con las señales luminosas, únicamente.',
         2,
-        2,
         'no_image.png'
     );
 
@@ -978,7 +852,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -987,7 +860,6 @@ VALUES (
         'Sí, porque no se obstaculiza a otros vehículos ya que hay más carriles para circualar.',
         'No, tanto si está parado como estacionado.',
         3,
-        2,
         'p16.gif'
     );
 
@@ -998,7 +870,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1007,7 +878,6 @@ VALUES (
         'Sí.',
         'Sí, como norma general.',
         1,
-        2,
         'no_image.png'
     );
 
@@ -1018,7 +888,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1026,7 +895,6 @@ VALUES (
         'Sí, siempre que observe que no se aproxima ningún vehículo que circule sobre raíles.',
         'No, en ningún caso.',
         'Sí, teniendo la precaución de cruzar antes de que esté la barrera completamente bajada',
-        2,
         2,
         'p17.gif'
     );
@@ -1038,7 +906,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1047,7 +914,6 @@ VALUES (
         'Sí, pero sólo en vías urbanas.',
         'No, en ningún caso. La marcha atrás está prohibida.',
         1,
-        2,
         'no_image.png'
     );
 
@@ -1058,7 +924,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1067,7 +932,6 @@ VALUES (
         'mide más de 2,50 metros de ancho.',
         'mide más de 12 metros.',
         3,
-        2,
         'p18.gif'
     );
 
@@ -1078,7 +942,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1087,7 +950,6 @@ VALUES (
         'el tiempo de reacción.',
         ' la sensibilidad al deslumbramiento de noche.',
         1,
-        2,
         'no_image.png'
     );
 
@@ -1098,7 +960,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1107,7 +968,6 @@ VALUES (
         'Sí, siempre que la carga no sobresalga de la estructura del vehículo.',
         'Sí, siempre que la carga sea adecuada a las características del vehículo, no comprometa su estabilidad y , en su caso, vaya correctamente señalizada.',
         3,
-        2,
         'no_image.png'
     );
 
@@ -1118,7 +978,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1127,7 +986,6 @@ VALUES (
         'Que el vehículo excede en masas y dimensiones.',
         'Que el vehículo lleva una matrícula europea.',
         1,
-        2,
         'p19.gif'
     );
 
@@ -1138,7 +996,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1146,7 +1003,6 @@ VALUES (
         'No, en ningún caso.',
         'No, salvo que utilice asientos de seguridad o dispositivos debidamente homologados para este fin.',
         'Sí, en todo caso.',
-        2,
         2,
         'no_image.png'
     );
@@ -1158,7 +1014,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1167,7 +1022,6 @@ VALUES (
         'el lugar donde está autorizado el estacionamiento de vehículos.',
         'un lugar reservado para el estacionamiento de taxis.',
         1,
-        2,
         'p20.gif'
     );
 
@@ -1178,7 +1032,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1186,7 +1039,6 @@ VALUES (
         'Por la parte de la calzada que queda a la derecha del refugio o isleta, únicamente.',
         'Por la parte de la calzada que queda a la izquierda del refugio o isleta, únicamente.',
         'Por cualquiera de los dos lados.',
-        3,
         3,
         'no_image.png'
     );
@@ -1198,7 +1050,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1206,7 +1057,6 @@ VALUES (
         'por la derecha de la calzada sin sobrepasar los 80 kilómetros por hora.',
         'por el centro de la calzada cuando no se aproximen otros vehículos en sentido contrario, sin sobrepasar lo 70 kilómetros por hora.',
         'por la derecha de la calzada siempre, sin sobrepasar los 90 kilómetros por hora.',
-        3,
         3,
         'p21.gif'
     );
@@ -1218,7 +1068,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1226,7 +1075,6 @@ VALUES (
         'Sí, pero unicamente cuando circule a más de 40 kilómetros por hora y la vía no esté iluminada.',
         'Sí, cuando la vía esté insuficientemente iluminada, siempre que observe que no hay posibilidad de producir deslumbramientos.',
         'No, dentro de poblado está prohibida su utilización.',
-        3,
         3,
         'no_image.png'
     );
@@ -1238,7 +1086,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1247,7 +1094,6 @@ VALUES (
         'Sí, porque es una zona excluidad al tráfico y ha encendido las luces de emergencia.',
         'Sí, porque es una zona especialmente destinada a este fin.',
         1,
-        3,
         'p22.gif'
     );
 
@@ -1258,7 +1104,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1267,7 +1112,6 @@ VALUES (
         'Que está prohibido ocupar dicho carril y deben abandonarlo lo antes posible.',
         'Que deben detenerse al llegar a un puesto de aduana, de policía, de peaje u otro.',
         2,
-        3,
         'no_image.png'
     );
 
@@ -1278,7 +1122,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1286,7 +1129,6 @@ VALUES (
         'El turismo.',
         'El vehículo que tenga más facilidad de maniobrar.',
         'El camión.',
-        3,
         3,
         'p23.gif'
     );
@@ -1298,7 +1140,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1307,7 +1148,6 @@ VALUES (
         'No, porque en las intersecciones está prohibido adelantar siempre.',
         'No, porque sólo está permitido adelantar en las intersecciones con circulación giratoria o en las gloriestas.',
         1,
-        3,
         'no_image.png'
     );
 
@@ -1318,7 +1158,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1326,7 +1165,6 @@ VALUES (
         'No, porque está prohibido el adelantamiento por la derecha.',
         'Dentro de poblado, es correcto; fuera de poblado, no.',
         'Sí, porque, en este caso, el hecho de que los vehículos de un carril circulen más rápidamente que los de otro no se considera adelantamiento.',
-        3,
         3,
         'p24.gif'
     );
@@ -1338,7 +1176,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1347,7 +1184,6 @@ VALUES (
         'Sí, salvo prohibición expresa en contrario.',
         'No, porque está prohibido.',
         2,
-        3,
         'no_image.png'
     );
 
@@ -1358,7 +1194,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1367,7 +1202,6 @@ VALUES (
         'los vehículos que circulen dentro de la vía circular.',
         'los vehículos que se aproximen a la glorieta, cualquiera que sea el lado por el que se aproximen.',
         2,
-        3,
         'p25.gif'
     );
 
@@ -1378,7 +1212,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1386,7 +1219,6 @@ VALUES (
         'No, porque circulo dentro del límite máximo permitido en poblado.',
         'No, porque circulo a la velocidad máxima permitida para las zonas así señalizadas.',
         'Sí, deberá circular como máximo a 20 kilómetros por hora.',
-        3,
         3,
         'no_image.png'
     );
@@ -1398,7 +1230,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1407,7 +1238,6 @@ VALUES (
         'No, en nigún caso.',
         'Sí, siempre que se circule antes de iniciar el adelantamiento, a la velocidad máxima permitida para la vía.',
         2,
-        3,
         'p26.gif'
     );
 
@@ -1418,7 +1248,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1426,7 +1255,6 @@ VALUES (
         'una fractura del hueso.',
         'un "estado de shock" (choque).',
         'una lesión de médula espinal.',
-        3,
         3,
         'no_image.png'
     );
@@ -1438,7 +1266,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1447,7 +1274,6 @@ VALUES (
         'desplazarse lateralmente a la derecha o a la izquierda.',
         'cambiar de dirección en la próxima intersección.',
         1,
-        3,
         'p27.gif'
     );
 
@@ -1458,7 +1284,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1467,7 +1292,6 @@ VALUES (
         '50 metros como mínimo.',
         'Un espacio libre que me permita detener mi turismo en caso de frenado brusco del vehículo que circula delante y, a su vez, permita al vehículo que me sigue adelantarme con seguridad.',
         1,
-        3,
         'no_image.png'
     );
 
@@ -1478,7 +1302,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1487,7 +1310,6 @@ VALUES (
         'Sí, porque el semáforo encendido con luz verde le da prioridad de paso.',
         'Sólo si ha observado que no se aproxima ningún vehículo por la vía transversal.',
         1,
-        3,
         'p28.gif'
     );
 
@@ -1498,7 +1320,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1507,7 +1328,6 @@ VALUES (
         'Detención obligatoria.',
         'Disminución de la velocidad.',
         1,
-        3,
         'no_image.png'
     );
 
@@ -1518,7 +1338,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1526,7 +1345,6 @@ VALUES (
         'no tiene preferencia de paso y, por tanto, debe aplicar la norma general de prioridad en las intersecciones sin señalizar.',
         'tienen preferencia de paso los vehículos que se aproximen por la izquierda.',
         'tiene preferencia de paso sobre los vehículos que se aproximan po la izquierda.',
-        3,
         3,
         'p29.gif'
     );
@@ -1538,7 +1356,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1547,7 +1364,6 @@ VALUES (
         'La actuación más eficaz es realizar presión directa sobre la herida.',
         'La actuación más eficaz es elevar la zona que sangra.',
         2,
-        3,
         'no_image.png'
     );
 
@@ -1558,7 +1374,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1567,7 +1382,6 @@ VALUES (
         'más de 2,10 de ancho.',
         'más de cuatro metros de alto.',
         2,
-        3,
         'no_image.png'
     );
 
@@ -1578,7 +1392,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1587,7 +1400,6 @@ VALUES (
         'No.',
         'Sí, cuando el semáforo pase a su fase roja.',
         2,
-        3,
         'p30.gif'
     );
 
@@ -1598,7 +1410,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1607,7 +1418,6 @@ VALUES (
         'Sí, siempre que no obstaculice el paso de los peatones por la acera.',
         'Sí, pero únicamente por la noche, que es cuando menos trásito de peatones hay.',
         1,
-        3,
         'no_image.png'
     );
 
@@ -1618,7 +1428,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1627,7 +1436,6 @@ VALUES (
         'No.',
         'Sí, como norma general.',
         2,
-        3,
         'p31.gif'
     );
 
@@ -1638,7 +1446,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1647,7 +1454,6 @@ VALUES (
         ' Sí, siempre que no circulen otros a los que pueda entorpecer su marcha normal.',
         'Sí, aunque en este caso estoy obligado a circular por el arcén, circulen o no otros vehículos.',
         1,
-        3,
         'no_image.png'
     );
 
@@ -1658,7 +1464,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1667,7 +1472,6 @@ VALUES (
         'No, porque los conos prohíbe el paso a través de la línea imaginaria que los une.',
         'Sí, para adelantar, siempre que al realizarlo no derribe ningún cono.',
         2,
-        3,
         'p32.gif'
     );
 
@@ -1678,7 +1482,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1687,7 +1490,6 @@ VALUES (
         'Ninguna.',
         'La delantera, únicamente.',
         3,
-        3,
         'no_image.png'
     );
 
@@ -1698,7 +1500,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1707,7 +1508,6 @@ VALUES (
         'un carril reversible.',
         'un carril adicional.',
         2,
-        3,
         'no_image.png'
     );
 
@@ -1718,7 +1518,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1727,7 +1526,6 @@ VALUES (
         'De la proximidad de una zona en la que sopla frecuentemente viento fuerte en dirección transversal.',
         'De la proximidad de un desnivel.',
         2,
-        3,
         'p33.gif'
     );
 
@@ -1738,7 +1536,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1746,7 +1543,6 @@ VALUES (
         'No, debo obtener otro permiso.',
         'Sí, pero tendré limitada la circulación a un radio de acción de 50 kilómetros.',
         'Sí.',
-        3,
         3,
         'no_image.png'
     );
@@ -1758,7 +1554,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1767,7 +1562,6 @@ VALUES (
         'detenerse, únicamente si va a seguir la dirección que marca la flecha.',
         'girar a la derecha, porque está prohibido seguir de frente sin detenerse.',
         1,
-        3,
         'p34.gif'
     );
 
@@ -1778,7 +1572,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1787,7 +1580,6 @@ VALUES (
         'No.',
         'No, nunca.',
         1,
-        4,
         'no_image.png'
     );
 
@@ -1798,7 +1590,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1807,7 +1598,6 @@ VALUES (
         'Detenerme a la altura del semáforo, si puedo hacerlo en condiciones de seguridad suficiente.',
         'Puedo pasar extremando la precaución',
         2,
-        4,
         'p35.jpg'
     );
 
@@ -1818,7 +1608,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1827,7 +1616,6 @@ VALUES (
         '70 kilómetros por hora.',
         '60 kilómetros por hora.',
         1,
-        4,
         'no_image.png'
     );
 
@@ -1838,7 +1626,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1847,7 +1634,6 @@ VALUES (
         'Peligro por la proximidad de una intersección con una vía a la izquierda, cuyos USUARIO deben ceder el paso.',
         'Peligro por la proximidad de una intersección.',
         2,
-        4,
         'p36.jpg'
     );
 
@@ -1858,7 +1644,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1867,7 +1652,6 @@ VALUES (
         'Sí, porque al circular a la velocidad máxima permitida, no puedo ser adelantado por lo que no obstaculizo a ningún otro vehículo.',
         'No, porque, como norma general, debo circular por el carril derecho.',
         3,
-        4,
         'no_image.png'
     );
 
@@ -1878,7 +1662,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1887,7 +1670,6 @@ VALUES (
         'Sí, pero sólo cuando haya obreros ',
         'No.',
         1,
-        4,
         'p37.jpg'
     );
 
@@ -1898,7 +1680,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1907,7 +1688,6 @@ VALUES (
         'Sí, para realizar cualquier maniobra que no sea la de adelantamiento.',
         'Sí, pero solamente para prepararme a girar a la derecha o a la izquierda, salir de la calzada o tomar determinada dirección.',
         3,
-        4,
         'no_image.png'
     );
 
@@ -1918,7 +1698,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1927,7 +1706,6 @@ VALUES (
         'La que, además de permitir detenerme en caso de frenado brusco del vehículo que va delante sin colisionar con él, permita al que me siga adelantarme con seguridad.',
         'Cincuenta metros.',
         2,
-        4,
         'p38.jpg'
     );
 
@@ -1938,7 +1716,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1947,7 +1724,6 @@ VALUES (
         'Solamente si no tengo prioridad de paso.',
         'Sí, siempre que la intersección se encuentre dentro de poblado.',
         2,
-        4,
         'no_image.png'
     );
 
@@ -1958,7 +1734,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1967,7 +1742,6 @@ VALUES (
         'hay una incorporación a una autovía, señalizada con STOP, por lo que debo detenerme.',
         'finaliza la autovía y debo ceder el paso a los vehículos que circulen por la vía a la que me voy a incorporar.',
         1,
-        4,
         'p39.jpg'
     );
 
@@ -1978,7 +1752,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -1987,7 +1760,6 @@ VALUES (
         'No, en ningún caso.',
         'Solamente si no puedo ceñirme por completo al borde derecho de la calzada y el adelantamiento puede hacerse con seguridad.',
         2,
-        4,
         'no_image.png'
     );
 
@@ -1998,7 +1770,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2007,7 +1778,6 @@ VALUES (
         'No.',
         'Sí, como norma general.',
         2,
-        4,
         'p40.gif'
     );
 
@@ -2018,7 +1788,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2027,7 +1796,6 @@ VALUES (
         'No, en ningún caso.',
         'No, como norma general.',
         3,
-        4,
         'no_image.png'
     );
 
@@ -2038,7 +1806,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2048,7 +1815,6 @@ VALUES (
         'Que solamente es utilizable el carril derecho.',
         'Que debo tomar obligatoriamente la salida inmediata que está a la derecha.',
         2,
-        4,
         'p41.jpg'
     );
 
@@ -2059,7 +1825,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2068,7 +1833,6 @@ VALUES (
         'Solamente los conductores implicados en el accidente y los que presencien o tengan conocimiento del accidente.',
         'Los conductores y personas implicadas en el accidente y los que presencien o tengan conocimiento del mismo.',
         3,
-        4,
         'no_image.png'
     );
 
@@ -2079,7 +1843,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2088,7 +1851,6 @@ VALUES (
         'Que durante 200 metros cesa de ser utilizable el carril izquierdo.',
         'Que a partir de 200 metros la calzada va a tener tres carriles.',
         1,
-        4,
         'p42.jpg'
     );
 
@@ -2099,7 +1861,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2108,7 +1869,6 @@ VALUES (
         'Tanto por la derecha como por la izquierda del refugio.',
         'Únicamente por la parte de la calzada que quede a la derecha del refugio.',
         2,
-        4,
         'no_image.png'
     );
 
@@ -2119,7 +1879,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2128,7 +1887,6 @@ VALUES (
         'No, excepto en los lugares habilitados al afecto.',
         'Sí.',
         2,
-        4,
         'p43.gif'
     );
 
@@ -2139,7 +1897,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2148,7 +1905,6 @@ VALUES (
         'Con la de corto alcance, la de largo alcance y la posterior de niebla.',
         'Solamente con las de posición.',
         2,
-        4,
         'no_image.png'
     );
 
@@ -2159,7 +1915,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2168,7 +1923,6 @@ VALUES (
         'Por delante y por detrás del vehículo, solamente.',
         'Por delante, por detrás y lateralmente del vehículo.',
         3,
-        4,
         'p44.jpg'
     );
 
@@ -2179,7 +1933,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2188,7 +1941,6 @@ VALUES (
         'Sí, tanto si está parado como estacionado.',
         'No, tanto si está parado como estacionado.',
         3,
-        4,
         'no_image.png'
     );
 
@@ -2199,7 +1951,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2208,7 +1959,6 @@ VALUES (
         ' Sí, resulta aumentado.',
         'No. El alcohol no afecta al tiempo de reacción.',
         2,
-        4,
         'no_image.png'
     );
 
@@ -2219,7 +1969,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2228,7 +1977,6 @@ VALUES (
         'No.',
         'Sí, siempre.',
         2,
-        4,
         'p45.jpg'
     );
 
@@ -2239,7 +1987,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2248,7 +1995,6 @@ VALUES (
         'No.',
         'Sí, pero solo en la circulación nocturna.',
         1,
-        4,
         'no_image.png'
     );
 
@@ -2259,7 +2005,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2268,7 +2013,6 @@ VALUES (
         'No.',
         'Sí, en todos los casos.',
         2,
-        4,
         'p46.gif'
     );
 
@@ -2279,7 +2023,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2288,7 +2031,6 @@ VALUES (
         'En el carril central.',
         'En el carril derecho.',
         2,
-        4,
         'no_image.png'
     );
 
@@ -2299,7 +2041,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2308,7 +2049,6 @@ VALUES (
         'es peligroso, porque reduce la eficacia del cinturón.',
         'es necesaria, como complemento del airbag, en los vehículos dotados del mismo.',
         2,
-        4,
         'no_image.png'
     );
 
@@ -2319,7 +2059,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2328,7 +2067,6 @@ VALUES (
         'A 60 kilómetros por hora.',
         'No existe límite mínimo de velocidad.',
         2,
-        4,
         'no_image.png'
     );
 
@@ -2339,7 +2077,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2348,7 +2085,6 @@ VALUES (
         'evita el bloqueo de las ruedas.',
         'elimina el desgaste de las superficies frenantes.',
         2,
-        4,
         'no_image.png'
     );
 
@@ -2359,7 +2095,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2368,7 +2103,6 @@ VALUES (
         'No.',
         'Sí, cuando no exista peligro de colisión con los vehículos que lo utilicen.',
         2,
-        4,
         'p47.jpg'
     );
 
@@ -2379,7 +2113,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2388,7 +2121,6 @@ VALUES (
         'Sí, siempre que no invada un cruce de vías y no recorra más de 15 metros en dicha marcha.',
         'Sí, aunque invada un cruce de vías o recorra más de 15 metros.',
         1,
-        5,
         'no_image.png'
     );
 
@@ -2399,7 +2131,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2408,7 +2139,6 @@ VALUES (
         'Ninguna, porque cuando está amaneciendo es como si fuera de día claro.',
         'Únicamente las de posición, porque, aunque no ha salido el sol, se ve bien.',
         1,
-        5,
         'p48.jpg'
     );
 
@@ -2419,7 +2149,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2428,7 +2157,6 @@ VALUES (
         'Una sepación mínima de 50 metros.',
         'Una separación que permita al conductor del vehículo que me sigue adelantarme con seguridad.',
         1,
-        5,
         'no_image.png'
     );
 
@@ -2439,7 +2167,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2448,7 +2175,6 @@ VALUES (
         'deteniéndose siempre al final del carril, para observar la posición, velocidad y trayectoria de los vehículos.',
         'al principio del carril, deteniéndose incluso si fuera necesario. A continuación, acelerará hasta alcanzar la velocidad adecuada al final del carril para incorporarse a la circulación de la calzada.',
         3,
-        5,
         'p49.jpg'
     );
 
@@ -2459,7 +2185,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2468,7 +2193,6 @@ VALUES (
         'A 140 kilómetros por hora.',
         'A 120 kilómetros por hora.',
         3,
-        5,
         'no_image.png'
     );
 
@@ -2479,7 +2203,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2488,7 +2211,6 @@ VALUES (
         'No, porque con la iluminación de la vía es suficiente.',
         'Sí, sólo las de posición, para advertir mi presencia a los demás USUARIO.',
         1,
-        5,
         'p50.jpg'
     );
 
@@ -2499,7 +2221,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2508,7 +2229,6 @@ VALUES (
         'Sólo si la línea longitudinal del lado exterior del carril reservado para autobuses es discontinua.',
         'No, porque el adelantamiento por la derecha está prohibido.',
         1,
-        5,
         'no_image.png'
     );
 
@@ -2519,7 +2239,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2528,7 +2247,6 @@ VALUES (
         'la velocidad mínima establecida para la vía interurbana.',
         '60 kilímetros por hora, como máximo.',
         1,
-        5,
         'p51.jpg'
     );
 
@@ -2539,7 +2257,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2549,7 +2266,6 @@ VALUES (
         'No, en ningún caso.',
         'Sí, cuando después de un tiempo prudencial su conductor no inicie la maniobra y después de advertirle con las señales ópticas y acústicas.',
         3,
-        5,
         'no_image.png'
     );
 
@@ -2560,7 +2276,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2569,7 +2284,6 @@ VALUES (
         'No, porque yo circulo por una vía pavimentada y tengo preferencia de paso.',
         'Sí, porque al no existir ninguna señal que regule la preferencia de paso, debo aplicar la norma general de prioridad de la derecha.',
         2,
-        5,
         'no_image.png'
     );
 
@@ -2580,7 +2294,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2589,7 +2302,6 @@ VALUES (
         'Sí, para adelantar o cambiar el sentido de la marcha.',
         'Sí, siempre que no se alteren los elementos de balizamiento con los que está señalizado dicho carril.',
         1,
-        5,
         'no_image.png'
     );
 
@@ -2600,7 +2312,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2609,7 +2320,6 @@ VALUES (
         '80 kilómetros por hora.',
         '90 kilómetros por hora.',
         1,
-        5,
         'p52.jpg'
     );
 
@@ -2620,7 +2330,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2630,7 +2339,6 @@ VALUES (
         'Que va a frenar su marcha de modo considerable.',
         'Que circula en situación de emergencia.',
         2,
-        5,
         'no_image.png'
     );
 
@@ -2641,7 +2349,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2650,7 +2357,6 @@ VALUES (
         'Peligro por la existencia de un tramo de vía con fuerte pendiente ascendente.',
         'Peligro por la proximidad de una zona con desprendimientos frecuentes y la consiguiente posible presencia de obstáculos en la calzada.',
         1,
-        5,
         'p53.jpg'
     );
 
@@ -2661,7 +2367,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2670,7 +2375,6 @@ VALUES (
         'Siempre por la parte de la calzada que quede a la derecha de la isleta.',
         'Por cualquier de los dos lados.',
         3,
-        5,
         'no_image.png'
     );
 
@@ -2681,7 +2385,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2690,7 +2393,6 @@ VALUES (
         'Sí.',
         'La señal recomienda no realizar cambio de dirección.',
         2,
-        5,
         'p54.jpg'
     );
 
@@ -2701,7 +2403,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2710,7 +2411,6 @@ VALUES (
         'parálisis.',
         'una fractura.',
         3,
-        5,
         'no_image.png'
     );
 
@@ -2721,7 +2421,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2731,7 +2430,6 @@ VALUES (
         'La existencia de un carril especial.',
         'Un carril destinado a la parada y estacionamiento de vehículos.',
         2,
-        5,
         'p55.jpg'
     );
 
@@ -2742,7 +2440,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2751,7 +2448,6 @@ VALUES (
         'Pasar con precaución porque la luz amarilla intermitente del semáforo exime de cumplir la señal vertical.',
         'Detenerme siempre y ceder el paso a los vehículos de la vía transversal.',
         3,
-        5,
         'no_image.png'
     );
 
@@ -2762,7 +2458,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2771,7 +2466,6 @@ VALUES (
         'Sólo si el herido está consciente.',
         'No, en ningún caso.',
         3,
-        5,
         'no_image.png'
     );
 
@@ -2782,7 +2476,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2791,7 +2484,6 @@ VALUES (
         'un lugar donde podrá hacer un cambio de dirección a la izquierda.',
         'una incorporación al la autopista.',
         1,
-        5,
         'p56.jpg'
     );
 
@@ -2802,7 +2494,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2811,7 +2502,6 @@ VALUES (
         'A 80 kilómetros por hora.',
         'A 90 kilómetros por hora, ya que estos carriles se instalan en vías de doble sentido de circulación con un carril para cada sentido.',
         2,
-        5,
         'no_image.png'
     );
 
@@ -2822,7 +2512,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2831,7 +2520,6 @@ VALUES (
         'Sólo si desde ese lugar tengo suficiente visibilidad.',
         'No, porque debo detenerme ante la línea transversal continua, sin rebasarla.',
         3,
-        5,
         'no_image.png'
     );
 
@@ -2842,7 +2530,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2851,7 +2538,6 @@ VALUES (
         'Sí, siempre que observe que no se van a producir deslumbramientos.',
         'No, porque está prohibido.',
         3,
-        5,
         'no_image.png'
     );
 
@@ -2862,7 +2548,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2871,7 +2556,6 @@ VALUES (
         'Sí, siguiendo la dirección y sentido de las flechas de la señal circular.',
         'No, porque es una intersección.',
         2,
-        5,
         'p57.jpg'
     );
 
@@ -2882,7 +2566,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2891,7 +2574,6 @@ VALUES (
         'Sí.',
         'Sólo si mi vehículo no dispone de luz de emergencia.',
         2,
-        5,
         'no_image.png'
     );
 
@@ -2902,7 +2584,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2911,7 +2592,6 @@ VALUES (
         'Sí, siempre que vayan sentadas y no dificulten por detrás la visión del conductor.',
         'No.',
         3,
-        5,
         'no_image.png'
     );
 
@@ -2922,7 +2602,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2931,7 +2610,6 @@ VALUES (
         'está prohibido circular sin mantener con el vehículo precedente una separación igual o mayor a la indicada en la señal.',
         'está prohibido circular sin mantener con el vehículo precedente una separación mayor a la indicada en la señal.',
         1,
-        5,
         'p57.jpg'
     );
 
@@ -2942,7 +2620,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2951,7 +2628,6 @@ VALUES (
         'Circular con la luz de cruce encendida, al menos y a una velocidad no inferior a la máxima permitida para la vía.',
         'Circular con la luz de cruce encendida, al menos y a una velocidad no inferior a 60 kilómetros por hora ni superior a 80 kilómetros por hora o inferiores si así estuviera establecido o específicamente señalizado.',
         3,
-        5,
         'no_image.png'
     );
 
@@ -2962,7 +2638,6 @@ INSERT INTO
         RESPUESTA2,
         RESPUESTA3,
         RESPUESTACORRECTA,
-        TEMA,
         IMAGEN
     )
 VALUES (
@@ -2971,7 +2646,6 @@ VALUES (
         'Los lugares sombríos y húmedos.',
         'Los tramos de vía rectos y cambios de rasante.',
         2,
-        5,
         'no_image.png'
     );
 
@@ -2982,17 +2656,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        1
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 1);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (1, 84, 0);
@@ -3112,7 +2779,7 @@ VALUES (1, 119, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (1, 115, 0);
-
+*/
 --
 
 INSERT INTO
@@ -3120,17 +2787,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        2
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 2);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (2, 84, 0);
@@ -3250,7 +2910,7 @@ VALUES (2, 55, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (2, 115, 0);
-
+*/
 --
 
 INSERT INTO
@@ -3258,17 +2918,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        2
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 2);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (3, 84, 0);
@@ -3388,7 +3041,7 @@ VALUES (3, 55, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (3, 56, 0);
-
+*/
 --
 
 INSERT INTO
@@ -3396,17 +3049,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        2
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 2);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (4, 77, 0);
@@ -3526,7 +3172,7 @@ VALUES (4, 57, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (4, 80, 0);
-
+*/
 --
 
 INSERT INTO
@@ -3534,17 +3180,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        2
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 2);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (5, 77, 0);
@@ -3664,7 +3303,7 @@ VALUES (5, 57, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (5, 80, 0);
-
+*/
 --
 
 INSERT INTO
@@ -3672,17 +3311,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        2
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 2);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (6, 1, 0);
@@ -3802,7 +3434,7 @@ VALUES (6, 29, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (6, 30, 0);
-
+*/
 --
 
 INSERT INTO
@@ -3810,17 +3442,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        1
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 1);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (7, 1, 0);
@@ -3940,7 +3565,7 @@ VALUES (7, 29, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (7, 30, 0);
-
+*/
 --
 
 INSERT INTO
@@ -3948,17 +3573,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        1
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 1);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (8, 1, 0);
@@ -4078,7 +3696,7 @@ VALUES (8, 29, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (8, 30, 0);
-
+*/
 --
 
 INSERT INTO
@@ -4086,17 +3704,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        1
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 1);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (9, 1, 0);
@@ -4216,7 +3827,7 @@ VALUES (9, 29, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (9, 30, 0);
-
+*/
 --
 
 INSERT INTO
@@ -4224,17 +3835,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        3
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 3);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (10, 1, 0);
@@ -4354,7 +3958,7 @@ VALUES (10, 29, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (10, 30, 0);
-
+*/
 --
 
 INSERT INTO
@@ -4362,17 +3966,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        3
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 3);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (11, 1, 0);
@@ -4492,7 +4089,7 @@ VALUES (11, 29, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (11, 30, 0);
-
+*/
 --
 
 INSERT INTO
@@ -4500,17 +4097,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        3
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 3);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (12, 1, 0);
@@ -4630,7 +4220,7 @@ VALUES (12, 29, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (12, 30, 0);
-
+*/
 --
 
 INSERT INTO
@@ -4638,17 +4228,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        3
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 3);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (13, 31, 0);
@@ -4768,7 +4351,7 @@ VALUES (13, 29, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (13, 30, 0);
-
+*/
 --
 
 INSERT INTO
@@ -4776,17 +4359,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        3
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 3);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (14, 31, 0);
@@ -4906,7 +4482,7 @@ VALUES (14, 29, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (14, 30, 0);
-
+*/
 --
 
 INSERT INTO
@@ -4914,17 +4490,10 @@ INSERT INTO
         FECHAHORA,
         ACERTADAS,
         FALLADAS,
-        BLANCO,
         USUARIO
     )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        1
-    );
-
+VALUES (CURRENT_TIMESTAMP, 30, 0, 1);
+/*
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (15, 31, 0);
@@ -5012,1829 +4581,4 @@ VALUES (15, 21, 0);
 INSERT INTO
     RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
 VALUES (15, 22, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (15, 23, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (15, 24, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (15, 25, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (15, 26, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (15, 27, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (15, 28, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (15, 29, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (15, 30, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        3
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 10, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 11, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 12, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 13, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 14, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 15, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 16, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 17, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 18, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 19, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 20, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 21, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 22, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 23, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 24, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 25, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 26, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 27, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 28, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 29, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (16, 30, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        4
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 10, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 11, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 12, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 13, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 14, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 15, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 16, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 17, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 18, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 19, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 20, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 21, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 22, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 23, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 24, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 25, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 26, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 27, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 28, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 29, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (17, 30, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        4
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 10, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 11, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 12, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 13, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 14, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 15, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 16, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 17, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 18, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 19, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 20, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 21, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 22, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 23, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 24, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 25, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 26, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 27, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 28, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 29, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (18, 30, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        4
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 10, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 11, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 12, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 13, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 14, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 15, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 16, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 17, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 18, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 19, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 20, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 21, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 22, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 23, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 24, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 25, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 26, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 27, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 28, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 29, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (19, 30, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        4
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 40, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 41, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 42, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 43, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 44, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 45, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 46, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 47, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 48, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 49, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 20, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 21, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 22, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 23, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 24, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 25, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 26, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 27, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 28, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 29, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (20, 30, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        4
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 40, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 41, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 42, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 43, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 44, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 45, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 46, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 47, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 48, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 49, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 20, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 21, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 22, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 23, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 24, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 25, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 26, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 27, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 28, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 29, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (21, 30, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        4
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 40, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 41, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 42, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 43, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 44, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 45, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 46, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 47, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 48, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 49, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 20, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 21, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 22, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 23, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 24, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 25, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 26, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 27, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 28, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 29, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (22, 30, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        4
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 40, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 41, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 42, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 43, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 44, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 45, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 46, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 47, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 48, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 49, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 20, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 21, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 22, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 23, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 24, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 25, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 26, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 27, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 28, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 29, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (23, 30, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        4
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 40, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 41, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 42, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 43, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 44, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 45, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 46, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 47, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 48, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 49, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 50, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 51, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 52, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 53, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 54, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 55, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 56, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 57, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 58, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 59, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (24, 60, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        3
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 40, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 41, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 42, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 43, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 44, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 45, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 46, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 47, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 48, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 49, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 50, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 51, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 52, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 53, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 54, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 55, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 56, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 57, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 58, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 59, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (25, 60, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        1
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 40, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 41, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 42, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 43, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 44, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 45, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 46, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 47, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 48, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 49, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 50, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 51, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 52, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 53, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 54, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 55, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 56, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 57, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 58, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 59, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (26, 60, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        1
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 40, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 41, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 42, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 43, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 44, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 45, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 46, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 47, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 48, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 49, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 50, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 51, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 52, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 53, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 54, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 55, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 56, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 57, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 58, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 59, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (27, 60, 0);
-
---
-
-INSERT INTO
-    RESULTADOSEXAMEN (
-        FECHAHORA,
-        ACERTADAS,
-        FALLADAS,
-        BLANCO,
-        USUARIO
-    )
-VALUES (
-        CURRENT_TIMESTAMP,
-        30,
-        0,
-        0,
-        2
-    );
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 31, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 32, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 33, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 34, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 35, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 36, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 37, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 38, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 39, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 40, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 41, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 42, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 43, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 44, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 45, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 46, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 47, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 48, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 49, 2);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 50, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 51, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 52, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 53, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 54, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 55, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 56, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 57, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 58, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 59, 0);
-
-INSERT INTO
-    RESULTADOSPREGUNTA (EXAMEN, PREGUNTA, RESULTADO)
-VALUES (28, 60, 0);
+*/

@@ -1,11 +1,24 @@
+- Funcionamiento de la aplicación -
+
+Al acceder a la página se ve un listado de exámenes, se mostrarán en verde los aprobados sin errores, en rojo los suspensos, en naranja los aprobados
+regulares y en color neutral los no realizados.
+
+Al pulsar en cada examen en la misma pantalla se muestra información sobre el examen; si ya se hizo el examen se ve el número de aciertos y fallos, y la fecha.
+En todos aparece un botón para realizar el examen.
+
+Al pulsar en el botón de realizar examen se carga una página con las preguntas tipo test. Cada examen tiene 30 preguntas. 
+Para corregir el examen hay que contestar todas. Al corregir un examen se marca como completado y se guarda el resultado en local.
+
+La aplicación tendrá una interfaz responsive.
+
+Opcionalmente el usuario puede registrarse con una cuenta para guardar el progreso en base de datos y continuar desde cualquier dispositivo.
+
+
 - Base de datos autoescuela -
 
-Los usuarios tienen un id, nombre, dni único y contraseña. Cada uno accede a la aplicación con su dni y contraseña.
+Los usuarios tienen un id, nombre y contraseña. Cada uno accede a la aplicación con su nombre y contraseña.
 
-Cada examen tiene 30 preguntas. De cada pregunta se almacena un id, el enunciado, las tres respuestas, la respuesta correcta(si es la 1, 2 o 3)
+De cada pregunta se almacena un id, el enunciado, las tres respuestas, la respuesta correcta(si es la 1, 2 o 3)
  y el nombre de la imagen que se mostrará en pantalla.
 
-Cuando el usuario completa un examen se registra la fecha, el número de preguntas acertadas y falladas y el usuario, 
-y de cada pregunta contestada se registra el examen al que pertecene, la pregunta y el resultado.
-
-Cada resultado de pregunta sólo pertenece a un examen y usuario.
+Cuando el usuario completa un examen se registra la fecha, el número de preguntas acertadas y falladas y el usuario.
