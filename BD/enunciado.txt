@@ -22,3 +22,7 @@ De cada pregunta se almacena un id, el enunciado, las tres respuestas, la respue
  y el nombre de la imagen que se mostrará en pantalla.
 
 Cuando el usuario completa un examen se registra la fecha, el número de preguntas acertadas y falladas y el usuario.
+
+
+
+select e.id, e.fecha, (select resultado from resultado_pregunta where resultado < 3) as aprobado from resultado_examen e join resultado_pregunta p on e.usuario = [id] group by m.resultado order by e.id asc;
