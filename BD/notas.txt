@@ -13,7 +13,7 @@ La aplicación tendrá una interfaz responsive.
 
 Opcionalmente el usuario puede registrarse con una cuenta para guardar el progreso en base de datos y continuar desde cualquier dispositivo.
 
-
+- - - - - - - - - - - - - - - 
 - Base de datos autoescuela -
 
 Los usuarios tienen un id, nombre y contraseña. Cada uno accede a la aplicación con su nombre y contraseña.
@@ -24,5 +24,3 @@ De cada pregunta se almacena un id, el enunciado, las tres respuestas, la respue
 Cuando el usuario completa un examen se registra la fecha, el número de preguntas acertadas y falladas y el usuario.
 
 
-
-select e.id, e.fecha, (select resultado from resultado_pregunta where resultado < 3) as aprobado from resultado_examen e join resultado_pregunta p on e.usuario = [id] group by m.resultado order by e.id asc;

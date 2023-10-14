@@ -1,0 +1,45 @@
+- - - - - - - -
+- mis querys  -
+
+En la pantalla del listado de exámenes:
+
+-número de preguntas que hay en total(para ver cuántos exámenes hay si cada uno tiene 30 preguntas):
+    select count(*) from pregunta;
+
+-exámenes de un usuario concreto con el número de fallos de cada examen(para el listado de exámenes):
+    select e.id, e.fechahora, (select count(*) from resultadopregunta where resultado="fallo" and examen=e.id) as fallos 
+    from resultadoexamen e join resultadopregunta p
+    on e.usuario=1 group by e.id order by e.id asc;
+- - - - -
+
+
+
+En la pantalla de realizar el examen:
+
+-Cargar las 30 preguntas correspondientes(ejemplo si cada examen tiene 30 y el inicio lo calculo en el js):
+    select * from pregunta limit [inicio], 30;
+o bien
+    select * from pregunta limit 30 offset [inicio];  (offset comienza desde 0)
+
+para calcular el inicio/offset: [numero examen(1,2,3...)] x 30 - 30
+
+-Cuando se corrige el examen guardar los resultados de las preguntas(primero el examen, luego las preguntas):
+
+-Para ello primero compruebo si el examen se hizo anteriormente:
+ Una forma de hacerlo:
+    select id from resultadoexamen where usuario=[id_usuario] order by id asc limit 1 offset 2;
+    si el examen que elegí hacer era el 3, busco el resultado de ese examen que debería estar
+    en el registro 2 del select
+ Otra forma: al entrar en la página de las preguntas le paso el id del examen porque los ids ya
+ los recuperé en la pantalla del listado exámenes. No le paso id el examen no se hizo antes.
+
+Para guardar el resultado (si el examen se corrige de nuevas):
+    insert into resultadoexamen (fechahora, usuario) values (CURRENT_TIMESTAMP, [id_usuario]);
+    ahora cojo el id del resultadoexamen creado y lo uso para las preguntas (pensar cómo hago eso):
+    insert into resultadopregunta (examen, pregunta, resultado) values([id_examen], [id_pregunta], "acierto");
+    insert into resultadopregunta...
+
+Si el examen ya estaba registrado en resultadoexamen:
+    update resultadoexamen set fechahora=CURRENT_TIMESTAMP where id=[id_examen];
+    update resultadopregunta set resultado=[nuevo_resultado] where examen=[id_examen] and pregunta=[id_pregunta];
+    update resultadopregunta ...
