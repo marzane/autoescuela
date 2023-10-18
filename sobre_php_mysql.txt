@@ -1,0 +1,3 @@
+Todos métodos mysqli: https://www.php.net/manual/es/mysqli.summary.php
+
+
