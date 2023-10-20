@@ -43,3 +43,10 @@ Si el examen ya estaba registrado en resultadoexamen:
     update resultadoexamen set fechahora=CURRENT_TIMESTAMP where id=[id_examen];
     update resultadopregunta set resultado=[nuevo_resultado] where examen=[id_examen] and pregunta=[id_pregunta];
     update resultadopregunta ...
+- - - - - - -
+
+En la pantalla de login:
+-comprobar si ya existe un usuario con el nombre introducido:
+    select * from usuario where nombre=[nombre];
+-Si no existe lo guardo:
+    insert into usuario (nombre, password) values ([nombre], [contraseña]);
