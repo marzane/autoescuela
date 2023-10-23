@@ -16,9 +16,12 @@
                                                on e.usuario=".$usuario." group by e.id order by e.id asc;");
         
         $num_examenes = mysqli_num_rows($query_preguntas);
-    
-    
-        echo json_encode($query_examenes, JSON_UNESCAPED_UNICODE);
+
+        $array_examenes = mysqli_fetch_assoc($query_examenes);
+
+        echo json_encode($array_examenes, JSON_UNESCAPED_UNICODE);
+
+        //mysqli_free_result($query_examenes);
         
         mysqli_close($conn);        
     }
