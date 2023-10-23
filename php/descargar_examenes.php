@@ -6,7 +6,7 @@
         $usuario = $_POST["usuario"];
         
         $query_usuario_id = mysqli_query($conn, "select id from USUARIO where nombre=".$usuario.";");
-        $usuario_id = mysqli_fetch_row(mysqli_result $query_usuario_id);
+        $usuario_id = mysqli_fetch_row($query_usuario_id);
         //echo $usuario_id;
 
         //if($usuario_id && $usuario_id[0])
