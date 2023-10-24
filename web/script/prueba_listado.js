@@ -75,6 +75,7 @@ function recogerExamenes(e){
 function descargarExamenes(e){
     if(e.target.status == 200){
         respuesta = JSON.parse(e.target.responseText);
+        console.log(respuesta);
     }
 }
 
