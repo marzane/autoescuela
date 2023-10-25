@@ -4,26 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bulma/css/bulma.css">
     <title>listado prueba</title>
-    <link rel="stylesheet" href="../css/css/bulma.min.css">
-    <link rel="stylesheet" href="../css/css/bulma.css">
-    <link rel="stylesheet" href="../css/css/bulma-rtl.min.css">
-    <link rel="stylesheet" href="../css/css/bulma-rtl.css">
-    <script src="../script/prueba_listado.js"></script>
 </head>
-<body>
+<body style="background-color: blanchedalmond;">
     <div class="columns is-desktop">
 
         <div class="column">
-            <div class="control">
-                <input class="input is-normal" type="text" placeholder="usuario">
-            </div>
-           <div class="control">
-                <input class="input is-normal" type="text" placeholder="contraseña">
-           </div>
+            <form action="" method="POST">
+                <div class="field">
+                    <label class="label">Usuario</label>
+                    <div class="control">
+                      <input class="input" type="text" placeholder="">
+                    </div>
+                  </div>
+                  
+                  <div class="field">
+                    <label class="label">Contraseña</label>
+                    <div class="control">
+                      <input class="input" type="password" placeholder="">
+                    </div>
+                  </div>
+
+                  <div class="control">
+                    <button class="button is-primary">enviar</button>
+                  </div>
+            </form>
         </div>
 
-        <div class="column">2</div>
+        <div class="column is-full" style="display: none;">
+            <button class="button is-rounded">1</button>
+            <button class="button is-rounded" disabled>2</button>
+            <button class="button is-rounded" disabled>3</button>
+            <button class="button is-rounded" disabled>4</button>
+        </div>
     </div>
 </body>
 </html>
