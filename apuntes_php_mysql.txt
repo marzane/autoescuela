@@ -9,3 +9,6 @@ Otros
 - mysql_num_row(): Retorna el número de filas del resultado. 
 
 - mysqli_affected_rows(): Devuelve el numero de filas afectadas por la última consulta INSERT, UPDATE, REPLACE or DELETE. 
+
+pdo:
+https://es.stackoverflow.com/questions/18232/c%c3%b3mo-evitar-la-inyecci%c3%b3n-sql-en-php
