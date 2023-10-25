@@ -1,8 +1,8 @@
 <?php
-    $servername = "/* host */";
-    $database = "/* base de datos */";
-    $username = "/* usuario */";
-    $password = "/* contraseña */";
+    $servername = " /* host */ ";
+    $database = " /* base de datos */ ";
+    $username = " /* usuario */ ";
+    $password = " /* contraseña */ ";
     
     $conn = mysqli_connect($servername, $username, $password, $database);
     // Check connection
