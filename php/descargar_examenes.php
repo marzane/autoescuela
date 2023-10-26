@@ -1,14 +1,14 @@
 <?php 
     header('Access-Control-Allow-Origin: *'); 
-    if($_GET){
+    if($_POST){
         require 'config.php';
-        $nombre_usuario = $_GET["usuario"];
+        $nombre_usuario = $_POST["usuario"];
         
         $examenes = array();
 
-        $query_usuario_id = $pdo->prepare("select ID from USUARIO where NOMBRE= 'Manuel José Castro Damas'");
+        $query_usuario_id = $pdo->prepare("select ID from USUARIO where NOMBRE= :usuario");
         //$query_usuario_id=$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        //$query_usuario_id->bindParam(":usuario", $nombre_usuario, PDO::PARAM_STR);
+        $query_usuario_id->bindParam(":usuario", $nombre_usuario, PDO::PARAM_STR);
         $query_usuario_id->execute();
         
         /*

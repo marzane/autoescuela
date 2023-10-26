@@ -1,1 +1,9 @@
+body{
+    background-color: bisque;
+}
 
+.columns{
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+}

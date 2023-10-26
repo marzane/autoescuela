@@ -4,6 +4,7 @@ const PREGUNTAS_EXAMEN = 30;
 
 const URL_NUM_PREGUNTAS = "https://marta.laprimeracloud01.com/prueba/listado_examenes.php";
 const URL_DESCARGAR_EXAMENES = "https://marta.laprimeracloud01.com/prueba/descargar_examenes.php";
+const URL_DESCARGAR_PREGUNTAS = "https://marta.laprimeracloud01.com/prueba/descargar_preguntas.php";
 
 // nombre de atributos que se guardan en LocalStorage
 const LOCAL_ATR_NOMBRE = "nombre";
@@ -121,6 +122,7 @@ function eliminarSesionLocal(){
 }
 
 
+// funcion para tener examenes guardados y hacer pruebas
 function guardarExamenesLocalPrueba(){
     let examenesResueltos = [
         {"fecha" : 212121, "aciertos" : 2, "fallos" : 28},
@@ -129,4 +131,31 @@ function guardarExamenesLocalPrueba(){
     ]
 
     localStorage.setItem(LOCAL_ATR_EXAMENES, examenesResueltos);
+}
+
+
+// listener del boton que tiene cada examen para ir a las preguntas
+function cargarPreguntasExamenListener(){
+    let numeroExamen = 1; // examen de prueba
+
+    let inicio = numeroExamen * PREGUNTAS_EXAMEN - PREGUNTAS_EXAMEN;
+
+    const xhr = new XMLHttpRequest();
+    let datos = new FormData();
+    datos.append("offset", inicio);
+    datos.append("preguntas", PREGUNTAS_EXAMEN);
+
+    xhr.addEventListener("load", descargarPreguntas);
+        
+    xhr.open("POST", URL_DESCARGAR_PREGUNTAS);
+    xhr.send(datos);
+}
+
+
+// llamada ajax para descargar las preguntas del examen
+function descargarPreguntas(e){
+    if(e.target.status == 200){
+        respuesta = JSON.parse(e.target.responseText);
+        console.log(respuesta);
+    }
 }
