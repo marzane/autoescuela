@@ -12,3 +12,6 @@ Otros
 
 pdo:
 https://es.stackoverflow.com/questions/18232/c%c3%b3mo-evitar-la-inyecci%c3%b3n-sql-en-php
+
+
+https://es.stackoverflow.com/questions/558445/mismo-header-y-footer-en-varias-p%C3%A1ginas-sin-php
