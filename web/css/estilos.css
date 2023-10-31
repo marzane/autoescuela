@@ -1,9 +1,132 @@
 body{
-    background-color: bisque;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+
+    margin: 0;
 }
 
-.columns{
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
+a {
+    font-size: inherit;
+    color: #2564B9;
+    font-weight: bold;
+    text-decoration: none;
 }
+
+.header-pagina{
+    background: white;
+    padding: 0.5em;
+    margin: 0;
+    border-bottom: 3px solid #FAFAFA;
+    box-shadow: 0px 10px 10px #FAFAFA;
+}
+
+.header-menu-escritorio{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0em 1em 0.5em 1em;
+}
+
+
+.header-logo{
+    max-width: 13em;
+}
+
+
+.header-menu-movil{
+    display: none;
+}
+
+
+.boton a{
+    color: white;
+}
+
+.boton-normal{
+    background-color: #00d1b2;
+    border: none;
+    padding: 1em;
+    border-radius: 0.7em;
+}
+
+.boton-normal:hover{
+    background-color: #00C4A7;
+}
+
+
+
+.pie-pagina{
+
+}
+
+
+
+
+/* Cuando la pantalla es menor a 900px  (tablets y teléfonos)*/
+@media only screen and (max-width : 900px) {
+    
+    .header-menu-escritorio{
+        display: none;
+    }
+
+    .header-menu-movil{
+        display: block;
+       
+    }
+
+    .header-menu-movil ul{
+        width: 100%;
+        padding: 0;
+        display: none;
+
+    }
+
+    .header-menu-movil li {
+        display: block;
+        background: lightgrey;
+        margin: 0;
+        padding: 10px;
+        list-style: none;
+        border-bottom: 1px solid grey;
+        text-align: center;
+      }
+
+    .header-menu-movil  input {
+        display: none;
+      }
+
+    .header-menu-movil label {
+        box-sizing: border-box;
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        line-height: 20px;
+        font-weight: bold;
+        font-size: 1.6em;
+        color: #2564B9;
+        text-align: center;
+        user-select: none;
+
+        position: absolute;
+        top: 0.7em;
+        right: 1.1em;
+      }
+
+    input:checked  ~ ul{
+        display:block;
+        flex-basis: 100%;
+        flex-grow: 1;
+      }
+
+      .header-logo{
+        width: 8em;
+        margin-left: 1em;
+      }
+
+      .header-pagina{
+        margin: 0;
+        padding: 0.8em 0em 0em 0em;
+    }
+
+    }
