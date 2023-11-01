@@ -2,96 +2,78 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link type="text/css" href="bulma/css/bulma.css">
-  <link rel="stylesheet" type="text/css" href="../css/css/bulma-rtl.css">
-  <link rel="stylesheet" type="text/css" href="../css/css/bulma.min.css">
-  <link rel="stylesheet" type="text/css" href="../css/css/bulma-rtl.min.css">
-  <link rel="stylesheet" href="../css/estilos.css">
-  <script src="../script/prueba_listado.js"></script>
-  <title>listado prueba</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prueba de diseño</title>
+    <link rel="stylesheet" href="/web/css/estilos.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="/web/img/fontawesome/css/all.css">
+    <script src="/web/script/prueba_listado.js"></script>
 </head>
 
 <body>
-  <div class="columns is-desktop">
+    <header class="header-pagina">
 
-    <div class="column is-three-fifths is-offset-one-fifth">
-      <form action="" method="POST">
-
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">log in</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" placeholder="usuario">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-user"></i>
-                </span>
-              </p>
-            </div>
-
-            <div class="field-label">
-              <!-- Left empty for spacing -->
-            </div>
-
-            <div class="field">
-              <p class="control is-expanded has-icons-left has-icons-right">
-                <input class="input" type="password" placeholder="password">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-envelope"></i>
-                </span>
-                <span class="icon is-small is-right">
-                  <i class="fas fa-check"></i>
-                </span>
-              </p>
-            </div>
-          </div>
-
-          <div class="field-label">
-            <!-- Left empty for spacing -->
-          </div>
-
-          <div class="field is-horizontal">
-            <div class="field">
-              <div class="control">
-                <button class="button is-primary">
-                  entrar
+        <nav class="header-menu-escritorio">
+            <img src="/web/img/logo.png" alt="logo-autotest" class="header-logo">
+            <div class="header-menu-opciones">
+                <button class="boton-normal boton">
+                    <a>Iniciar sesión</a>
                 </button>
-              </div>
             </div>
-          </div>
+        </nav>
 
-          <div class="field-label">
-            <!-- Left empty for spacing -->
-          </div>
+        <nav class="header-menu-movil">
+            <img src="/web/img/logo.png" alt="logo-autotest" class="header-logo">
+            <input type="checkbox" id="menu">
+            <label for="menu"> ☰ </label>
+            <ul>
+                <li>Iniciar sesión</li>
+            </ul>
+        </nav>
+    </header>
 
-          <div class="field is-horizontal">
-            <div class="field">
-              <div class="control">
-                <button class="button is-primary">
-                  registrar
-                </button>
-              </div>
-            </div>
-          </div>
-          
+    <div class="contenido-principal">
+        <div class="lista-examenes">
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
+            <button class="examen examen"></button>
         </div>
 
-      </form>
     </div>
 
 
-    <div class="column is-three-fifths is-offset-one-quarter">
-      <button class="button is-rounded">1</button>
-      <button class="button is-rounded" disabled>2</button>
-      <button class="button is-rounded" disabled>3</button>
-      <button class="button is-rounded" disabled>4</button>
-    </div>
-  </div>
+    <footer class="footer-pagina">
+        <div>
+
+        </div>
+        <div>
+            <p><i class="fa-regular fa-copyright"></i>2023  Marta Pérez Mora</p>
+        </div>
+        <div class="footer-redes-sociales">
+            <a href="https://github.com/marzane/autoescuela.git" target="_blank" title="github">
+                <i class="fa-brands fa-github-alt"></i>
+            </a>
+            <a href="https://www.deviantart.com/marzanepm" target="_blank" title="deviantart">
+                <i class="fa-brands fa-deviantart"></i>
+            </a>
+        </div>
+    </footer>
 </body>
 
 </html>
