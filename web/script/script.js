@@ -9,6 +9,13 @@ const URL_DESCARGAR_PREGUNTAS = "https://marta.laprimeracloud01.com/prueba/desca
 
 // clases css
 const CLASE_BOTON_EXAMEN = "examen";
+const CLASE_BOTON_BASE = "boton";
+const CLASE_BOTON_PELIGRO = "boton-peligro";
+const CLASE_BOTON_NORMAL = "boton-normal";
+
+// identificadores
+const ID_MENU_ESCRITORIO = "menuEscritorio";
+const ID_MENU_MOVIL = "menuMovil";
 
 // nombre de atributos que se guardan en LocalStorage
 const LOCAL_ATR_NOMBRE = "nombre";
@@ -18,6 +25,42 @@ const LOCAL_ATR_EXAMENES = "examenes";
 const usuarioLogeado = leerSesionLocal();
 
 function main() {
+
+    // puesta a punto de los controles de la cabecera de la pagina
+    let menuEscritorio = document.getElementById(ID_MENU_ESCRITORIO);
+    let menuMovil = document.getElementById(ID_MENU_MOVIL);
+
+    if (menuEscritorio && menuMovil) {
+        let listaDesplegableMovil = document.createElement("ul");
+
+        let botonMenu = document.createElement("button");
+        botonMenu.classList.add(CLASE_BOTON_BASE);
+
+        if (usuarioLogeado.length > 0) {
+            botonMenu.classList.add(CLASE_BOTON_PELIGRO);  // boton para cerrar sesion
+            botonMenu.innerHTML = '<i class="fa-solid fa-power-off"></i>  Log out';
+            botonMenu.addEventListener("click", eliminarSesionLocal);
+
+            let elementoUsuario = document.createElement("p");
+            elementoUsuario.innerHTML = '<i class="fa-regular fa-user"></i> ' + usuarioLogeado[0];
+            menuEscritorio.appendChild(elementoUsuario);
+
+            listaDesplegableMovil.innerHTML = '<li> <i class="fa-regular fa-user"></i> ' + usuarioLogeado[0] + ' </li>';
+
+            botonMenuMovil = botonMenu.cloneNode(true);
+            botonMenuMovil.addEventListener("click", eliminarSesionLocal);
+            
+        } else {
+            botonMenu.classList.add(CLASE_BOTON_NORMAL);  // boton para iniciar sesion
+            botonMenu.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i>  Log in';
+            botonMenuMovil = botonMenu.cloneNode(true);
+        }
+
+        menuEscritorio.appendChild(botonMenu);
+        listaDesplegableMovil.appendChild(botonMenuMovil);
+        menuMovil.appendChild(listaDesplegableMovil);
+    }
+
 
     const xhr = new XMLHttpRequest();
 
@@ -52,7 +95,6 @@ function recogerExamenes(e) {
                 // ponerle a cada uno sus clases css
                 // ...
             }
-
 
 
         } else {                            // si hay sesion leo los examenes del usuario de la base de datos
@@ -123,6 +165,7 @@ function guardarSesionLocal(nombre = "", password = "") {
 function eliminarSesionLocal() {
     localStorage.removeItem(LOCAL_ATR_NOMBRE);
     localStorage.removeItem(LOCAL_ATR_PASSWORD);
+    location.replace('/web/html/listado.html');        // recargar página
 }
 
 
