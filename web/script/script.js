@@ -2,9 +2,13 @@ window.addEventListener("DOMContentLoaded", main);
 
 const PREGUNTAS_EXAMEN = 30;
 
+// urls ajax
 const URL_NUM_PREGUNTAS = "https://marta.laprimeracloud01.com/prueba/listado_examenes.php";
 const URL_DESCARGAR_EXAMENES = "https://marta.laprimeracloud01.com/prueba/descargar_examenes.php";
 const URL_DESCARGAR_PREGUNTAS = "https://marta.laprimeracloud01.com/prueba/descargar_preguntas.php";
+
+// clases css
+const CLASE_BOTON_EXAMEN = "examen";
 
 // nombre de atributos que se guardan en LocalStorage
 const LOCAL_ATR_NOMBRE = "nombre";
@@ -13,7 +17,7 @@ const LOCAL_ATR_EXAMENES = "examenes";
 
 const usuarioLogeado = leerSesionLocal();
 
-function main(){
+function main() {
 
     const xhr = new XMLHttpRequest();
 
@@ -27,8 +31,8 @@ function main(){
 
 // llamada ajax que recibe el número de preguntas que hay en la base de datos
 // para saber cuántos examenes hay disponibles si cada uno tiene x preguntas
-function recogerExamenes(e){
-    if(e.target.status == 200){
+function recogerExamenes(e) {
+    if (e.target.status == 200) {
         respuesta = JSON.parse(e.target.responseText);  // datos de la respuesta(numero de preguntas)
         const num_examenes = Math.trunc(respuesta / PREGUNTAS_EXAMEN); // numero de examenes
 
@@ -37,17 +41,17 @@ function recogerExamenes(e){
 
 
         // compruebo si hay un usuario 'logeado'
-        if(usuarioLogeado.length <= 0){     // si no hay sesion leo la info de los examenes en local
+        if (usuarioLogeado.length <= 0) {     // si no hay sesion leo la info de los examenes en local
             console.log("no hay sesion");
 
             let examenesLocal = localStorage.getItem(LOCAL_ATR_EXAMENES);
-            if(examenesLocal && examenesLocal.length > 0){
+            if (examenesLocal && examenesLocal.length > 0) {
 
                 // pintar la lista de examenes en el html
                 // ponerle a cada uno un dataset con los datos
                 // ponerle a cada uno sus clases css
                 // ...
-            } 
+            }
 
 
 
@@ -62,19 +66,19 @@ function recogerExamenes(e){
             datos.append("usuario", nombre);
 
             xhr.addEventListener("load", descargarExamenes);
-        
+
             xhr.open("POST", URL_DESCARGAR_EXAMENES);
             xhr.send(datos);
         }
-        
+
     }
 }
 
 
 
 // llamada ajax que descarga los examenes realizados por un usuario
-function descargarExamenes(e){
-    if(e.target.status == 200){
+function descargarExamenes(e) {
+    if (e.target.status == 200) {
         respuesta = JSON.parse(e.target.responseText);
         console.log(respuesta);
     }
@@ -84,12 +88,12 @@ function descargarExamenes(e){
 // funcion para comprobar si hay una sesion abierta en la aplicacion
 // devuelve un array con los valores del usuario de la sesion
 // ejemplo: ['marta', '1234']
-function leerSesionLocal(){
+function leerSesionLocal() {
     let usuarioSesion = [];
     let nombre = localStorage.getItem(LOCAL_ATR_NOMBRE);
     let password = localStorage.getItem(LOCAL_ATR_PASSWORD);
 
-    if(nombre && password){
+    if (nombre && password) {
         usuarioSesion.push(nombre);
         usuarioSesion.push(password);
     }
@@ -101,11 +105,11 @@ function leerSesionLocal(){
 // function para guardar los datos de la sesion activa en localStorage
 // le paso el nombre y la contraseña de tipo string del usuario
 // devuelve true/false
-function guardarSesionLocal(nombre = "", password = ""){
+function guardarSesionLocal(nombre = "", password = "") {
 
     let exito = false;
 
-    if(typeof nombre == 'string' && typeof password == 'string' && nombre != "" && password != ""){
+    if (typeof nombre == 'string' && typeof password == 'string' && nombre != "" && password != "") {
         localStorage.setItem(LOCAL_ATR_NOMBRE, nombre);
         localStorage.setItem(LOCAL_ATR_PASSWORD, password);
         exito = true;
@@ -116,18 +120,18 @@ function guardarSesionLocal(nombre = "", password = ""){
 
 
 // funcion para eliminar la sesion almacenada en localStorage
-function eliminarSesionLocal(){
+function eliminarSesionLocal() {
     localStorage.removeItem(LOCAL_ATR_NOMBRE);
     localStorage.removeItem(LOCAL_ATR_PASSWORD);
 }
 
 
 // funcion para tener examenes guardados y hacer pruebas
-function guardarExamenesLocalPrueba(){
+function guardarExamenesLocalPrueba() {
     let examenesResueltos = [
-        {"fecha" : 212121, "aciertos" : 2, "fallos" : 28},
-        {"fecha" : 212121, "aciertos" : 10, "fallos" : 20},
-        {"fecha" : 212121, "aciertos" : 1, "fallos" : 29},
+        { "fecha": 212121, "aciertos": 2, "fallos": 28 },
+        { "fecha": 212121, "aciertos": 10, "fallos": 20 },
+        { "fecha": 212121, "aciertos": 1, "fallos": 29 },
     ]
 
     localStorage.setItem(LOCAL_ATR_EXAMENES, examenesResueltos);
@@ -135,7 +139,7 @@ function guardarExamenesLocalPrueba(){
 
 
 // listener del boton que tiene cada examen para ir a las preguntas
-function cargarPreguntasExamenListener(){
+function cargarPreguntasExamenListener() {
     let numeroExamen = 1; // examen de prueba
 
     let inicio = numeroExamen * PREGUNTAS_EXAMEN - PREGUNTAS_EXAMEN;
@@ -146,16 +150,23 @@ function cargarPreguntasExamenListener(){
     datos.append("preguntas", PREGUNTAS_EXAMEN);
 
     xhr.addEventListener("load", descargarPreguntas);
-        
+
     xhr.open("POST", URL_DESCARGAR_PREGUNTAS);
     xhr.send(datos);
 }
 
 
 // llamada ajax para descargar las preguntas del examen
-function descargarPreguntas(e){
-    if(e.target.status == 200){
+function descargarPreguntas(e) {
+    if (e.target.status == 200) {
         respuesta = JSON.parse(e.target.responseText);
         console.log(respuesta);
     }
+}
+
+
+function crearBotonExamen() {
+    let botonExamen = document.createElement("button");
+    botonExamen.classList.add(CLASE_BOTON_EXAMEN);
+    return botonExamen;
 }
