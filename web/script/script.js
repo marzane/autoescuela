@@ -129,7 +129,7 @@ function descargarExamenes(e) {
 
 // funcion para comprobar si hay una sesion abierta en la aplicacion
 // devuelve un array con los valores del usuario de la sesion
-// ejemplo: ['marta', '1234']
+// ejemplo: ['Manuel José Castro Damas', '123456']
 function leerSesionLocal() {
     let usuarioSesion = [];
     let nombre = localStorage.getItem(LOCAL_ATR_NOMBRE);
@@ -169,18 +169,6 @@ function eliminarSesionLocal() {
 }
 
 
-// funcion para tener examenes guardados y hacer pruebas
-function guardarExamenesLocalPrueba() {
-    let examenesResueltos = [
-        { "fecha": 212121, "aciertos": 2, "fallos": 28 },
-        { "fecha": 212121, "aciertos": 10, "fallos": 20 },
-        { "fecha": 212121, "aciertos": 1, "fallos": 29 },
-    ]
-
-    localStorage.setItem(LOCAL_ATR_EXAMENES, examenesResueltos);
-}
-
-
 // listener del boton que tiene cada examen para ir a las preguntas
 function cargarPreguntasExamenListener() {
     let numeroExamen = 1; // examen de prueba
@@ -212,4 +200,22 @@ function crearBotonExamen() {
     let botonExamen = document.createElement("button");
     botonExamen.classList.add(CLASE_BOTON_EXAMEN);
     return botonExamen;
+}
+
+
+
+// * * * * * * * * * * * * * * *
+// funciones de prueba de datos
+// * * * * * * * * * * * * * * *
+
+// funcion para tener examenes guardados y hacer pruebas
+function guardarExamenesLocalPrueba() {
+    let date = new Date();
+    let examenesResueltos = [
+        { "fecha": date.getDate("YYYY-MM-DDTHH:mm:ss.sssZ"), "aciertos": 2, "fallos": 28 },
+        { "fecha": 212121, "aciertos": 10, "fallos": 20 },
+        { "fecha": 212121, "aciertos": 1, "fallos": 29 },
+    ]
+
+    localStorage.setItem(LOCAL_ATR_EXAMENES, examenesResueltos);
 }
