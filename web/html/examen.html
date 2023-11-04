@@ -1,48 +1,60 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>prueba de diseño</title>
+    <title>examen</title>
     <link rel="stylesheet" href="/web/css/estilos.css">
     <link rel="stylesheet" href="/web/css/fontawesome/css/all.css">
     <link rel="shortcut icon" href="/web/img/favicon.png" type="image/x-icon">
     <script src="/web/script/script.js"></script>
+    <script src="/web/script/script_examen.js"></script>
 </head>
 
 <body>
+
     <header class="header-pagina">
         <nav class="header-menu-escritorio" id="menuEscritorio">
-            <a href="listado.html"><img src="/web/img/logo.png" alt="logo-autotest" class="header-logo"></a>
+            <a href="inicio.html"><img src="/web/img/logo.png" alt="logo-autotest" class="header-logo"></a>
             <div class="header-menu-opciones">
 
             </div>
         </nav>
 
         <nav class="header-menu-movil" id="menuMovil">
-            <a href="listado.html"><img src="/web/img/logo.png" alt="logo-autotest" class="header-logo"></a>
+            <a href="inicio.html"><img src="/web/img/logo.png" alt="logo-autotest" class="header-logo"></a>
             <input type="checkbox" id="menu">
             <label for="menu"> ☰ </label>
         </nav>
     </header>
 
+
+
     <div class="contenido-principal">
-        <div class="contenedor-tarjetas">
-            <a href="#">
-                <div class="tarjeta">
-                    <h2>Test de autoescuela</h2>
-                    <p>Exámenes que incluyen preguntas aleatorias del Permiso B de autoescuelas y de la DGT.</p>
-                    <i class="fa-solid fa-car-side"></i>
+        <div class="contenedor-preguntas" id="contenedorPreguntas">
+            <!--
+            <div class="pregunta">
+                <img src="/web/img/preguntas/p1.gif" alt="" class="pregunta-img">
+                <div class="pregunta-contenido">
+                    <p>1. En esta vía fuera de poblado, ¿qué luces debe llev…afía, que está amaneciendo y no ha salido el sol?</p>
+                    <div class="pregunta-opcion">
+                        <input type="radio" name="pregunta1" id="">
+                        <label for="">respuesta 1</label>
+                    </div>
+                    
+                    <div class="pregunta-opcion">
+                        <input type="radio" name="pregunta1" id="">
+                        <label for="">respuesta 2</label>
+                    </div>
+
+                    <div class="pregunta-opcion">
+                        <input type="radio" name="pregunta1" id="">
+                        <label for="">respuesta 3</label>
+                    </div>
                 </div>
-            </a>
-            <a href="#">
-                <div class="tarjeta">
-                    <h2>Test de fallos</h2>
-                    <p>Repasa todas aquellas preguntas que fallaste en otros exámenes. Requiere registro previo</p>
-                    <i class="fa-solid fa-spell-check"></i>
-                </div>
-            </a>
+            </div>
+-->
         </div>
     </div>
 
@@ -63,6 +75,7 @@
             </a>
         </div>
     </footer>
+
 </body>
 
 </html>
