@@ -1,0 +1,17 @@
+- - - - - - - -
+- autoescuela -
+- - - - - - - -
+pagina de ejemplo: https://vialtest.com/dgt-examenes/permiso-B
+
+otra: http://testautoescuelaonline.com/test-de-examen
+
+En la pantalla de inicio aparecen las opciones de la app:
+    - Test de autoescuela: al hacer click se genera un examen con preguntas aleatorias.
+    - Test de fallos: igual pero las preguntas que aparecen son aquellas falladas anteriormente. 
+                      será necesario registrarse como usuario para esta función.
+
+
+Administración:
+- Usuario normal: puede realizar examenes, cambiar contraseña y cambiar su nombre de usuario.
+- Usuario admin: además de lo anterior, puede modificar usuarios y eliminar usuarios
+Nota: añadir un campo booleano en la tabla usuario que se llame: esAdmin;

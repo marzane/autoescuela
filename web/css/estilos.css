@@ -68,6 +68,56 @@ a {
 }
 
 
+.contenido-principal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-tarjetas{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+
+.tarjeta{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+    padding: 1em;
+    width: 15em;
+    min-height: 13em;
+    border: 0.5px solid #c5c3c3;
+    background-color: #efeded;
+    border-radius: 0.7em;
+    font-size: 1em;
+    color: grey;
+    text-align: center;
+}
+
+.tarjeta h2{
+    font-size: 1.6em;
+    color: #2564B9;
+    margin: 0;
+}
+
+.tarjeta i{
+    font-size: 5em;
+    margin: 0.3em;
+}
+
+.tarjeta:hover{
+    background-color: #c5c3c3;
+}
+
+
 
 .footer-pagina {
     display: flex;
@@ -86,45 +136,7 @@ a {
     font-size: 1.2em;
 }
 
-.contenido-principal{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
-
-
-/* lista con los examenes */
-.lista-examenes{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 50%;
-
-}
-
-.examen{
-    width: 40px;
-    height: 40px;
-    margin: 1em;
-    border: 0.5px solid #c5c3c3;
-    background-color: #efeded;
-    border-radius: 0.7em;
-}
-
-.examen:hover{
-    background-color: #c5c3c3;
-}
-
-.examen-aprobado{
-    background-color: #00C4A7;
-}
-
-.examen-aprobado:hover{
-    background-color: green;
-}
 
 
 
@@ -201,6 +213,14 @@ a {
     .lista-examenes{
         width: 80%;
         
+    }
+
+    .contenedor-tarjetas{
+        padding: 1em;
+    }
+
+    .tarjeta{
+       
     }
 
 }
