@@ -3,7 +3,10 @@ window.addEventListener("DOMContentLoaded", main);
 const PREGUNTAS_EXAMEN = 30;
 
 const ID_CONTENEDOR_PREGUNTAS = "contenedorPreguntas";
+const ID_BOTON_CORREGIR = "botonCorregir";
 const PREGUNTA_IMAGEN_URL = "/web/img/preguntas/";
+
+let INTERVAL_ID_HABILITAR_CORRECCION;
 
 
 // URL AJAX
@@ -20,11 +23,13 @@ function main() {
 
     xhr.open("POST", URL_DESCARGAR_PREGUNTAS);
     xhr.send(datos);
-
 }
 
 
+
+
 // llamada ajax para descargar las preguntas del examen
+// y mostrar en contenido en la interfaz
 function descargarPreguntas(e) {
     if (e.target.status == 200) {
         preguntas = JSON.parse(e.target.responseText);
@@ -35,6 +40,17 @@ function descargarPreguntas(e) {
             for (let i = 0; i < preguntas.length; i++) {
                 contenedorPreguntas.appendChild(crearElementoPregunta(preguntas[i], i + 1));
             }
+
+            let botonCorregir = document.createElement("button");
+            botonCorregir.classList.add("boton");
+            botonCorregir.classList.add("boton-action");
+            botonCorregir.setAttribute("disabled", "");
+            botonCorregir.setAttribute("id", ID_BOTON_CORREGIR);
+            botonCorregir.innerHTML = "CORREGIR";
+            botonCorregir.addEventListener("click", corregirExamen);
+            contenedorPreguntas.appendChild(botonCorregir);
+
+            INTERVAL_ID_HABILITAR_CORRECCION = setInterval(habilitarCorreccionExamen, 1000);
         }
     }
 }
@@ -48,23 +64,57 @@ function crearElementoPregunta(datos = {}, numeroPregunta = 0) {
                             <div class="pregunta-contenido">
                                 <p>${numeroPregunta}. ${datos["ENUNCIADO"]}</p>
                                 <div class="pregunta-opcion">
-                                    <input type="radio" name="pregunta${numeroPregunta}">
-                                    <label>${datos["RESPUESTA1"]}</label>
+                                    <input type="radio" name="pregunta${numeroPregunta}" class="radio-input">
+                                    <label><i></i>${datos["RESPUESTA1"]}</label>
                                 </div>
                                 
                                 <div class="pregunta-opcion">
-                                    <input type="radio" name="pregunta${numeroPregunta}">
-                                    <label>${datos["RESPUESTA2"]}</label>
+                                    <input type="radio" name="pregunta${numeroPregunta}" class="radio-input">
+                                    <label><i></i>${datos["RESPUESTA2"]}</label>
                                 </div>
 
                                 <div class="pregunta-opcion">
-                                    <input type="radio" name="pregunta${numeroPregunta}">
-                                    <label>${datos["RESPUESTA3"]}</label>
+                                    <input type="radio" name="pregunta${numeroPregunta}" class="radio-input">
+                                    <label><i></i>${datos["RESPUESTA3"]}</label>
                                 </div>
                             </div>`;
 
     return contenedor;
 }
+
+
+function corregirExamen(){
+
+    console.log("corregir examen");
+
+    // ...
+
+}
+
+// funcion que comprueba que se han contestado todas las preguntas
+// y habilita el boton para corregir el examen
+function habilitarCorreccionExamen(){
+    let botonCorregir = document.getElementById(ID_BOTON_CORREGIR);
+    if(botonCorregir){
+        let preguntasContestadas = document.querySelectorAll(`#${ID_CONTENEDOR_PREGUNTAS} input[type="radio"]:checked`);
+        if(preguntasContestadas.length == PREGUNTAS_EXAMEN){
+            botonCorregir.disabled = false;
+            clearInterval(INTERVAL_ID_HABILITAR_CORRECCION);
+        }
+    }
+}
+
+
+// funcion que contesta las preguntas del examen
+// para hacer pruebas de desarrollo
+function rellenarExamen(){
+    let preguntas = document.querySelectorAll(`#${ID_CONTENEDOR_PREGUNTAS} .pregunta input[type="radio"]:first-child`);
+
+    for(p of preguntas){
+        p.checked = true;
+    }
+}
+
 
 /*  estructura de cada bloque de pregunta
 
