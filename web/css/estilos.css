@@ -204,19 +204,19 @@ a {
  }
 
 .radio-input-fallo::after{
-    background-color: #f14668;
+    background-color: #f14668 !important;
 }
 
 .radio-input-acierto:hover::after{
-    background-color: #00c465;
+    background-color: #00c465 !important;
 }
 
 .radio-input-fallo:hover::after{
-    background-color: #f14668;
+    background-color: #f14668 !important;
 }
 
 .radio-input-acierto::after{
-    background-color: #00c465;
+    background-color: #00c465 !important;
 }
 
 

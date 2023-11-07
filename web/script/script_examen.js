@@ -36,7 +36,7 @@ function descargarPreguntas(e) {
         console.log(preguntas);
 
         let contenedorPreguntas = document.getElementById(ID_CONTENEDOR_PREGUNTAS);
-        if(contenedorPreguntas){
+        if (contenedorPreguntas) {
             for (let i = 0; i < preguntas.length; i++) {
                 contenedorPreguntas.appendChild(crearElementoPregunta(preguntas[i], i + 1));
             }
@@ -60,6 +60,8 @@ function crearElementoPregunta(datos = {}, numeroPregunta = 0) {
 
     let contenedor = document.createElement("div");
     contenedor.classList.add("pregunta");
+    //contenedor.setAttribute("DATA-RESPUESTACORRECTA", datos["RESPUESTACORRECTA"]);
+    contenedor.dataset.respuestacorrecta = datos["RESPUESTACORRECTA"];
     contenedor.innerHTML = `<img src="${PREGUNTA_IMAGEN_URL}${datos["IMAGEN"]}" alt="" class="pregunta-img">
                             <div class="pregunta-contenido">
                                 <p>${numeroPregunta}. ${datos["ENUNCIADO"]}</p>
@@ -83,21 +85,34 @@ function crearElementoPregunta(datos = {}, numeroPregunta = 0) {
 }
 
 
-function corregirExamen(){
+function corregirExamen() {
 
-    console.log("corregir examen");
+    let nodoPreguntas = document.getElementsByClassName("pregunta");
 
-    // ...
+    if (nodoPreguntas.length == PREGUNTAS_EXAMEN) {
 
+        for (let pregunta of nodoPreguntas) {
+            let radios = pregunta.querySelectorAll("input[type=radio]");
+            let respuestacorrecta = parseInt(pregunta.dataset.respuestacorrecta);
+            for (let i = 0; i < radios.length; i++) {
+                if ((i + 1) == respuestacorrecta) {
+                    radios[i].classList.add("radio-input-acierto");
+                } else if (radios[i].checked) {
+                    radios[i].classList.add("radio-input-fallo");
+                }
+            }
+        }
+
+    }
 }
 
 // funcion que comprueba que se han contestado todas las preguntas
 // y habilita el boton para corregir el examen
-function habilitarCorreccionExamen(){
+function habilitarCorreccionExamen() {
     let botonCorregir = document.getElementById(ID_BOTON_CORREGIR);
-    if(botonCorregir){
+    if (botonCorregir) {
         let preguntasContestadas = document.querySelectorAll(`#${ID_CONTENEDOR_PREGUNTAS} input[type="radio"]:checked`);
-        if(preguntasContestadas.length == PREGUNTAS_EXAMEN){
+        if (preguntasContestadas.length == PREGUNTAS_EXAMEN) {
             botonCorregir.disabled = false;
             clearInterval(INTERVAL_ID_HABILITAR_CORRECCION);
         }
@@ -107,10 +122,10 @@ function habilitarCorreccionExamen(){
 
 // funcion que contesta las preguntas del examen
 // para hacer pruebas de desarrollo
-function rellenarExamen(){
+function rellenarExamen() {
     let preguntas = document.querySelectorAll(`#${ID_CONTENEDOR_PREGUNTAS} .pregunta input[type="radio"]:first-child`);
 
-    for(p of preguntas){
+    for (p of preguntas) {
         p.checked = true;
     }
 }
