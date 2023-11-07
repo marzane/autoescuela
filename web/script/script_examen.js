@@ -8,6 +8,8 @@ const PREGUNTA_IMAGEN_URL = "/web/img/preguntas/";
 
 let INTERVAL_ID_HABILITAR_CORRECCION;
 
+let aciertos = 0;
+let fallos = 0;
 
 // URL AJAX
 const URL_DESCARGAR_PREGUNTAS = "https://marta.laprimeracloud01.com/prueba/descargar_preguntas.php";
@@ -32,6 +34,7 @@ function main() {
 // y mostrar en contenido en la interfaz
 function descargarPreguntas(e) {
     if (e.target.status == 200) {
+        console.log("usuario: " + usuarioLogeado);
         preguntas = JSON.parse(e.target.responseText);
         console.log(preguntas);
 
@@ -97,14 +100,28 @@ function corregirExamen() {
             for (let i = 0; i < radios.length; i++) {
                 if ((i + 1) == respuestacorrecta) {
                     radios[i].classList.add("radio-input-acierto");
+                    if(radios[i].checked){
+                        aciertos++;
+                    }
                 } else if (radios[i].checked) {
                     radios[i].classList.add("radio-input-fallo");
+                    fallos++;
                 }
             }
         }
 
+        alert(`Aciertos: ${aciertos}\nfallos: ${fallos}`);
+
+        if(usuarioLogeado.length > 0){
+            // guardo las preguntas falladas para los examenes de fallos
+        }
+
     }
+
+    //this.removeEventListener("click", corregirExamen);
+    this.disabled = true;
 }
+
 
 // funcion que comprueba que se han contestado todas las preguntas
 // y habilita el boton para corregir el examen
