@@ -13,6 +13,9 @@ const CLASE_BOTON_NORMAL = "boton-normal";
 // identificadores
 const ID_MENU_ESCRITORIO = "menuEscritorio";
 const ID_MENU_MOVIL = "menuMovil";
+const ID_INPUT_NOMBRE = "inputNombreUsuario";
+const ID_INPUT_PASSWORD = "inputPasswordUsuario";
+
 
 // nombre de atributos que se guardan en LocalStorage
 const LOCAL_ATR_NOMBRE = "nombre";
@@ -30,10 +33,27 @@ function main() {
     if (menuEscritorio && menuMovil) {
         let listaDesplegableMovil = document.createElement("ul");
 
+        // boton login
         let botonMenu = document.createElement("button");
         botonMenu.classList.add(CLASE_BOTON_BASE);
 
-        if (usuarioLogeado.length > 0) {
+        //inputs login usuario
+        let formularioLogin = document.createElement("form");
+        // nombre
+        let inputNombre = document.createElement("input");
+        inputNombre.type = "text";
+        inputNombre.placeholder = "usuario";
+
+        // password
+        let inputPassword = document.createElement("input");
+        inputPassword.type = "password";
+        inputPassword.placeholder = "contraseña";
+
+        formularioLogin.appendChild(inputNombre);
+        formularioLogin.appendChild(inputPassword);
+
+
+        if (usuarioLogeado.length > 0) {  // si se ha iniciado sesion
             botonMenu.classList.add(CLASE_BOTON_PELIGRO);  // boton para cerrar sesion
             botonMenu.innerHTML = '<i class="fa-solid fa-power-off"></i>  Log out';
             botonMenu.addEventListener("click", eliminarSesionLocal);
@@ -47,10 +67,13 @@ function main() {
             botonMenuMovil = botonMenu.cloneNode(true);
             botonMenuMovil.addEventListener("click", eliminarSesionLocal);
             
-        } else {
-            botonMenu.classList.add(CLASE_BOTON_NORMAL);  // boton para iniciar sesion
+        } else {  // si no hay sesion
+            menuEscritorio.appendChild(formularioLogin);
+
+            botonMenu.classList.add(CLASE_BOTON_NORMAL);  // el boton para iniciar sesion
             botonMenu.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i>  Log in';
             botonMenuMovil = botonMenu.cloneNode(true);
+            listaDesplegableMovil.appendChild(formularioLogin.cloneNode(true));
         }
 
         menuEscritorio.appendChild(botonMenu);
