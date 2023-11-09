@@ -37,11 +37,40 @@ a {
     max-width: 13em;
 }
 
-
+/*
 .header-menu-movil {
     display: none;
 }
+*/
 
+.header-control-hamburguesa{
+    display: none;
+}
+
+.header-contenido-menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+.header-contenido-menu li{
+    margin-left: 1em;
+}
+
+.header-form-log{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 23em;
+}
+
+.header-form-log input{
+    border-radius: 0.5em;
+    padding: 0.5em;
+    border-color: #c5c3c3;
+}
 
 
 .boton a, .boton {
@@ -258,14 +287,14 @@ a {
 
 /* Cuando la pantalla es menor a 900px  (tablets y teléfonos)*/
 @media only screen and (max-width : 900px) {
-
+/*
     .header-menu-escritorio {
         display: none;
     }
 
+    
     .header-menu-movil {
         display: block;
-
     }
 
     .header-menu-movil ul {
@@ -303,6 +332,11 @@ a {
         top: 0.6em;
         right: 1em;
     }
+*/
+
+    .header-menu-escritorio {
+        display: block;
+    }
 
     input:checked~ul {
         display: flex;
@@ -310,6 +344,23 @@ a {
         align-items: center;
         flex-basis: 100%;
         flex-grow: 1;
+    }
+
+    .header-menu-escritorio label {
+        box-sizing: border-box;
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        line-height: 20px;
+        font-weight: bold;
+        font-size: 1.6em;
+        color: #2564B9;
+        text-align: center;
+        user-select: none;
+
+        position: absolute;
+        top: 0.6em;
+        right: 1em;
     }
 
     .header-logo {
@@ -320,6 +371,33 @@ a {
     .header-pagina {
         padding: 0.6em 0em 0em 0em;
     }
+
+    .header-menu-escritorio ul {
+        width: 100%;
+        padding: 0;
+        display: none;
+
+    }
+
+    .header-menu-escritorio li {
+        display: block;
+        margin: 0;
+        padding: 10px;
+        list-style: none;
+        text-align: center;
+    }
+
+    .header-form-log{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .header-form-log input{
+        margin-top: 1em;
+    }
+
+   
+
 
     .footer-pagina{
         justify-content: center;

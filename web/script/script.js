@@ -2,17 +2,14 @@ window.addEventListener("DOMContentLoaded", main);
 
 // urls ajax
 const URL_NUM_PREGUNTAS = "https://marta.laprimeracloud01.com/prueba/listado_examenes.php";
-const URL_DESCARGAR_EXAMENES = "https://marta.laprimeracloud01.com/prueba/descargar_examenes.php";
 
 // clases css
-const CLASE_BOTON_EXAMEN = "examen";
 const CLASE_BOTON_BASE = "boton";
 const CLASE_BOTON_PELIGRO = "boton-peligro";
 const CLASE_BOTON_NORMAL = "boton-normal";
 
 // identificadores
 const ID_MENU_ESCRITORIO = "menuEscritorio";
-const ID_MENU_MOVIL = "menuMovil";
 const ID_INPUT_NOMBRE = "inputNombreUsuario";
 const ID_INPUT_PASSWORD = "inputPasswordUsuario";
 
@@ -20,12 +17,14 @@ const ID_INPUT_PASSWORD = "inputPasswordUsuario";
 // nombre de atributos que se guardan en LocalStorage
 const LOCAL_ATR_NOMBRE = "nombre";
 const LOCAL_ATR_PASSWORD = "password";
-const LOCAL_ATR_EXAMENES = "examenes";
+
 
 const usuarioLogeado = leerSesionLocal();
 
 function main() {
     console.log("script.js");
+
+    /*
     // puesta a punto de los controles de la cabecera de la pagina
     let menuEscritorio = document.getElementById(ID_MENU_ESCRITORIO);
     let menuMovil = document.getElementById(ID_MENU_MOVIL);
@@ -81,16 +80,57 @@ function main() {
         menuMovil.appendChild(listaDesplegableMovil);
     }
 
-
-    /*
-    const xhr = new XMLHttpRequest();
-
-    xhr.addEventListener("load", recogerExamenes);
-
-    xhr.open("POST", URL_NUM_PREGUNTAS);
-    xhr.send();
-
     */
+
+
+    let menu = document.getElementById(ID_MENU_ESCRITORIO);
+    if (menu) {
+        menu.innerHTML = `<a href="listado.html"><img src="/web/img/logo.png" alt="logo-autotest" class="header-logo"></a>
+                            <input type="checkbox" id="menu" class="header-control-hamburguesa">
+                            <label for="menu" class="header-control-hamburguesa"> ☰ </label>`;
+
+        let listaMenu = document.createElement("ul");
+        listaMenu.classList.add("header-contenido-menu");
+
+        let botonLog = document.createElement("button");
+        botonLog.classList.add(CLASE_BOTON_BASE);
+
+        let elementoLi = document.createElement("li");
+
+
+        if (usuarioLogeado.length > 0) {
+            listaMenu.innerHTML = `<li><i class="fa-regular fa-user"></i>${usuarioLogeado[0]}</li>`;
+
+            botonLog.classList.add(CLASE_BOTON_PELIGRO);  // boton para cerrar sesion
+            botonLog.innerHTML = '<i class="fa-solid fa-power-off"></i>  Log out';
+            botonLog.addEventListener("click", eliminarSesionLocal);
+            elementoLi.appendChild(botonLog);
+            listaMenu.appendChild(elementoLi);
+
+        } else {
+            // no se ha iniciado sesión
+            listaMenu.innerHTML = `<li>
+                                        <form class="header-form-log">
+                                            <input type="text" placeholder="usuario">
+                                            <input type="password" placeholder="password">
+                                        </form>
+                                    </li>`;
+
+            botonLog.classList.add(CLASE_BOTON_NORMAL);  // el boton para iniciar sesion
+            botonLog.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i>  Log in';
+            elementoLi.appendChild(botonLog);
+            listaMenu.appendChild(elementoLi);
+
+            let elementoLiRegistrar = elementoLi.cloneNode();
+            elementoLiRegistrar.innerHTML = `<button class="boton boton-normal">
+                                                <a href="#">registrar</a>
+                                            </button>`;
+            listaMenu.appendChild(elementoLiRegistrar);
+        }
+
+        menu.appendChild(listaMenu);
+    }
+
 
 }
 
@@ -139,15 +179,9 @@ function eliminarSesionLocal() {
     location.replace('/web/html/inicio.html');        // recargar página
 }
 
+function iniciarSesionListener() {
 
-
-/*
-function crearBotonExamen() {
-    let botonExamen = document.createElement("button");
-    botonExamen.classList.add(CLASE_BOTON_EXAMEN);
-    return botonExamen;
 }
-*/
 
 
 
@@ -166,9 +200,6 @@ function guardarExamenesLocalPrueba() {
 
     localStorage.setItem(LOCAL_ATR_EXAMENES, examenesResueltos);
 }
-
-
-
 
 
 
