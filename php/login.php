@@ -3,24 +3,26 @@
     
     if($_POST){
         require 'config.php';
-        $nombre = $_POST["preguntas"];
-        $passw = $_POST["preguntas"];
+        $nombre = $_POST["nombre"];
+        $passw = $_POST["password"];
+        $usuario = array();
         
         if(isset($nombre) && isset($passw)){
-            $query_usuario = $pdo->prepare("select count(*) from USUARIO where NOMBRE= :nombre");
-            $query_usuario->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+            $query_usuario = $pdo->prepare("select * from USUARIO where NOMBRE=:nombre && PASSWORD=:passw;");
+            $query_usuario->bindParam(":nombre", $nombre, PDO::PARAM_STR, 30);
+            $query_usuario->bindParam(":passw", $passw, PDO::PARAM_STR, 30);
             $query_usuario->execute();
             
-            if($query_usuario->fetchColumn() > 0){
-                // ya existe un usuario con ese nombre
-                
-            } else {
-                
-            }   
+            $usuario = $query_usuario->fetch(PDO::FETCH_ASSOC);
+        
+            if($usuario["NOMBRE"] != $nombre || $usuario["PASSWORD"] != $passw){
+                // no existe el usuario
+                $usuario = array();
+            } 
         }
         
         
-        //echo json_encode($preguntas, JSON_UNESCAPED_UNICODE);
+        echo json_encode($usuario, JSON_UNESCAPED_UNICODE);
     }
     
 ?>

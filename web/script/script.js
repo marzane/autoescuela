@@ -14,9 +14,9 @@ const ID_INPUT_NOMBRE = "inputNombreUsuario";
 const ID_INPUT_PASSWORD = "inputPasswordUsuario";
 
 // nombre de atributos que se guardan en LocalStorage
-const LOCAL_ATR_NOMBRE = "nombre";
-const LOCAL_ATR_PASSWORD = "password";
-
+const LOCAL_ATR_NOMBRE = "nombreUsuario";
+const LOCAL_ATR_PASSWORD = "passwordUsuario";
+const LOCAL_ATR_ADMIN = "esAdmin";
 
 const usuarioLogeado = leerSesionLocal();
 
@@ -38,14 +38,27 @@ function main() {
         let elementoLi = document.createElement("li");
 
 
-        if (usuarioLogeado.length > 0) {
-            listaMenu.innerHTML = `<li><i class="fa-regular fa-user"></i>${usuarioLogeado[0]}</li>`;
+        if (usuarioLogeado["nombre"]) {  // si hay una sesion guardada
+
+            
+            listaMenu.innerHTML = `<li><i class="fa-regular fa-user"></i> ${usuarioLogeado["nombre"]}</li>`;
 
             botonLog.classList.add(CLASE_BOTON_PELIGRO);  // boton para cerrar sesion
             botonLog.innerHTML = '<i class="fa-solid fa-power-off"></i>  Log out';
             botonLog.addEventListener("click", eliminarSesionLocal);
             elementoLi.appendChild(botonLog);
             listaMenu.appendChild(elementoLi);
+
+            // si el usuario es administrador
+            if(usuarioLogeado["admin"] == 1 && usuarioLogeado["admin"] == true){
+                console.log(usuarioLogeado["admin"])
+                inicializarOpcionesAdmin();
+            }
+
+            // borro los datos de admin porque no se necesitan
+            delete usuarioLogeado.admin;
+            localStorage.removeItem(LOCAL_ATR_ADMIN);
+
 
         } else {
             // no se ha iniciado sesión
@@ -80,15 +93,40 @@ function iniciarSesionListener(){
 
 
     if(nombreUsuario && passwordUsuario && nombreUsuario != "" && passwordUsuario != ""){
-        console.log(nombreUsuario)
-        console.log(passwordUsuario)
 
+        const xhr = new XMLHttpRequest();
+        let datos = new FormData();
+        datos.append("nombre", nombreUsuario);
+        datos.append("password", passwordUsuario);
 
+        xhr.addEventListener("load", llamadaLogin);
+
+        xhr.open("POST", URL_LOGIN);
+        xhr.send(datos);
     }
 
+}
 
 
-    //location.replace('/web/html/inicio.html');        // recargar página
+// llamada AJAX para el login
+// la llamada devuelve true si el login es correcto
+// false si no existe el usuario
+function llamadaLogin(e){
+    if (e.target.status == 200) {
+        resultado = JSON.parse(e.target.responseText);
+        console.log(resultado);
+
+        if(resultado["NOMBRE"]){
+            guardarSesionLocal(resultado["NOMBRE"], resultado["PASSWORD"], resultado["esAdmin"]);
+            location.replace('/web/html/inicio.html');        // recargar página
+
+        } else {
+            // no se puede iniciar sesion
+            // no existe el usuario o los datos son incorrectos
+            console.log("no se puede iniciar sesion")
+        }
+
+    }
 }
 
 
@@ -100,10 +138,12 @@ function leerSesionLocal() {
     let usuarioSesion = [];
     let nombre = localStorage.getItem(LOCAL_ATR_NOMBRE);
     let password = localStorage.getItem(LOCAL_ATR_PASSWORD);
+    let esAdmin = localStorage.getItem(LOCAL_ATR_ADMIN);
 
     if (nombre && password) {
-        usuarioSesion.push(nombre);
-        usuarioSesion.push(password);
+        usuarioSesion["nombre"] = nombre;
+        usuarioSesion["password"] = password;
+        usuarioSesion["admin"] = esAdmin;
     }
 
     return usuarioSesion;
@@ -113,13 +153,15 @@ function leerSesionLocal() {
 // function para guardar los datos de la sesion activa en localStorage
 // le paso el nombre y la contraseña de tipo string del usuario
 // devuelve true/false
-function guardarSesionLocal(nombre = "", password = "") {
+function guardarSesionLocal(nombre = "", password = "", esAdmin = false) {
 
     let exito = false;
 
     if (typeof nombre == 'string' && typeof password == 'string' && nombre != "" && password != "") {
         localStorage.setItem(LOCAL_ATR_NOMBRE, nombre);
         localStorage.setItem(LOCAL_ATR_PASSWORD, password);
+        localStorage.setItem(LOCAL_ATR_ADMIN, esAdmin);
+
         exito = true;
     }
 
@@ -135,93 +177,17 @@ function eliminarSesionLocal() {
 }
 
 
-
-// * * * * * * * * * * * * * * *
-// funciones de prueba de datos
-// * * * * * * * * * * * * * * *
-
-// funcion para tener examenes guardados y hacer pruebas
-function guardarExamenesLocalPrueba() {
-    let date = new Date();
-    let examenesResueltos = [
-        { "fecha": date.getDate("YYYY-MM-DDTHH:mm:ss.sssZ"), "aciertos": 2, "fallos": 28 },
-        { "fecha": 212121, "aciertos": 10, "fallos": 20 },
-        { "fecha": 212121, "aciertos": 1, "fallos": 29 },
-    ]
-
-    localStorage.setItem(LOCAL_ATR_EXAMENES, examenesResueltos);
-}
-
-
-
-
-
-
-/*
-
-// llamada ajax que recibe el número de preguntas que hay en la base de datos
-// para saber cuántos examenes hay disponibles si cada uno tiene x preguntas
-function recogerExamenes(e) {
-    if (e.target.status == 200) {
-        respuesta = JSON.parse(e.target.responseText);  // datos de la respuesta(numero de preguntas)
-        const num_examenes = Math.trunc(respuesta / PREGUNTAS_EXAMEN); // numero de examenes
-
-        console.log("hay " + respuesta + " preguntas");
-        console.log("Examenes: " + num_examenes);
-
-
-        // compruebo si hay un usuario 'logeado'
-        if (usuarioLogeado.length <= 0) {     // si no hay sesion leo la info de los examenes en local
-            console.log("no hay sesion");
-
-            let examenesLocal = localStorage.getItem(LOCAL_ATR_EXAMENES);
-            if (examenesLocal && examenesLocal.length > 0) {
-
-                // pintar la lista de examenes en el html
-                // ponerle a cada uno un dataset con los datos
-                // ponerle a cada uno sus clases css
-                // ...
-            }
-
-
-        } else {                            // si hay sesion leo los examenes del usuario de la base de datos
-            let nombre = usuarioLogeado[0];
-            let password = usuarioLogeado[1];
-            console.log(nombre + " | " + password);
-
-            // hacer llamada Ajax para descargar los examenes realizados con aciertos y fallos
-            const xhr = new XMLHttpRequest();
-            let datos = new FormData();
-            datos.append("usuario", nombre);
-
-            xhr.addEventListener("load", descargarExamenes);
-
-            xhr.open("POST", URL_DESCARGAR_EXAMENES);
-            xhr.send(datos);
-        }
-
+function inicializarOpcionesAdmin(){
+    let contenedor = document.getElementById("contenedorTarjetas");
+    if(contenedor){
+        let enlace = document.createElement("a");
+        enlace.href = "/web/html/usuarios.html";
+        enlace.innerHTML = `
+                            <div class="tarjeta">
+                                <h2>Usuarios</h2>
+                                <p>Administra los usuarios de la app</p>
+                                <i class="fa-solid fa-users"></i>
+                            </div>`;
+        contenedor.appendChild(enlace);
     }
 }
-
-
-*/
-
-
-/*
-// listener del boton que tiene cada examen para ir a las preguntas
-function cargarPreguntasExamenListener() {
-    let numeroExamen = 1; // examen de prueba
-
-    let inicio = numeroExamen * PREGUNTAS_EXAMEN - PREGUNTAS_EXAMEN;
-
-    const xhr = new XMLHttpRequest();
-    let datos = new FormData();
-    datos.append("offset", inicio);
-    datos.append("preguntas", PREGUNTAS_EXAMEN);
-
-    xhr.addEventListener("load", descargarPreguntas);
-
-    xhr.open("POST", URL_DESCARGAR_PREGUNTAS);
-    xhr.send(datos);
-}
-*/

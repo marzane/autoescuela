@@ -29,7 +29,6 @@ function main() {
 
 
 
-
 // llamada ajax para descargar las preguntas del examen
 // y mostrar en contenido en la interfaz
 function descargarPreguntas(e) {
