@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", main);
 
 // urls ajax
-const URL_NUM_PREGUNTAS = "https://marta.laprimeracloud01.com/prueba/listado_examenes.php";
+const URL_LOGIN = "https://marta.laprimeracloud01.com/prueba/login.php";
 
 // clases css
 const CLASE_BOTON_BASE = "boton";
@@ -13,7 +13,6 @@ const ID_MENU_ESCRITORIO = "menuEscritorio";
 const ID_INPUT_NOMBRE = "inputNombreUsuario";
 const ID_INPUT_PASSWORD = "inputPasswordUsuario";
 
-
 // nombre de atributos que se guardan en LocalStorage
 const LOCAL_ATR_NOMBRE = "nombre";
 const LOCAL_ATR_PASSWORD = "password";
@@ -23,65 +22,6 @@ const usuarioLogeado = leerSesionLocal();
 
 function main() {
     console.log("script.js");
-
-    /*
-    // puesta a punto de los controles de la cabecera de la pagina
-    let menuEscritorio = document.getElementById(ID_MENU_ESCRITORIO);
-    let menuMovil = document.getElementById(ID_MENU_MOVIL);
-
-    if (menuEscritorio && menuMovil) {
-        let listaDesplegableMovil = document.createElement("ul");
-
-        // boton login
-        let botonMenu = document.createElement("button");
-        botonMenu.classList.add(CLASE_BOTON_BASE);
-
-        //inputs login usuario
-        let formularioLogin = document.createElement("form");
-        // nombre
-        let inputNombre = document.createElement("input");
-        inputNombre.type = "text";
-        inputNombre.placeholder = "usuario";
-
-        // password
-        let inputPassword = document.createElement("input");
-        inputPassword.type = "password";
-        inputPassword.placeholder = "contraseña";
-
-        formularioLogin.appendChild(inputNombre);
-        formularioLogin.appendChild(inputPassword);
-
-
-        if (usuarioLogeado.length > 0) {  // si se ha iniciado sesion
-            botonMenu.classList.add(CLASE_BOTON_PELIGRO);  // boton para cerrar sesion
-            botonMenu.innerHTML = '<i class="fa-solid fa-power-off"></i>  Log out';
-            botonMenu.addEventListener("click", eliminarSesionLocal);
-
-            let elementoUsuario = document.createElement("p");
-            elementoUsuario.innerHTML = '<i class="fa-regular fa-user"></i> ' + usuarioLogeado[0];
-            menuEscritorio.appendChild(elementoUsuario);
-
-            listaDesplegableMovil.innerHTML = '<li> <i class="fa-regular fa-user"></i> ' + usuarioLogeado[0] + ' </li>';
-
-            botonMenuMovil = botonMenu.cloneNode(true);
-            botonMenuMovil.addEventListener("click", eliminarSesionLocal);
-            
-        } else {  // si no hay sesion
-            menuEscritorio.appendChild(formularioLogin);
-
-            botonMenu.classList.add(CLASE_BOTON_NORMAL);  // el boton para iniciar sesion
-            botonMenu.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i>  Log in';
-            botonMenuMovil = botonMenu.cloneNode(true);
-            listaDesplegableMovil.appendChild(formularioLogin.cloneNode(true));
-        }
-
-        menuEscritorio.appendChild(botonMenu);
-        listaDesplegableMovil.appendChild(botonMenuMovil);
-        menuMovil.appendChild(listaDesplegableMovil);
-    }
-
-    */
-
 
     let menu = document.getElementById(ID_MENU_ESCRITORIO);
     if (menu) {
@@ -111,13 +51,14 @@ function main() {
             // no se ha iniciado sesión
             listaMenu.innerHTML = `<li>
                                         <form class="header-form-log">
-                                            <input type="text" placeholder="usuario">
-                                            <input type="password" placeholder="password">
+                                            <input type="text" placeholder="usuario" id="${ID_INPUT_NOMBRE}">
+                                            <input type="password" placeholder="contraseña" id="${ID_INPUT_PASSWORD}">
                                         </form>
                                     </li>`;
 
             botonLog.classList.add(CLASE_BOTON_NORMAL);  // el boton para iniciar sesion
             botonLog.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i>  Log in';
+            botonLog.addEventListener("click", iniciarSesionListener);
             elementoLi.appendChild(botonLog);
             listaMenu.appendChild(elementoLi);
 
@@ -131,10 +72,24 @@ function main() {
         menu.appendChild(listaMenu);
     }
 
-
 }
 
+function iniciarSesionListener(){
+    let nombreUsuario = document.getElementById(ID_INPUT_NOMBRE)?.value;
+    let passwordUsuario = document.getElementById(ID_INPUT_PASSWORD)?.value;
 
+
+    if(nombreUsuario && passwordUsuario && nombreUsuario != "" && passwordUsuario != ""){
+        console.log(nombreUsuario)
+        console.log(passwordUsuario)
+
+
+    }
+
+
+
+    //location.replace('/web/html/inicio.html');        // recargar página
+}
 
 
 
@@ -177,10 +132,6 @@ function eliminarSesionLocal() {
     localStorage.removeItem(LOCAL_ATR_NOMBRE);
     localStorage.removeItem(LOCAL_ATR_PASSWORD);
     location.replace('/web/html/inicio.html');        // recargar página
-}
-
-function iniciarSesionListener() {
-
 }
 
 
