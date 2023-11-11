@@ -25,7 +25,7 @@ function main() {
 
     let menu = document.getElementById(ID_MENU_ESCRITORIO);
     if (menu) {
-        menu.innerHTML = `<a href="listado.html"><img src="/web/img/logo.png" alt="logo-autotest" class="header-logo"></a>
+        menu.innerHTML = `<a href="inicio.html"><img src="/web/img/logo.png" alt="logo-autotest" class="header-logo"></a>
                             <input type="checkbox" id="menu" class="header-control-hamburguesa">
                             <label for="menu" class="header-control-hamburguesa"> ☰ </label>`;
 
@@ -38,8 +38,20 @@ function main() {
         let elementoLi = document.createElement("li");
 
 
-        if (usuarioLogeado["nombre"]) {  // si hay una sesion guardada
+        if (usuarioLogeado["nombre"] && usuarioLogeado["password"]) {  
+            // si hay una sesion activa
 
+            if(usuarioLogeado["admin"] == undefined){
+                const xhr = new XMLHttpRequest();
+                let datos = new FormData();
+                datos.append("nombre", usuarioLogeado["nombre"]);
+                datos.append("password", usuarioLogeado["password"]);
+            
+                xhr.addEventListener("load", llamadaLoginComprobarUsuario);
+            
+                xhr.open("POST", URL_LOGIN);
+                xhr.send(datos);
+            }
             
             listaMenu.innerHTML = `<li><i class="fa-regular fa-user"></i> ${usuarioLogeado["nombre"]}</li>`;
 
@@ -51,14 +63,13 @@ function main() {
 
             // si el usuario es administrador
             if(usuarioLogeado["admin"] == 1 && usuarioLogeado["admin"] == true){
-                console.log(usuarioLogeado["admin"])
+                //console.log(usuarioLogeado["admin"])
                 inicializarOpcionesAdmin();
             }
 
-            // borro los datos de admin porque no se necesitan
+            // borro los datos relacionados con ser admin para que no se vean
             delete usuarioLogeado.admin;
             localStorage.removeItem(LOCAL_ATR_ADMIN);
-
 
         } else {
             // no se ha iniciado sesión
@@ -118,12 +129,33 @@ function llamadaLogin(e){
 
         if(resultado["NOMBRE"]){
             guardarSesionLocal(resultado["NOMBRE"], resultado["PASSWORD"], resultado["esAdmin"]);
-            location.replace('/web/html/inicio.html');        // recargar página
-
+            location.replace('/web/html/inicio.html');
         } else {
             // no se puede iniciar sesion
             // no existe el usuario o los datos son incorrectos
-            console.log("no se puede iniciar sesion")
+            console.log("no se puede iniciar sesion; no existe el usuario o los datos son incorrectos.");
+        }
+
+    }
+}
+
+
+// llamada AJAX para comprobar el usuario
+// y almacenar si es admin o no
+// para dibujar las opciones de admin en el inicio
+function llamadaLoginComprobarUsuario(e){
+    if (e.target.status == 200) {
+        resultado = JSON.parse(e.target.responseText);
+        console.log(resultado);
+
+        if(resultado["NOMBRE"]){
+            if(resultado["esAdmin"]){
+                guardarSesionLocal(resultado["NOMBRE"], resultado["PASSWORD"], resultado["esAdmin"]);
+            }
+
+        } else {
+            // no existe el usuario de la sesion en la BD
+            eliminarSesionLocal();
         }
 
     }
