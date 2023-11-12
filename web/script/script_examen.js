@@ -13,6 +13,8 @@ let fallos = 0;
 
 // URL AJAX
 const URL_DESCARGAR_PREGUNTAS = "https://marta.laprimeracloud01.com/prueba/descargar_preguntas.php";
+const URL_DESCARGAR_SOLUCIONES = "https://marta.laprimeracloud01.com/prueba/descargar_soluciones.php";
+
 
 function main() {
     console.log("script_examen.js");
@@ -33,9 +35,7 @@ function main() {
 // y mostrar en contenido en la interfaz
 function descargarPreguntas(e) {
     if (e.target.status == 200) {
-        console.log("usuario: " + usuarioLogeado);
         preguntas = JSON.parse(e.target.responseText);
-        console.log(preguntas);
 
         let contenedorPreguntas = document.getElementById(ID_CONTENEDOR_PREGUNTAS);
         if (contenedorPreguntas) {
@@ -62,8 +62,7 @@ function crearElementoPregunta(datos = {}, numeroPregunta = 0) {
 
     let contenedor = document.createElement("div");
     contenedor.classList.add("pregunta");
-    //contenedor.setAttribute("DATA-RESPUESTACORRECTA", datos["RESPUESTACORRECTA"]);
-    contenedor.dataset.respuestacorrecta = datos["RESPUESTACORRECTA"];
+    contenedor.dataset.id = datos["ID"];
     contenedor.innerHTML = `<img src="${PREGUNTA_IMAGEN_URL}${datos["IMAGEN"]}" alt="" class="pregunta-img">
                             <div class="pregunta-contenido">
                                 <p>${numeroPregunta}. ${datos["ENUNCIADO"]}</p>
@@ -87,38 +86,67 @@ function crearElementoPregunta(datos = {}, numeroPregunta = 0) {
 }
 
 
+
 function corregirExamen() {
 
-    let nodoPreguntas = document.getElementsByClassName("pregunta");
+    let nodoPreguntas = document.querySelectorAll(".pregunta");
 
     if (nodoPreguntas.length == PREGUNTAS_EXAMEN) {
+        let arrayNodos = [...nodoPreguntas]
 
-        for (let pregunta of nodoPreguntas) {
-            let radios = pregunta.querySelectorAll("input[type=radio]");
-            let respuestacorrecta = parseInt(pregunta.dataset.respuestacorrecta);
-            for (let i = 0; i < radios.length; i++) {
-                if ((i + 1) == respuestacorrecta) {
-                    radios[i].classList.add("radio-input-acierto");
-                    if(radios[i].checked){
-                        aciertos++;
-                    }
-                } else if (radios[i].checked) {
-                    radios[i].classList.add("radio-input-fallo");
-                    fallos++;
-                }
-            }
-        }
+        let identificadoresPreguntas = arrayNodos.map(pregunta => pregunta.dataset.id);
+        let identificadoresPreguntasString = identificadoresPreguntas.join(' ');
 
-        alert(`Aciertos: ${aciertos}\nfallos: ${fallos}`);
+        const xhr = new XMLHttpRequest();
+        let datos = new FormData();
+        datos.append("preguntas", identificadoresPreguntasString);
 
-        if(usuarioLogeado.length > 0){
-            // guardo las preguntas falladas para los examenes de fallos
-        }
+        xhr.addEventListener("load", descargarSoluciones);
+
+        xhr.open("POST", URL_DESCARGAR_SOLUCIONES);
+        xhr.send(datos);
 
     }
 
     //this.removeEventListener("click", corregirExamen);
     this.disabled = true;
+}
+
+
+// llamada AJAX para descargar las soluciones y corregir las preguntas
+function descargarSoluciones(e){
+    if (e.target.status == 200) {
+        soluciones = JSON.parse(e.target.responseText);
+
+        let nodoPreguntas = document.querySelectorAll(".pregunta");
+
+        if (soluciones.length == PREGUNTAS_EXAMEN && nodoPreguntas.length == PREGUNTAS_EXAMEN) {
+
+            for (let i = 0 ; i < nodoPreguntas.length ; i++) {
+                let pregunta = nodoPreguntas[i];
+                let radios = pregunta.querySelectorAll("input[type=radio]");
+                let respuestacorrecta = soluciones[i];
+
+                for (let j = 0; j < radios.length; j++) {
+                    if ((j + 1) == respuestacorrecta) {
+                        radios[j].classList.add("radio-input-acierto");
+                        if(radios[j].checked){
+                            aciertos++;
+                        }
+                    } else if (radios[j].checked) {
+                        radios[j].classList.add("radio-input-fallo");
+                        fallos++;
+                    }
+                }
+            }
+    
+            alert(`Aciertos: ${aciertos}\nfallos: ${fallos}`);
+    
+            if(usuarioLogeado.length > 0){
+                // guardo las preguntas falladas para los examenes de fallos
+            }
+        }
+    }
 }
 
 
