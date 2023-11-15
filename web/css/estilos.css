@@ -37,11 +37,6 @@ a {
     max-width: 13em;
 }
 
-/*
-.header-menu-movil {
-    display: none;
-}
-*/
 
 .header-control-hamburguesa{
     display: none;
@@ -65,7 +60,7 @@ a {
     justify-content: space-between;
 }
 
-.header-form-log input{
+.header-form-log input, .form-registrar input{
     border-radius: 0.5em;
     padding: 0.5em;
     border-color: #c5c3c3;
@@ -300,6 +295,33 @@ a {
 }
 
 
+.form-registrar{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #FFFFFF;
+    padding: 2em;
+    border: 3px solid #FAFAFA;
+    box-shadow: 0px 7px 15px #efeded;
+    border-radius: 0.5em;
+}
+
+.form-registrar input, .form-registrar label{
+    margin: 0.5em;
+    
+}
+
+.form-registrar input{
+    margin-bottom: 3em;
+}
+
+.controles-form-registrar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
 
 .footer-pagina {
     display: flex;
@@ -324,52 +346,6 @@ a {
 
 /* Cuando la pantalla es menor a 900px  (tablets y teléfonos)*/
 @media only screen and (max-width : 1000px) {
-/*
-    .header-menu-escritorio {
-        display: none;
-    }
-
-    
-    .header-menu-movil {
-        display: block;
-    }
-
-    .header-menu-movil ul {
-        width: 100%;
-        padding: 0;
-        display: none;
-
-    }
-
-    .header-menu-movil li {
-        display: block;
-        margin: 0;
-        padding: 10px;
-        list-style: none;
-        text-align: center;
-    }
-
-    .header-menu-movil input {
-        display: none;
-    }
-
-    .header-menu-movil label {
-        box-sizing: border-box;
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        line-height: 20px;
-        font-weight: bold;
-        font-size: 1.6em;
-        color: #2564B9;
-        text-align: center;
-        user-select: none;
-
-        position: absolute;
-        top: 0.6em;
-        right: 1em;
-    }
-*/
 
     .header-menu-escritorio {
         display: block;

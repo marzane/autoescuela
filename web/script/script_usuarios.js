@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", main);
 
 const URL_USUARIOS = "https://marta.laprimeracloud01.com/prueba/descargar_usuarios.php";
 
-const NUM_USUARIOS = 10;
+const NUM_USUARIOS = 30;
 const ID_CONTENEDOR_USUARIOS = "contenedorUsuarios";
 
 

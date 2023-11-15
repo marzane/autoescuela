@@ -88,7 +88,7 @@ function main() {
 
             let elementoLiRegistrar = elementoLi.cloneNode();
             elementoLiRegistrar.innerHTML = `<button class="boton boton-normal">
-                                                <a href="#">registrar</a>
+                                                <a href="/web/html/formusuario.html">registrar</a>
                                             </button>`;
             listaMenu.appendChild(elementoLiRegistrar);
         }

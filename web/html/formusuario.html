@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>usuarios</title>
+    <title>autotest</title>
     <link rel="stylesheet" href="/web/css/estilos.css">
     <link rel="stylesheet" href="/web/css/fontawesome/css/all.css">
     <link rel="shortcut icon" href="/web/img/favicon.png" type="image/x-icon">
-    <script src="/web/script/script.js"></script>
-    <script src="/web/script/script_usuarios.js"></script>
+    <script src="/web/script/script_registrar.js"></script>
 </head>
 
 <body>
@@ -23,7 +22,16 @@
     <div class="contenido-principal">
 
         <div>
-            <button class="boton boton-normal"><a href="/web/html/usuarios.html"></a></button>
+            <form class="form-registrar">
+                <label for="nombre">Nombre: </label>
+                <input type="text" placeholder="usuario" id="inputNombreUsuario" name="nombre">
+                <label for="password">Contraseña: </label>
+                <input type="text" placeholder="contraseña" id="inputPasswordUsuario" name="password">
+                <div class="controles-form-registrar">
+                    <button class="boton boton-action"><a href="/web/html/inicio.html">volver</a></button>
+                    <button class="boton boton-normal">aceptar</button>
+                </div>
+            </form>
         </div>
 
     </div>
