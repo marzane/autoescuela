@@ -1,6 +1,7 @@
 window.addEventListener("DOMContentLoaded", main);
 
 const URL_USUARIOS = "https://marta.laprimeracloud01.com/prueba/descargar_usuarios.php";
+const URL_ELIMINAR_USUARIO = "https://marta.laprimeracloud01.com/prueba/eliminar_usuario.php";
 
 const NUM_USUARIOS = 30;
 const ID_CONTENEDOR_USUARIOS = "contenedorUsuarios";
@@ -83,11 +84,22 @@ function descargarListadoUsuarios(e){
                 let filaUsuario = document.createElement("tr");
                 filaUsuario.innerHTML =    `<td>${usuario["NOMBRE"]}</td>
                             <td>${usuario["PASSWORD"]}</td>
-                            <td>${usuario["esAdmin"] == 1 ? "Sí" : "No"}</td>
-                            <td>
-                                <button class="boton boton-normal"><i class="fa-solid fa-pencil"></i></button>
-                                <button class="boton boton-peligro"><i class="fa-solid fa-trash-can"></i></button>
-                            </td>`;
+                            <td>${usuario["esAdmin"] == 1 ? "Sí" : "No"}</td>`;
+
+                let contenedorControles = document.createElement("td");
+                contenedorControles.innerHTML = '<button class="boton boton-normal"><i class="fa-solid fa-pencil"></i></button>';
+                let botonEliminar = document.createElement("button");
+                botonEliminar.classList.add("boton");
+                botonEliminar.classList.add("boton-peligro");
+                botonEliminar.addEventListener("click", eliminarUsuarioListener);
+                botonEliminar.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+
+                contenedorControles.appendChild(botonEliminar);
+
+                filaUsuario.appendChild(contenedorControles);
+
+                filaUsuario.dataset.id = usuario["ID"];
+
                 tablaUsuarios.appendChild(filaUsuario);
                 }
 
@@ -125,3 +137,39 @@ function descargarListadoUsuarios(e){
 
         </table>
 */
+
+
+function eliminarUsuarioListener(e){
+    console.log(this.parentNode.parentNode);
+    let fila = this.parentNode.parentNode;
+
+    let nombreUsuario = fila.getElementsByTagName("td")[0]?.innerHTML;
+
+
+    if (confirm(`Está a punto de eliminar el usuario "${nombreUsuario}". Esta acción no se puede deshacer`) == true) {
+
+        let idUsuario = fila.dataset.id;
+
+        if(idUsuario){
+            const xhr = new XMLHttpRequest();
+            let datos = new FormData();
+            datos.append("id", idUsuario);
+        
+            xhr.addEventListener("load", llamadaEliminarUsuario);
+        
+            xhr.open("POST", URL_ELIMINAR_USUARIO);
+            xhr.send(datos);
+        }
+
+      }
+}
+
+function llamadaEliminarUsuario(e){
+    if (e.target.status == 200) {
+
+        // buscar la forma de comprobar si el usuario se eliminó correctamente
+        // ...
+
+        location.replace('/web/html/usuarios.html');
+    }
+}

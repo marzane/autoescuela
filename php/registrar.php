@@ -5,7 +5,7 @@
         require 'config.php';
         $nombre = $_POST["nombre"];
         $passw = $_POST["password"];
-        $resultado = "";
+        $resultado = -2;
         
         if(isset($nombre) && isset($passw)){
             $query_usuario = $pdo->prepare("select count(*) as cantidad from USUARIO where NOMBRE= :nombre");
@@ -19,9 +19,9 @@
                 $insert_usuario->bindParam(":password", $passw, PDO::PARAM_STR);
                 $insert_usuario->execute();
                 
-                $usuario = $insert_usuario;
+                $usuario = 0;
             } else {
-                $resultado = "Ya existe un usuario con ese nombre";
+                $resultado = -1;
             }
         }
         

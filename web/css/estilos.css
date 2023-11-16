@@ -87,6 +87,10 @@ a {
     background-color: #00C4A7;
 }
 
+.boton-normal:disabled{
+    background-color: #ccece7;
+}
+
 .boton-peligro {
     background-color: #f14668;
 }
