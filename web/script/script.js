@@ -7,16 +7,23 @@ const URL_LOGIN = "https://marta.laprimeracloud01.com/prueba/login.php";
 const CLASE_BOTON_BASE = "boton";
 const CLASE_BOTON_PELIGRO = "boton-peligro";
 const CLASE_BOTON_NORMAL = "boton-normal";
+const MENSAJE_EXITO = "mensaje-exito";
+const MENSAJE_ERROR = "mensaje-error";
 
 // identificadores
 const ID_MENU_ESCRITORIO = "menuEscritorio";
 const ID_INPUT_NOMBRE = "inputNombreUsuario";
 const ID_INPUT_PASSWORD = "inputPasswordUsuario";
+const ID_MENSAJE_ACCION = "mensajeAccion";
 
 // nombre de atributos que se guardan en LocalStorage
 const LOCAL_ATR_NOMBRE = "nombreUsuario";
 const LOCAL_ATR_PASSWORD = "passwordUsuario";
 const LOCAL_ATR_ADMIN = "esAdmin";
+
+// mensajes
+const MENSAJE_BORRAR_USUARIO_EXITO = "Usuario eliminado";
+const MENSAJE_BORRAR_USUARIO_ERROR = "No se ha podido eliminar";
 
 const usuarioLogeado = leerSesionLocal();
 

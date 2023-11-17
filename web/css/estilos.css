@@ -13,6 +13,10 @@ a {
     text-decoration: none;
 }
 
+.ocultar{
+    display: none;
+}
+
 .header-pagina {
     background: white;
     padding: 0.5em;
@@ -120,6 +124,31 @@ a {
     padding-top: 150px;
 
 }
+
+
+.contenedor-mensaje{
+    display: none;
+    background-color: #FFFFFF;
+    width: 80%;
+    padding-left: 1.5em;
+    border-radius: 1em;
+    box-shadow: 0px 7px 10px #efeded;
+    margin-bottom: 2em;
+    color: #808080;
+}
+
+.mensaje-peligro{
+    display: block;
+    background-color: #FCE1F1;
+    color:#EA4AAA;
+}
+
+.mensaje-exito{
+    display: block;
+    background-color:#DEFFFA;
+    color:#00C4A7;
+}
+
 
 .contenedor-tarjetas{
     display: flex;

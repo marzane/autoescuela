@@ -5,6 +5,8 @@ const URL_ELIMINAR_USUARIO = "https://marta.laprimeracloud01.com/prueba/eliminar
 
 const NUM_USUARIOS = 30;
 const ID_CONTENEDOR_USUARIOS = "contenedorUsuarios";
+const CLASE_OCULTAR = "ocultar";
+
 
 
 function main(){
@@ -116,28 +118,6 @@ function descargarListadoUsuarios(e){
     }
 }
 
-/*
-<table class="tabla-listado">
-            <tr>
-                <th>Nombre</th>
-                <th>Contraseña</th>
-                <th>Admin</th>
-                <th>
-              </tr>
-
-              <tr>
-                <td>marta</td>
-                <td>1234</td>
-                <td>Sí</td>
-                <td>
-                    <button class="boton boton-normal"><i class="fa-solid fa-pencil"></i></button>
-                    <button class="boton boton-peligro"><i class="fa-solid fa-trash-can"></i></button>
-                </td>
-              </tr>
-
-        </table>
-*/
-
 
 function eliminarUsuarioListener(e){
     console.log(this.parentNode.parentNode);
@@ -166,10 +146,59 @@ function eliminarUsuarioListener(e){
 
 function llamadaEliminarUsuario(e){
     if (e.target.status == 200) {
+        let resultado = JSON.parse(e.target.responseText);
+        let mensaje = "";
+        let claseCss = "";
+        if(resultado){
+            // se ha borrado el usuario
+            mensaje = MENSAJE_BORRAR_USUARIO_EXITO;
+            claseCss = MENSAJE_EXITO;
+            ocultarFilaUsuarioPorId(id);
 
-        // buscar la forma de comprobar si el usuario se eliminó correctamente
-        // ...
+        } else {
+            // no se ha realizado el borrado
+            mensaje = MENSAJE_BORRAR_USUARIO_ERROR;
+            claseCss = MENSAJE_ERROR;
+        }
 
-        location.replace('/web/html/usuarios.html');
+        let contenedorMensaje = document.getElementById(ID_MENSAJE_ACCION);
+        if(contenedorMensaje){
+            contenedorMensaje.classList.add(claseCss);
+            contenedorMensaje.innerHTML = `<p>${mensaje}</p>`;
+        }
+
     }
 }
+
+function ocultarFilaUsuarioPorId(id){
+    let fila = document.querySelector(`#${ID_CONTENEDOR_USUARIOS} tr[data-id='${id}']`);
+    console.log(fila);
+    if(fila){
+        fila.innerHTML = "";
+        fila.removeAttribute("data-id");
+    }
+
+}
+
+
+/*
+<table class="tabla-listado">
+            <tr>
+                <th>Nombre</th>
+                <th>Contraseña</th>
+                <th>Admin</th>
+                <th>
+              </tr>
+
+              <tr>
+                <td>marta</td>
+                <td>1234</td>
+                <td>Sí</td>
+                <td>
+                    <button class="boton boton-normal"><i class="fa-solid fa-pencil"></i></button>
+                    <button class="boton boton-peligro"><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+              </tr>
+
+        </table>
+*/
