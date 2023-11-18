@@ -6,7 +6,12 @@ const URL_ELIMINAR_USUARIO = "https://marta.laprimeracloud01.com/prueba/eliminar
 const NUM_USUARIOS = 30;
 const ID_CONTENEDOR_USUARIOS = "contenedorUsuarios";
 const CLASE_OCULTAR = "ocultar";
+let usuarioIdEliminar = 0;
 
+
+// mensajes
+const MENSAJE_BORRAR_USUARIO_EXITO = "Usuario eliminado";
+const MENSAJE_BORRAR_USUARIO_ERROR = "No se ha podido eliminar";
 
 
 function main(){
@@ -24,7 +29,7 @@ function main(){
         xhr.send(datos);
     } else {
         // redirigir al inicio
-        location.replace('/web/html/inicio.html');
+        location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
     }
 
 }
@@ -35,7 +40,6 @@ function main(){
 function llamadaLoginComprobarUsuarioAdmin(e){
     if (e.target.status == 200) {
         resultado = JSON.parse(e.target.responseText);
-        //console.log(resultado);
 
         if(resultado["NOMBRE"]){
             if(resultado["esAdmin"]){
@@ -55,7 +59,7 @@ function llamadaLoginComprobarUsuarioAdmin(e){
         } else {
             // no existe el usuario de la sesion en la BD
             eliminarSesionLocal();
-            location.replace('/web/html/inicio.html');
+            location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
         }
 
     }
@@ -89,13 +93,18 @@ function descargarListadoUsuarios(e){
                             <td>${usuario["esAdmin"] == 1 ? "Sí" : "No"}</td>`;
 
                 let contenedorControles = document.createElement("td");
-                contenedorControles.innerHTML = '<button class="boton boton-normal"><i class="fa-solid fa-pencil"></i></button>';
+
                 let botonEliminar = document.createElement("button");
                 botonEliminar.classList.add("boton");
                 botonEliminar.classList.add("boton-peligro");
                 botonEliminar.addEventListener("click", eliminarUsuarioListener);
                 botonEliminar.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+                let botonEditar = document.createElement("button");
+                botonEditar.classList.add("boton");
+                botonEditar.classList.add("boton-normal");
+                botonEditar.innerHTML = `<a href="${URL_PAGINAS_HTML + PAGINA_EDITAR_USUARIO}"><i class="fa-solid fa-pencil"></i></a>`;
 
+                contenedorControles.appendChild(botonEditar);
                 contenedorControles.appendChild(botonEliminar);
 
                 filaUsuario.appendChild(contenedorControles);
@@ -128,12 +137,12 @@ function eliminarUsuarioListener(e){
 
     if (confirm(`Está a punto de eliminar el usuario "${nombreUsuario}". Esta acción no se puede deshacer`) == true) {
 
-        let idUsuario = fila.dataset.id;
+        usuarioIdEliminar = fila.dataset.id;
 
-        if(idUsuario){
+        if(usuarioIdEliminar){
             const xhr = new XMLHttpRequest();
             let datos = new FormData();
-            datos.append("id", idUsuario);
+            datos.append("id", usuarioIdEliminar);
         
             xhr.addEventListener("load", llamadaEliminarUsuario);
         
@@ -153,7 +162,7 @@ function llamadaEliminarUsuario(e){
             // se ha borrado el usuario
             mensaje = MENSAJE_BORRAR_USUARIO_EXITO;
             claseCss = MENSAJE_EXITO;
-            ocultarFilaUsuarioPorId(id);
+            ocultarFilaUsuarioPorId(usuarioIdEliminar);
 
         } else {
             // no se ha realizado el borrado
@@ -177,7 +186,6 @@ function ocultarFilaUsuarioPorId(id){
         fila.innerHTML = "";
         fila.removeAttribute("data-id");
     }
-
 }
 
 

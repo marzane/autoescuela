@@ -1,31 +1,24 @@
 window.addEventListener("DOMContentLoaded", main);
 
-const URL_REGISTRAR = "https://marta.laprimeracloud01.com/prueba/registrar.php";
+const URL_editar_usuario = "https://marta.laprimeracloud01.com/prueba/editar_usuario.php";
 
 const ID_CONTENEDOR_USUARIOS = "contenedorUsuarios";
 const ID_BOTON_ENVIAR = "botonEnviar";
 const ID_BOTON_VOLVER = "botonVolver";
 const ID_INPUT_USUARIO_NOMBRE = "inputNombreUsuario";
 const ID_INPUT_USUARIO_PASSWORD = "inputPasswordUsuario";
-const ID_MENSAJE_ACCION = "mensajeAccion";
 const ID_INPUT_REPETIR_PASSWORD = "inputRepetirPasswordUsuario";
 
-// clases css
-const CLASE_BOTON_BASE = "boton";
-const CLASE_BOTON_PELIGRO = "boton-peligro";
-const CLASE_BOTON_NORMAL = "boton-normal";
-const MENSAJE_EXITO = "mensaje-exito";
-const MENSAJE_ERROR = "mensaje-peligro";
 
 // mensajes
-const MENSAJE_USUARIO_REGISTRADO_EXITO = "Usuario registrado correctamente";
-const MENSAJE_USUARIO_REGISTRADO_ERROR_NOMBRE = "El nombre de usuario ya existe";
-const MENSAJE_USUARIO_REGISTRADO_ERROR = "Error: no se ha podido registrar";
-const MENSAJE_REPETIR_CONTRASEÑA_ERROR = "Las contraseñas no coinciden";
+const MENSAJE_USUARIO_EDITADO_EXITO = "Usuario registrado correctamente";
+const MENSAJE_USUARIO_EDITADO_ERROR_NOMBRE = "El nombre de usuario ya existe";
+const MENSAJE_USUARIO_EDITADO_ERROR = "Error: no se ha podido registrar";
+const MENSAJE_REPETIR_EDITADO_ERROR = "Las contraseñas no coinciden";
 
 
-function main() {
-    console.log("script_registrar.js");
+function main(){
+    console.log("script_editar.js");
     let botonEnviar = document.getElementById(ID_BOTON_ENVIAR);
     if (botonEnviar) {
         botonEnviar.addEventListener("click", enviarDatosFormListener);
@@ -43,7 +36,7 @@ function main() {
 
 
 function habilitarBotonEnviarLlamada() {
-    console.log("habilitar boton ")
+    console.log("habilitar boton")
     let botonEnviar = document.getElementById(ID_BOTON_ENVIAR);
     if (botonEnviar) {
         // ...
@@ -52,13 +45,14 @@ function habilitarBotonEnviarLlamada() {
         let passwordUsuarioForm = document.getElementById(ID_INPUT_USUARIO_PASSWORD)?.value;
         let repetirPassword = document.getElementById(ID_INPUT_REPETIR_PASSWORD)?.value;
 
-        if (nombreUsuarioForm != "" && passwordUsuarioForm != "" && repetirPassword != "") {
+        if (nombreUsuarioForm != "") {
             botonEnviar.disabled = false;
         } else {
             botonEnviar.disabled = true;
         }
     }
 }
+
 
 
 function enviarDatosFormListener() {
@@ -92,38 +86,8 @@ function enviarDatosFormListener() {
 }
 
 
-function llamadaRegistroUsuario(e) {
-    if (e.target.status == 200) {
-        resultado = JSON.parse(e.target.responseText);
-        console.log(resultado);
+function rellenarFormularioEditarUsuario(){
 
-        let contenedorMensaje = document.getElementById(ID_MENSAJE_ACCION);
-        if (contenedorMensaje) {
-            let mensaje = "";
-            let claseCss = "";
-            switch (resultado) {
-                case 0: // exito
-                    console.log("usuario registrado correctamente");
-                    mensaje = MENSAJE_USUARIO_REGISTRADO_EXITO;
-                    claseCss = MENSAJE_EXITO;
+    
 
-                    break;
-                case -1: // error: ya existe un usuario con ese nombre
-                    console.log("error: ya existe un usuario con ese nombre");
-                    mensaje = MENSAJE_USUARIO_REGISTRADO_ERROR_NOMBRE;
-                    claseCss = MENSAJE_ERROR;
-
-                    break;
-                case -2: // otro error
-                    console.log("error");
-                    mensaje = MENSAJE_USUARIO_REGISTRADO_ERROR;
-                    claseCss = MENSAJE_ERROR;
-
-            }
-
-            contenedorMensaje.classList.add(claseCss);
-            contenedorMensaje.innerHTML = `<p>${mensaje}</p>`;
-        }
-
-    }
 }

@@ -3,17 +3,26 @@ window.addEventListener("DOMContentLoaded", main);
 // urls ajax
 const URL_LOGIN = "https://marta.laprimeracloud01.com/prueba/login.php";
 
+// enlaces html
+const URL_PAGINAS_HTML = "/web/html/";
+const PAGINA_INICIO = "inicio.html";
+const PAGINA_USUARIOS = "usuarios.html";
+const PAGINA_REGISTRAR_USUARIO = "formusuario.html";
+const PAGINA_EDITAR_USUARIO = "formusuario_editar.html";
+
 // clases css
 const CLASE_BOTON_BASE = "boton";
 const CLASE_BOTON_PELIGRO = "boton-peligro";
 const CLASE_BOTON_NORMAL = "boton-normal";
 const MENSAJE_EXITO = "mensaje-exito";
-const MENSAJE_ERROR = "mensaje-error";
+const MENSAJE_ERROR = "mensaje-peligro";
 
 // identificadores
 const ID_MENU_ESCRITORIO = "menuEscritorio";
 const ID_INPUT_NOMBRE = "inputNombreUsuario";
 const ID_INPUT_PASSWORD = "inputPasswordUsuario";
+const ID_INPUT_ADMIN = "inputEsAdmin";
+const ID_FORMULARIO_EDITAR_USUARIO = "formEditarUsuario";
 const ID_MENSAJE_ACCION = "mensajeAccion";
 
 // nombre de atributos que se guardan en LocalStorage
@@ -21,9 +30,10 @@ const LOCAL_ATR_NOMBRE = "nombreUsuario";
 const LOCAL_ATR_PASSWORD = "passwordUsuario";
 const LOCAL_ATR_ADMIN = "esAdmin";
 
+
 // mensajes
-const MENSAJE_BORRAR_USUARIO_EXITO = "Usuario eliminado";
-const MENSAJE_BORRAR_USUARIO_ERROR = "No se ha podido eliminar";
+const MENSAJE_ERROR_LOGIN = "no se puede iniciar sesion; no existe el usuario o los datos son incorrectos";
+
 
 const usuarioLogeado = leerSesionLocal();
 
@@ -32,7 +42,7 @@ function main() {
 
     let menu = document.getElementById(ID_MENU_ESCRITORIO);
     if (menu) {
-        menu.innerHTML = `<a href="inicio.html"><img src="/web/img/logo.png" alt="logo-autotest" class="header-logo"></a>
+        menu.innerHTML = `<a href="${URL_PAGINAS_HTML}${PAGINA_INICIO}"><img src="/web/img/logo.png" alt="logo-autotest" class="header-logo"></a>
                             <input type="checkbox" id="menu" class="header-control-hamburguesa">
                             <label for="menu" class="header-control-hamburguesa"> ☰ </label>`;
 
@@ -68,10 +78,13 @@ function main() {
             elementoLi.appendChild(botonLog);
             listaMenu.appendChild(elementoLi);
 
+            inicializarOpcionEditarUsuarioInicio();
+
             // si el usuario es administrador
             if(usuarioLogeado["admin"] == 1 && usuarioLogeado["admin"] == true){
                 //console.log(usuarioLogeado["admin"])
                 inicializarOpcionesAdmin();
+                inicializarOpcionesAdminFormularioUsuario();
             }
 
             // borro los datos relacionados con ser admin para que no se vean
@@ -95,7 +108,7 @@ function main() {
 
             let elementoLiRegistrar = elementoLi.cloneNode();
             elementoLiRegistrar.innerHTML = `<button class="boton boton-normal">
-                                                <a href="/web/html/formusuario.html">registrar</a>
+                                                <a href="${URL_PAGINAS_HTML}${PAGINA_REGISTRAR_USUARIO}">registrar</a>
                                             </button>`;
             listaMenu.appendChild(elementoLiRegistrar);
         }
@@ -105,10 +118,12 @@ function main() {
 
 }
 
+
+// esto es para el formulario de iniciar sesion que hay en la cabecera
+// si se tienen los datos de usuario y contraseña de realiza el login
 function iniciarSesionListener(){
     let nombreUsuario = document.getElementById(ID_INPUT_NOMBRE)?.value;
     let passwordUsuario = document.getElementById(ID_INPUT_PASSWORD)?.value;
-
 
     if(nombreUsuario && passwordUsuario && nombreUsuario != "" && passwordUsuario != ""){
 
@@ -136,11 +151,15 @@ function llamadaLogin(e){
 
         if(resultado["NOMBRE"]){
             guardarSesionLocal(resultado["NOMBRE"], resultado["PASSWORD"], resultado["esAdmin"]);
-            location.replace('/web/html/inicio.html');
+            location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
         } else {
             // no se puede iniciar sesion
             // no existe el usuario o los datos son incorrectos
-            console.log("no se puede iniciar sesion; no existe el usuario o los datos son incorrectos.");
+            let contenedorMensaje = document.getElementById(ID_MENSAJE_ACCION);
+            if(contenedorMensaje){
+                contenedorMensaje.classList.add(MENSAJE_ERROR);
+                contenedorMensaje.innerHTML = `<p>${MENSAJE_ERROR_LOGIN}</p>`;
+            }
         }
 
     }
@@ -212,15 +231,34 @@ function guardarSesionLocal(nombre = "", password = "", esAdmin = false) {
 function eliminarSesionLocal() {
     localStorage.removeItem(LOCAL_ATR_NOMBRE);
     localStorage.removeItem(LOCAL_ATR_PASSWORD);
-    location.replace('/web/html/inicio.html');        // recargar página
+    location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);// recargar página
 }
 
 
+
+function inicializarOpcionEditarUsuarioInicio(){
+    let contenedor = document.getElementById("contenedorTarjetas");
+    if(contenedor){
+        let enlace = document.createElement("a");
+        enlace.href = URL_PAGINAS_HTML + PAGINA_EDITAR_USUARIO;
+        enlace.innerHTML = `
+                            <div class="tarjeta">
+                                <h2>Editar</h2>
+                                <p>Edita tu usuario o cambia de contraseña</p>
+                                <i class="fa-solid fa-users"></i>
+                            </div>`;
+        contenedor.appendChild(enlace);
+    }
+}
+
+
+// esto es para la pantalla de inicio en modo administrador
+// muestra elementos de administrador
 function inicializarOpcionesAdmin(){
     let contenedor = document.getElementById("contenedorTarjetas");
     if(contenedor){
         let enlace = document.createElement("a");
-        enlace.href = "/web/html/usuarios.html";
+        enlace.href = URL_PAGINAS_HTML + PAGINA_USUARIOS;
         enlace.innerHTML = `
                             <div class="tarjeta">
                                 <h2>Usuarios</h2>
@@ -229,4 +267,18 @@ function inicializarOpcionesAdmin(){
                             </div>`;
         contenedor.appendChild(enlace);
     }
+}
+
+
+// esto es para el formulario de editar usuario en modo administrador
+// habilita el input para dar el permiso de admin al usuario que se está editando
+function inicializarOpcionesAdminFormularioUsuario(){
+    let contenedorForm = document.getElementById(ID_FORMULARIO_EDITAR_USUARIO);
+    if(contenedorForm){
+        let contenedorInputAdmin = document.createElement("div");
+        contenedorInputAdmin.innerHTML = `<input type="checkbox" id="${ID_INPUT_ADMIN}"/> <label>Administrador</label>`;
+
+        contenedorForm.appendChild(contenedorInputAdmin);
+    }
+
 }

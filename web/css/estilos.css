@@ -138,13 +138,13 @@ a {
 }
 
 .mensaje-peligro{
-    display: block;
+    display: block !important;
     background-color: #FCE1F1;
     color:#EA4AAA;
 }
 
 .mensaje-exito{
-    display: block;
+    display: block !important;
     background-color:#DEFFFA;
     color:#00C4A7;
 }
@@ -320,6 +320,14 @@ a {
     background-color: #efeded;
 }
 
+.contenedor-form-registrar{
+    background-color: #FFFFFF;
+    padding: 2em;
+    border: 3px solid #FAFAFA;
+    box-shadow: 0px 7px 15px #efeded;
+    border-radius: 0.5em;
+}
+
 .control-usuarios{
     display: flex;
     flex-direction: row;
@@ -332,11 +340,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: #FFFFFF;
-    padding: 2em;
-    border: 3px solid #FAFAFA;
-    box-shadow: 0px 7px 15px #efeded;
-    border-radius: 0.5em;
+    
 }
 
 .form-registrar input, .form-registrar label{

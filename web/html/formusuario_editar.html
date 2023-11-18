@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>autotest | Registrar usuario</title>
+    <title>autotest | editar usuario</title>
     <link rel="stylesheet" href="/web/css/estilos.css">
     <link rel="stylesheet" href="/web/css/fontawesome/css/all.css">
     <link rel="shortcut icon" href="/web/img/favicon.png" type="image/x-icon">
-    <script src="/web/script/script_registrar.js"></script>
+    <script src="/web/script/script_editar_usuario.js"></script>
+    <script src="/web/script/script.js"></script>
 </head>
 
 <body>
@@ -26,17 +27,17 @@
         </div>
 
         <div class="contenedor-form-registrar">
-            <form class="form-registrar">
+            <form class="form-registrar" id="formEditarUsuario">
                 <label for="nombre">Nombre: </label>
                 <input type="text" placeholder="usuario" id="inputNombreUsuario" name="nombre">
-                <label for="password">Contraseña: </label>
+                <label for="password">Nueva contraseña: </label>
                 <input type="text" placeholder="contraseña" id="inputPasswordUsuario" name="password">
                 <label for="password">Repetir contraseña: </label>
                 <input type="text" placeholder="repetir contraseña" id="inputRepetirPasswordUsuario" name="password">
             </form>
             <div class="controles-form-registrar">
                 <button class="boton boton-action" id="botonVolver"><a href="#">volver</a></button>
-                <button class="boton boton-normal" id="botonEnviar" disabled>registrar</button>
+                <button class="boton boton-normal" id="botonEnviar" disabled>guardar</button>
             </div>
         </div>
     </div>
