@@ -42,7 +42,7 @@ function llamadaLoginComprobarUsuarioAdmin(e){
         resultado = JSON.parse(e.target.responseText);
 
         if(resultado["NOMBRE"]){
-            if(resultado["esAdmin"]){
+           if(resultado["esAdmin"] == 1){
 
                 // descargar los usuarios
                 const xhr = new XMLHttpRequest();
@@ -54,6 +54,9 @@ function llamadaLoginComprobarUsuarioAdmin(e){
             
                 xhr.open("POST", URL_USUARIOS);
                 xhr.send(datos);
+            } else {
+                eliminarSesionLocal();
+                location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
             }
             
         } else {
@@ -99,10 +102,13 @@ function descargarListadoUsuarios(e){
                 botonEliminar.classList.add("boton-peligro");
                 botonEliminar.addEventListener("click", eliminarUsuarioListener);
                 botonEliminar.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+
                 let botonEditar = document.createElement("button");
                 botonEditar.classList.add("boton");
                 botonEditar.classList.add("boton-normal");
-                botonEditar.innerHTML = `<a href="${URL_PAGINAS_HTML + PAGINA_EDITAR_USUARIO}"><i class="fa-solid fa-pencil"></i></a>`;
+                //botonEditar.innerHTML = `<a href="${URL_PAGINAS_HTML + PAGINA_EDITAR_USUARIO}"><i class="fa-solid fa-pencil"></i></a>`;
+                botonEditar.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
+                botonEditar.addEventListener("click", editarUsuarioBotonListener);
 
                 contenedorControles.appendChild(botonEditar);
                 contenedorControles.appendChild(botonEliminar);
@@ -110,6 +116,7 @@ function descargarListadoUsuarios(e){
                 filaUsuario.appendChild(contenedorControles);
 
                 filaUsuario.dataset.id = usuario["ID"];
+                filaUsuario.dataset.nombre = usuario["NOMBRE"];
 
                 tablaUsuarios.appendChild(filaUsuario);
                 }
@@ -153,6 +160,7 @@ function eliminarUsuarioListener(e){
       }
 }
 
+
 function llamadaEliminarUsuario(e){
     if (e.target.status == 200) {
         let resultado = JSON.parse(e.target.responseText);
@@ -179,6 +187,7 @@ function llamadaEliminarUsuario(e){
     }
 }
 
+
 function ocultarFilaUsuarioPorId(id){
     let fila = document.querySelector(`#${ID_CONTENEDOR_USUARIOS} tr[data-id='${id}']`);
     console.log(fila);
@@ -186,6 +195,14 @@ function ocultarFilaUsuarioPorId(id){
         fila.innerHTML = "";
         fila.removeAttribute("data-id");
     }
+}
+
+
+function editarUsuarioBotonListener(){
+    let fila = this.parentNode.parentNode;
+    idUsuarioEditar = fila.dataset.id;
+    localStorage.setItem(LOCAL_EDITAR_USUARIO_ID, idUsuarioEditar);
+    location.replace(URL_PAGINAS_HTML + PAGINA_EDITAR_USUARIO);
 }
 
 

@@ -17,8 +17,11 @@ const MENSAJE_USUARIO_EDITADO_ERROR = "Error: no se ha podido registrar";
 const MENSAJE_REPETIR_EDITADO_ERROR = "Las contraseñas no coinciden";
 
 
-function main(){
+function main() {
     console.log("script_editar.js");
+
+    rellenarFormularioEditarUsuario();
+    
     let botonEnviar = document.getElementById(ID_BOTON_ENVIAR);
     if (botonEnviar) {
         botonEnviar.addEventListener("click", enviarDatosFormListener);
@@ -54,7 +57,7 @@ function habilitarBotonEnviarLlamada() {
 }
 
 
-
+// listener para enviar los datos del formulario
 function enviarDatosFormListener() {
 
     console.log("enviar");
@@ -75,7 +78,7 @@ function enviarDatosFormListener() {
             xhr.send(datos);
         } else {
             let contenedorMensaje = document.getElementById(ID_MENSAJE_ACCION);
-            if(contenedorMensaje){
+            if (contenedorMensaje) {
                 contenedorMensaje.classList.add(MENSAJE_ERROR);
                 contenedorMensaje.innerHTML = `<p>${MENSAJE_REPETIR_CONTRASEÑA_ERROR}</p>`;
             }
@@ -85,9 +88,9 @@ function enviarDatosFormListener() {
 
 }
 
+// funcion para rellenar el formulario con los datos del usuario
+function rellenarFormularioEditarUsuario() {
 
-function rellenarFormularioEditarUsuario(){
-
-    
 
 }
+
