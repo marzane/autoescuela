@@ -36,6 +36,11 @@ const LOCAL_EDITAR_USUARIO_ID = "idUsuarioEditar";
 // mensajes
 const MENSAJE_ERROR_LOGIN = "no se puede iniciar sesion; no existe el usuario o los datos son incorrectos";
 
+const MENSAJE_USUARIO_EDITADO_EXITO = "Usuario actualizado correctamente";
+const MENSAJE_USUARIO_EDITADO_ERROR_NOMBRE = "El nombre de usuario ya está en uso";
+const MENSAJE_USUARIO_EDITADO_ERROR = "Error: no se ha podido actualizar";
+const MENSAJE_REPETIR_EDITADO_ERROR = "Las contraseñas no coinciden";
+
 
 const usuarioLogeado = leerSesionLocal();
 

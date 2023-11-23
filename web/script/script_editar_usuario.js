@@ -13,16 +13,9 @@ const ID_INPUT_REPETIR_PASSWORD = "inputRepetirPasswordUsuario";
 let usuarioEditar = [];
 
 
-// mensajes
-const MENSAJE_USUARIO_EDITADO_EXITO = "Usuario registrado correctamente";
-const MENSAJE_USUARIO_EDITADO_ERROR_NOMBRE = "El nombre de usuario ya existe";
-const MENSAJE_USUARIO_EDITADO_ERROR = "Error: no se ha podido registrar";
-const MENSAJE_REPETIR_EDITADO_ERROR = "Las contraseñas no coinciden";
-
-
 function main() {
     console.log("script_editar.js");
-    
+
     let botonEnviar = document.getElementById(ID_BOTON_ENVIAR);
     if (botonEnviar) {
         botonEnviar.addEventListener("click", enviarDatosFormListener);
@@ -49,16 +42,65 @@ function habilitarBotonEnviarLlamada() {
         let repetirPassword = document.getElementById(ID_INPUT_REPETIR_PASSWORD)?.value;
         //let esAdminForm = document.getElementById(ID_INPUT_ADMIN)?.checked;
 
-        if (nombreUsuarioForm == "" || 
-            nombreUsuarioForm == usuarioEditar["NOMBRE"] || 
+        if (nombreUsuarioForm == "" ||
+            nombreUsuarioForm == usuarioEditar["NOMBRE"] ||
             (passwordUsuarioForm != "" && repetirPassword != passwordUsuarioForm)) {
 
             botonEnviar.disabled = true;
         } else {
             botonEnviar.disabled = false;
         }
+
+        if (nombreUsuarioForm == usuarioEditar["NOMBRE"] && (passwordUsuarioForm != "" && repetirPassword == passwordUsuarioForm)) {
+            botonEnviar.disabled = false;
+        }
+
     }
 }
+
+
+function descargarUsuarioEditar() {
+
+    let idUsuarioDescargar = localStorage.getItem(LOCAL_EDITAR_USUARIO_ID);
+    console.log(idUsuarioDescargar)
+    if (idUsuarioDescargar) {
+        const xhr = new XMLHttpRequest();
+        let datos = new FormData();
+        datos.append("id", idUsuarioDescargar);
+
+        xhr.addEventListener("load", llamadaDescargarUsuario);
+
+        xhr.open("POST", URL_descargar_usuario_id);
+        xhr.send(datos);
+    }
+
+}
+
+
+function llamadaDescargarUsuario(e) {
+    if (e.target.status == 200) {
+        resultado = JSON.parse(e.target.responseText);
+
+        if (resultado["NOMBRE"]) {
+            if (resultado["ID"] != usuarioLogeado["id"] && usuarioLogeado["admin"] != 1) {
+                location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
+            }
+
+            usuarioEditar = resultado;
+
+            let inputNombre = document.getElementById(ID_INPUT_USUARIO_NOMBRE);
+            if (inputNombre) {
+                inputNombre.value = resultado["NOMBRE"];
+            }
+
+            let inputAdmin = document.getElementById(ID_INPUT_ADMIN);
+            if (inputAdmin) {
+                inputAdmin.checked = resultado["esAdmin"] == 1 ? true : false;
+            }
+        }
+    }
+}
+
 
 
 // listener para comprobar y enviar los datos del formulario
@@ -67,69 +109,63 @@ function enviarDatosFormListener() {
     let nombreUsuarioForm = document.getElementById(ID_INPUT_USUARIO_NOMBRE)?.value;
     let passwordUsuarioForm = document.getElementById(ID_INPUT_USUARIO_PASSWORD)?.value;
     let repetirPasswordUsuarioForm = document.getElementById(ID_INPUT_REPETIR_PASSWORD)?.value;
+    let esAdminForm = document.getElementById(ID_INPUT_ADMIN)?.checked;
+    console.log(esAdminForm)
 
-    if (nombreUsuarioForm && passwordUsuarioForm && repetirPasswordUsuarioForm) {
-        if (passwordUsuarioForm == repetirPasswordUsuarioForm) {
-            const xhr = new XMLHttpRequest();
-            let datos = new FormData();
-            datos.append("nombre", nombreUsuarioForm);
+    if (nombreUsuarioForm) {
+
+        const xhr = new XMLHttpRequest();
+
+        let datos = new FormData();
+        datos.append("id", usuarioEditar["ID"]);
+        datos.append("nombre", nombreUsuarioForm);
+
+        if (passwordUsuarioForm != "" && repetirPasswordUsuarioForm != "" && passwordUsuarioForm == repetirPasswordUsuarioForm) {
             datos.append("password", passwordUsuarioForm);
-
-            xhr.addEventListener("load", llamadaRegistroUsuario);
-
-            xhr.open("POST", URL_REGISTRAR);
-            xhr.send(datos);
         } else {
-            let contenedorMensaje = document.getElementById(ID_MENSAJE_ACCION);
-            if (contenedorMensaje) {
-                contenedorMensaje.classList.add(MENSAJE_ERROR);
-                contenedorMensaje.innerHTML = `<p>${MENSAJE_REPETIR_CONTRASEÑA_ERROR}</p>`;
-            }
+            datos.append("password", usuarioEditar["PASSWORD"]);
         }
 
+        if (esAdminForm && usuarioLogeado["admin"] == 1) {
+            datos.append("esAdmin", esAdminForm);
+        }
+
+        xhr.addEventListener("load", llamadaEditarUsuario);
+
+        xhr.open("POST", URL_editar_usuario);
+        xhr.send(datos);
+
+
     }
 
 }
 
 
-function descargarUsuarioEditar() {
-
-    let idUsuarioDescargar = localStorage.getItem(LOCAL_EDITAR_USUARIO_ID);
-    console.log(idUsuarioDescargar)
-    if(idUsuarioDescargar){
-        const xhr = new XMLHttpRequest();
-            let datos = new FormData();
-            datos.append("id", idUsuarioDescargar);
-
-            xhr.addEventListener("load", llamadaDescargarUsuario);
-
-            xhr.open("POST", URL_descargar_usuario_id);
-            xhr.send(datos);
-    }
-
-}
-
-
-function llamadaDescargarUsuario(e){
+function llamadaEditarUsuario(e) {
     if (e.target.status == 200) {
         resultado = JSON.parse(e.target.responseText);
+        console.log(resultado);
+        let mensaje = "";
+        let claseCss = "";
 
-        if(resultado["NOMBRE"]){
-            if(resultado["ID"] != usuarioLogeado["id"] && usuarioLogeado["esAdmin"] != 1){
-                location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
-            }
+        switch (resultado) {
+            case 0:
+                mensaje = MENSAJE_USUARIO_EDITADO_EXITO;
+                claseCss = MENSAJE_EXITO;
+                break;
+            case -2:
+                mensaje = MENSAJE_USUARIO_EDITADO_ERROR;
+                claseCss = MENSAJE_ERROR;
+                break;
+            case -1:
+                mensaje = MENSAJE_USUARIO_EDITADO_ERROR_NOMBRE;
+                claseCss = MENSAJE_ERROR;
+        }
 
-            usuarioEditar = resultado;
-
-            let inputNombre = document.getElementById(ID_INPUT_USUARIO_NOMBRE);
-            if(inputNombre){
-                inputNombre.value = resultado["NOMBRE"];
-            }
-    
-            let inputAdmin = document.getElementById(ID_INPUT_ADMIN);
-            if(inputAdmin){
-                inputAdmin.checked = resultado["esAdmin"] == 1 ? true : false;
-            }
+        let contenedorMensaje = document.getElementById(ID_MENSAJE_ACCION);
+        if (contenedorMensaje) {
+            contenedorMensaje.innerHTML = `<p>${mensaje}</p>`;
+            contenedorMensaje.classList.add(claseCss);
         }
     }
 }
