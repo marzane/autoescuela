@@ -8,12 +8,11 @@ const PREGUNTA_IMAGEN_URL = "/web/img/preguntas/";
 
 let INTERVAL_ID_HABILITAR_CORRECCION;
 
-let aciertos = 0;
-let fallos = 0;
 
 // URL AJAX
 const URL_DESCARGAR_PREGUNTAS = "https://marta.laprimeracloud01.com/prueba/descargar_preguntas.php";
 const URL_DESCARGAR_SOLUCIONES = "https://marta.laprimeracloud01.com/prueba/descargar_soluciones.php";
+const URL_GUARDAR_FALLADAS = "https://marta.laprimeracloud01.com/prueba/guardar_falladas.php";
 
 
 function main() {
@@ -49,7 +48,7 @@ function descargarPreguntas(e) {
             botonCorregir.setAttribute("disabled", "");
             botonCorregir.setAttribute("id", ID_BOTON_CORREGIR);
             botonCorregir.innerHTML = "CORREGIR";
-            botonCorregir.addEventListener("click", corregirExamen);
+            botonCorregir.addEventListener("click", corregirExamenListener);
             contenedorPreguntas.appendChild(botonCorregir);
 
             INTERVAL_ID_HABILITAR_CORRECCION = setInterval(habilitarCorreccionExamen, 1000);
@@ -87,8 +86,7 @@ function crearElementoPregunta(datos = {}, numeroPregunta = 0) {
 
 
 
-function corregirExamen() {
-
+function corregirExamenListener() {
     let nodoPreguntas = document.querySelectorAll(".pregunta");
 
     if (nodoPreguntas.length == PREGUNTAS_EXAMEN) {
@@ -108,7 +106,6 @@ function corregirExamen() {
 
     }
 
-    //this.removeEventListener("click", corregirExamen);
     this.disabled = true;
 }
 
@@ -122,6 +119,12 @@ function descargarSoluciones(e){
 
         if (soluciones.length == PREGUNTAS_EXAMEN && nodoPreguntas.length == PREGUNTAS_EXAMEN) {
 
+            let aciertos = 0;
+            let fallos = 0;
+
+            let preguntasFalladas = [];  // aqui se guardaran los id de las preguntas falladas
+            let preguntasAcertadas = [];  // aqui se guardaran los id de las preguntas acertadas
+
             for (let i = 0 ; i < nodoPreguntas.length ; i++) {
                 let pregunta = nodoPreguntas[i];
                 let radios = pregunta.querySelectorAll("input[type=radio]");
@@ -132,20 +135,44 @@ function descargarSoluciones(e){
                         radios[j].classList.add("radio-input-acierto");
                         if(radios[j].checked){
                             aciertos++;
+                            preguntasAcertadas.push(pregunta.dataset.id);
                         }
                     } else if (radios[j].checked) {
                         radios[j].classList.add("radio-input-fallo");
                         fallos++;
+                        preguntasFalladas.push(pregunta.dataset.id);
                     }
                 }
             }
     
             alert(`Aciertos: ${aciertos}\nfallos: ${fallos}`);
     
-            if(usuarioLogeado.length > 0){
+            if(usuarioLogeado["nombre"]){
                 // guardo las preguntas falladas para los examenes de fallos
+                let preguntasFalladasString = preguntasFalladas.join(" ");
+                let preguntasAcertadasString = preguntasAcertadas.join(" ");
+
+                const xhr = new XMLHttpRequest();
+                let datos = new FormData();
+                datos.append("falladas", preguntasFalladasString);
+                datos.append("acertadas", preguntasAcertadasString);
+                datos.append("usuario", usuarioLogeado["id"]);
+                xhr.addEventListener("load", enviarDatosResultado);
+                console.log(usuarioLogeado["id"])
+        
+                xhr.open("POST", URL_GUARDAR_FALLADAS);
+                xhr.send(datos);
             }
         }
+    }
+}
+
+
+function enviarDatosResultado(e){
+    if (e.target.status == 200) {
+        console.log("enviarDatosResultado")
+        //soluciones = JSON.parse(e.target.responseText);
+        //console.log(soluciones);
     }
 }
 
