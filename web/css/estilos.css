@@ -378,7 +378,10 @@ a {
 }
 
 
-
+.contenedor-grafico{
+    min-width: 50em;
+    min-height: 20em;
+}
 
 
 /* Cuando la pantalla es menor a 900px  (tablets y teléfonos)*/

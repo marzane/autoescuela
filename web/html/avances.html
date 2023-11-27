@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autotest | examenes online</title>
+    <title>Autotest | mis avances</title>
     <link rel="stylesheet" href="/web/css/estilos.css">
     <link rel="stylesheet" href="/web/css/fontawesome/css/all.css">
     <link rel="shortcut icon" href="/web/img/favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@latest/dist/Chart.min.js"></script>
     <script src="/web/script/script.js"></script>
+    <script src="/web/script/script_progreso.js"></script>
 </head>
 
 <body>
@@ -25,26 +27,11 @@
         </div>
 
         <div>
-            <h1>Test permiso B</h1>
-            <p>En esta web podrás realizar todos los test de la DGT gratis y sin registrarte.</p>
+            <h1>Progreso</h1>
+            <canvas id="myChart" class="contenedor-grafico"></canvas>
         </div>
 
-        <div class="contenedor-tarjetas" id="contenedorTarjetas">
-            <a href="examen.html">
-                <div class="tarjeta" id="examenAuto">
-                    <h2>Test de autoescuela</h2>
-                    <p>Exámenes que incluyen preguntas aleatorias del Permiso B de autoescuelas y de la DGT.</p>
-                    <i class="fa-solid fa-car-side"></i>
-                </div>
-            </a>
-            <a href="#">
-                <div class="tarjeta">
-                    <h2>Test de fallos</h2>
-                    <p>Repasa todas aquellas preguntas que fallaste en otros exámenes. Requiere registro previo</p>
-                    <i class="fa-solid fa-spell-check"></i>
-                </div>
-            </a>
-        </div>
+
     </div>
 
 

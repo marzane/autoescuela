@@ -149,8 +149,8 @@ function descargarSoluciones(e){
     
             if(usuarioLogeado["nombre"]){
                 // guardo las preguntas falladas para los examenes de fallos
-                let preguntasFalladasString = preguntasFalladas.join(" ");
-                let preguntasAcertadasString = preguntasAcertadas.join(" ");
+                let preguntasFalladasString = preguntasFalladas.join("-");
+                let preguntasAcertadasString = preguntasAcertadas.join("-");
 
                 const xhr = new XMLHttpRequest();
                 let datos = new FormData();
@@ -159,6 +159,7 @@ function descargarSoluciones(e){
                 datos.append("usuario", usuarioLogeado["id"]);
                 xhr.addEventListener("load", enviarDatosResultado);
                 console.log(usuarioLogeado["id"])
+                console.log(preguntasAcertadasString)
         
                 xhr.open("POST", URL_GUARDAR_FALLADAS);
                 xhr.send(datos);
@@ -171,8 +172,8 @@ function descargarSoluciones(e){
 function enviarDatosResultado(e){
     if (e.target.status == 200) {
         console.log("enviarDatosResultado")
-        //soluciones = JSON.parse(e.target.responseText);
-        //console.log(soluciones);
+        soluciones = JSON.parse(e.target.responseText);
+        console.log(soluciones);
     }
 }
 

@@ -50,6 +50,16 @@ CREATE TABLE
     );
 
 
+CREATE TABLE
+    EXAMENCORREGIDO(
+        USUARIO INTEGER NOT NULL,
+        ESTADO enum("perfecto", "aprobado", "suspenso") NOT NULL,
+        ID INTEGER NOT NULL AUTO_INCREMENT,
+        PRIMARY KEY (ID),
+        FOREIGN KEY (USUARIO) REFERENCES USUARIO(ID) ON DELETE CASCADE
+    );
+
+
 
 /*******************************************************************************
  DATOS DE EJEMPLO

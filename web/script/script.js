@@ -9,6 +9,7 @@ const PAGINA_INICIO = "inicio.html";
 const PAGINA_USUARIOS = "usuarios.html";
 const PAGINA_REGISTRAR_USUARIO = "formusuario.html";
 const PAGINA_EDITAR_USUARIO = "formusuario_editar.html";
+const PAGINA_AVANCES = "avances.html";
 
 // clases css
 const CLASE_BOTON_BASE = "boton";
@@ -61,7 +62,6 @@ function main() {
 
         let elementoLi = document.createElement("li");
 
-
         if (usuarioLogeado["nombre"] && usuarioLogeado["password"]) {
 
             // si hay una sesion activa
@@ -82,6 +82,15 @@ function main() {
             botonLog.innerHTML = '<i class="fa-solid fa-power-off"></i>  Log out';
             botonLog.addEventListener("click", eliminarSesionLocal);
             elementoLi.appendChild(botonLog);
+
+            let elementoLiAvance = elementoLi.cloneNode();
+            let botonAvance = document.createElement("button");
+            botonAvance.innerHTML = `<a href="${URL_PAGINAS_HTML}${PAGINA_AVANCES}">progreso</a>`;
+            botonAvance.classList.add(CLASE_BOTON_NORMAL);
+            botonAvance.classList.add(CLASE_BOTON_BASE);
+            elementoLiAvance.appendChild(botonAvance);
+
+            listaMenu.appendChild(elementoLiAvance);
             listaMenu.appendChild(elementoLi);
 
             inicializarOpcionEditarUsuarioInicio();
