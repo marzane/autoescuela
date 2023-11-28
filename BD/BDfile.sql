@@ -12,10 +12,6 @@
  CREACION DE TABLAS
  ******************************************************************************/
 
-drop database autoescuelabd;
-
-create database autoescuelabd;
-
 use autoescuelabd;
 
 CREATE TABLE
@@ -114,9 +110,9 @@ VALUES (
 INSERT INTO
     USUARIO (NOMBRE, PASSWORD, esAdmin)
 VALUES (
-        'Jose Ramón Ureña Ureña',
+        'admin',
         '123456',
-        false
+        true
     );
 
 /********************************************PREGUNTA**********************************************/

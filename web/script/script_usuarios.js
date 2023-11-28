@@ -3,7 +3,6 @@ window.addEventListener("DOMContentLoaded", main);
 const URL_USUARIOS = "https://marta.laprimeracloud01.com/prueba/descargar_usuarios.php";
 const URL_ELIMINAR_USUARIO = "https://marta.laprimeracloud01.com/prueba/eliminar_usuario.php";
 
-const NUM_USUARIOS = 30;
 const ID_CONTENEDOR_USUARIOS = "contenedorUsuarios";
 const CLASE_OCULTAR = "ocultar";
 let usuarioIdEliminar = 0;
@@ -46,14 +45,10 @@ function llamadaLoginComprobarUsuarioAdmin(e){
 
                 // descargar los usuarios
                 const xhr = new XMLHttpRequest();
-                let datos = new FormData();
-                datos.append("usuarios", NUM_USUARIOS);
-                datos.append("posicion", 0);
-            
                 xhr.addEventListener("load", descargarListadoUsuarios);
             
                 xhr.open("POST", URL_USUARIOS);
-                xhr.send(datos);
+                xhr.send();
             } else {
                 eliminarSesionLocal();
                 location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
@@ -76,6 +71,8 @@ function descargarListadoUsuarios(e){
         console.log(usuarios);
 
         let tablaUsuarios = document.createElement("table");
+        let cuerpoTabla = document.createElement("tbody");
+        cuerpoTabla.classList.add("list");
         tablaUsuarios.classList.add("tabla-listado");
 
         if(usuarios.length > 0){
@@ -91,9 +88,9 @@ function descargarListadoUsuarios(e){
                                             </tr>`;
                 for(usuario of usuarios){
                 let filaUsuario = document.createElement("tr");
-                filaUsuario.innerHTML =    `<td>${usuario["NOMBRE"]}</td>
-                            <td>${usuario["PASSWORD"]}</td>
-                            <td>${usuario["esAdmin"] == 1 ? "Sí" : "No"}</td>`;
+                filaUsuario.innerHTML =    `<td class='nombre'>${usuario["NOMBRE"]}</td>
+                            <td class='password'>${usuario["PASSWORD"]}</td>
+                            <td class='admin'>${usuario["esAdmin"] == 1 ? "Sí" : "No"}</td>`;
 
                 let contenedorControles = document.createElement("td");
 
@@ -118,7 +115,7 @@ function descargarListadoUsuarios(e){
                 filaUsuario.dataset.id = usuario["ID"];
                 filaUsuario.dataset.nombre = usuario["NOMBRE"];
 
-                tablaUsuarios.appendChild(filaUsuario);
+                cuerpoTabla.appendChild(filaUsuario);
                 }
 
                 } else {
@@ -127,8 +124,12 @@ function descargarListadoUsuarios(e){
                             <td colspan="4">No hay usuarios disponibles</td>
                         </tr>`;
                 }
+                tablaUsuarios.appendChild(cuerpoTabla);
 
                 contenedorUsuarios.appendChild(tablaUsuarios);
+
+                inicializarBuscador();
+
             }
 
     }
@@ -203,6 +204,16 @@ function editarUsuarioBotonListener(){
     idUsuarioEditar = fila.dataset.id;
     localStorage.setItem(LOCAL_EDITAR_USUARIO_ID, idUsuarioEditar);
     location.replace(URL_PAGINAS_HTML + PAGINA_EDITAR_USUARIO);
+}
+
+
+
+function inicializarBuscador(){
+    let options = {
+        valueNames: [ 'nombre', 'password', "admin" ]
+      };
+      
+      let userList = new List('contenedorUsuarios', options);
 }
 
 
