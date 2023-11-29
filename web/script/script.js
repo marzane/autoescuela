@@ -1,7 +1,8 @@
 window.addEventListener("DOMContentLoaded", main);
 
 // urls ajax
-const URL_LOGIN = "https://marta.laprimeracloud01.com/prueba/login.php";
+const URL_PHP = "/php/";
+const URL_LOGIN = `https://marta.laprimeracloud01.com/prueba/login.php`;
 
 // enlaces html
 const URL_PAGINAS_HTML = "/web/html/";
@@ -10,6 +11,7 @@ const PAGINA_USUARIOS = "usuarios.html";
 const PAGINA_REGISTRAR_USUARIO = "formusuario.html";
 const PAGINA_EDITAR_USUARIO = "formusuario_editar.html";
 const PAGINA_AVANCES = "avances.html";
+const PAGINA_EXAMEN_FALLOS = "examen_fallos.html";
 
 // clases css
 const CLASE_BOTON_BASE = "boton";
@@ -25,6 +27,8 @@ const ID_INPUT_PASSWORD = "inputPasswordUsuario";
 const ID_INPUT_ADMIN = "inputEsAdmin";
 const ID_FORMULARIO_EDITAR_USUARIO = "formEditarUsuario";
 const ID_MENSAJE_ACCION = "mensajeAccion";
+const ID_ENLACE_EXAMEN_FALLOS = "testFallosEnlace";
+const ID_CONTENEDOR_PREGUNTAS_FALLOS = "contenedorPreguntasFallos";
 
 // nombre de atributos que se guardan en LocalStorage
 const LOCAL_ATR_NOMBRE = "nombreUsuario";
@@ -166,6 +170,7 @@ function llamadaLogin(e) {
         if (resultado["NOMBRE"]) {
             guardarSesionLocal(resultado["NOMBRE"], resultado["PASSWORD"], resultado["esAdmin"], resultado["ID"]);
             location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
+
         } else {
             // no se puede iniciar sesion
             // no existe el usuario o los datos son incorrectos
@@ -190,7 +195,6 @@ function llamadaLoginComprobarUsuario(e) {
 
         if (resultado["NOMBRE"]) {
             guardarSesionLocal(resultado["NOMBRE"], resultado["PASSWORD"], resultado["esAdmin"], resultado["ID"]);
-
         } else {
             // no existe el usuario de la sesion en la BD
             eliminarSesionLocal();

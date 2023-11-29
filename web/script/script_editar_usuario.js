@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", main);
 
-const URL_editar_usuario = "https://marta.laprimeracloud01.com/prueba/editar_usuario.php";
-const URL_descargar_usuario_id = "https://marta.laprimeracloud01.com/prueba/descargar_usuario_id.php";
+const URL_editar_usuario = `https://marta.laprimeracloud01.com/prueba/editar_usuario.php`;
+const URL_descargar_usuario_id = `https://marta.laprimeracloud01.com/prueba/descargar_usuario_id.php`;
 
 const ID_CONTENEDOR_USUARIOS = "contenedorUsuarios";
 const ID_BOTON_ENVIAR = "botonEnviar";

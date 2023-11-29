@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", main);
 
 const ID_GRAFICO_EXAMENES = "myChart";
-const URL_DESCARGAR_PROGRESO = "https://marta.laprimeracloud01.com/prueba/descargar_progreso.php"
+const URL_DESCARGAR_PROGRESO = `https://marta.laprimeracloud01.com/prueba/descargar_progreso.php`;
 
 function main(){
 

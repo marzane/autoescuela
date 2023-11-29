@@ -7,29 +7,16 @@ const ID_BOTON_CORREGIR = "botonCorregir";
 const PREGUNTA_IMAGEN_URL = "/web/img/preguntas/";
 
 let INTERVAL_ID_HABILITAR_CORRECCION;
-let elementoContenedorPreguntas;
 
 
 // URL AJAX
-const URL_DESCARGAR_PREGUNTAS = `https://marta.laprimeracloud01.com/prueba/descargar_preguntas.php`;
 const URL_DESCARGAR_PREGUNTAS_FALLOS = `https://marta.laprimeracloud01.com/prueba/descargar_preguntas_fallos.php`;
 const URL_DESCARGAR_SOLUCIONES = `https://marta.laprimeracloud01.com/prueba/descargar_soluciones.php`;
 const URL_GUARDAR_FALLADAS = `https://marta.laprimeracloud01.com/prueba/guardar_falladas.php`;
 
 
 function main() {
-    console.log("script_examen.js");
-
-    elementoContenedorPreguntas = document.getElementById(ID_CONTENEDOR_PREGUNTAS_FALLOS);
-    let url = URL_DESCARGAR_PREGUNTAS_FALLOS;
-    if(elementoContenedorPreguntas){
-        if(!usuarioLogeado["nombre"] || !usuarioLogeado["ID"] || !usuarioLogeado["password"]){
-            location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
-        }
-    } else {
-        elementoContenedorPreguntas = document.getElementById(ID_CONTENEDOR_PREGUNTAS);
-        url = URL_DESCARGAR_PREGUNTAS;
-    }
+    console.log("script_examen_fallos.js");
 
     const xhr = new XMLHttpRequest();
     let datos = new FormData();
@@ -37,7 +24,7 @@ function main() {
 
     xhr.addEventListener("load", descargarPreguntas);
 
-    xhr.open("POST", url);
+    xhr.open("POST", URL_DESCARGAR_PREGUNTAS);
     xhr.send(datos);
 }
 
@@ -49,10 +36,10 @@ function descargarPreguntas(e) {
     if (e.target.status == 200) {
         preguntas = JSON.parse(e.target.responseText);
 
-        //let contenedorPreguntas = document.getElementById(ID_CONTENEDOR_PREGUNTAS);
-        if (elementoContenedorPreguntas) {
+        let contenedorPreguntas = document.getElementById(ID_CONTENEDOR_PREGUNTAS);
+        if (contenedorPreguntas) {
             for (let i = 0; i < preguntas.length; i++) {
-                elementoContenedorPreguntas.appendChild(crearElementoPregunta(preguntas[i], i + 1));
+                contenedorPreguntas.appendChild(crearElementoPregunta(preguntas[i], i + 1));
             }
 
             let botonCorregir = document.createElement("button");
@@ -62,7 +49,7 @@ function descargarPreguntas(e) {
             botonCorregir.setAttribute("id", ID_BOTON_CORREGIR);
             botonCorregir.innerHTML = "CORREGIR";
             botonCorregir.addEventListener("click", corregirExamenListener);
-            elementoContenedorPreguntas.appendChild(botonCorregir);
+            contenedorPreguntas.appendChild(botonCorregir);
 
             INTERVAL_ID_HABILITAR_CORRECCION = setInterval(habilitarCorreccionExamen, 1000);
         }
@@ -196,7 +183,7 @@ function enviarDatosResultado(e){
 function habilitarCorreccionExamen() {
     let botonCorregir = document.getElementById(ID_BOTON_CORREGIR);
     if (botonCorregir) {
-        let preguntasContestadas = document.querySelectorAll(`.pregunta input[type="radio"]:checked`);
+        let preguntasContestadas = document.querySelectorAll(`#${ID_CONTENEDOR_PREGUNTAS} input[type="radio"]:checked`);
         if (preguntasContestadas.length == PREGUNTAS_EXAMEN) {
             botonCorregir.disabled = false;
             clearInterval(INTERVAL_ID_HABILITAR_CORRECCION);
@@ -208,7 +195,7 @@ function habilitarCorreccionExamen() {
 // funcion que contesta las preguntas del examen
 // para hacer pruebas de desarrollo
 function rellenarExamen() {
-    let preguntas = document.querySelectorAll(`.pregunta input[type="radio"]:first-child`);
+    let preguntas = document.querySelectorAll(`#${ID_CONTENEDOR_PREGUNTAS} .pregunta input[type="radio"]:first-child`);
 
     for (p of preguntas) {
         p.checked = true;

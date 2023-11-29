@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", main);
 
-const URL_USUARIOS = "https://marta.laprimeracloud01.com/prueba/descargar_usuarios.php";
-const URL_ELIMINAR_USUARIO = "https://marta.laprimeracloud01.com/prueba/eliminar_usuario.php";
+const URL_USUARIOS = `https://marta.laprimeracloud01.com/prueba/descargar_usuarios.php`;
+const URL_ELIMINAR_USUARIO = `https://marta.laprimeracloud01.com/prueba/eliminar_usuario.php`;
 
 const ID_CONTENEDOR_USUARIOS = "contenedorUsuarios";
 const CLASE_OCULTAR = "ocultar";

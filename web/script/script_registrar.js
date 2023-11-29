@@ -1,6 +1,7 @@
 window.addEventListener("DOMContentLoaded", main);
 
-const URL_REGISTRAR = "https://marta.laprimeracloud01.com/prueba/registrar.php";
+const URL_PHP = "/php/";
+const URL_REGISTRAR = `https://marta.laprimeracloud01.com/prueba/registrar.php`;
 
 const ID_CONTENEDOR_USUARIOS = "contenedorUsuarios";
 const ID_BOTON_ENVIAR = "botonEnviar";
