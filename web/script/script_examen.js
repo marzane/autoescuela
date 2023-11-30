@@ -22,8 +22,10 @@ function main() {
 
     elementoContenedorPreguntas = document.getElementById(ID_CONTENEDOR_PREGUNTAS_FALLOS);
     let url = URL_DESCARGAR_PREGUNTAS_FALLOS;
+    let datos = new FormData();
+    datos.append("usuario", usuarioLogeado["id"]);
     if(elementoContenedorPreguntas){
-        if(!usuarioLogeado["nombre"] || !usuarioLogeado["ID"] || !usuarioLogeado["password"]){
+        if(!usuarioLogeado["nombre"] || !usuarioLogeado["id"] || !usuarioLogeado["password"]){
             location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
         }
     } else {
@@ -32,7 +34,6 @@ function main() {
     }
 
     const xhr = new XMLHttpRequest();
-    let datos = new FormData();
     datos.append("preguntas", PREGUNTAS_EXAMEN)
 
     xhr.addEventListener("load", descargarPreguntas);
@@ -48,6 +49,7 @@ function main() {
 function descargarPreguntas(e) {
     if (e.target.status == 200) {
         preguntas = JSON.parse(e.target.responseText);
+        console.log(preguntas)
 
         //let contenedorPreguntas = document.getElementById(ID_CONTENEDOR_PREGUNTAS);
         if (elementoContenedorPreguntas) {
