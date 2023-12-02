@@ -1,8 +1,8 @@
 window.addEventListener("DOMContentLoaded", main);
 
 // urls ajax
-const URL_PHP = "/php/";
-const URL_LOGIN = `https://marta.laprimeracloud01.com/prueba/login.php`;
+const URL_PHP = "https://marta.laprimeracloud01.com/prueba/";
+const URL_LOGIN = `${URL_PHP}login.php`;
 
 // enlaces html
 const URL_PAGINAS_HTML = "/web/html/";
@@ -17,6 +17,7 @@ const PAGINA_EXAMEN_FALLOS = "examen_fallos.html";
 const CLASE_BOTON_BASE = "boton";
 const CLASE_BOTON_PELIGRO = "boton-peligro";
 const CLASE_BOTON_NORMAL = "boton-normal";
+const CLASE_CONTENEDOR_INPUT_ADMIN = "contenedor-input-admin";
 const MENSAJE_EXITO = "mensaje-exito";
 const MENSAJE_ERROR = "mensaje-peligro";
 
@@ -50,7 +51,6 @@ const MENSAJE_REPETIR_EDITADO_ERROR = "Las contraseñas no coinciden";
 const usuarioLogeado = leerSesionLocal();
 
 function main() {
-    console.log("script.js");
 
     let menu = document.getElementById(ID_MENU_ESCRITORIO);
     if (menu) {
@@ -87,14 +87,15 @@ function main() {
             botonLog.addEventListener("click", eliminarSesionLocal);
             elementoLi.appendChild(botonLog);
 
-            let elementoLiAvance = elementoLi.cloneNode();
-            let botonAvance = document.createElement("button");
-            botonAvance.innerHTML = `<a href="${URL_PAGINAS_HTML}${PAGINA_AVANCES}">progreso</a>`;
-            botonAvance.classList.add(CLASE_BOTON_NORMAL);
-            botonAvance.classList.add(CLASE_BOTON_BASE);
-            elementoLiAvance.appendChild(botonAvance);
+            let elementoLiEditar = elementoLi.cloneNode();
+            let botonEditar = document.createElement("button");
+            botonEditar.innerHTML = `<a href="${URL_PAGINAS_HTML}${PAGINA_EDITAR_USUARIO}">editar</a>`;
+            botonEditar.classList.add(CLASE_BOTON_NORMAL);
+            botonEditar.classList.add(CLASE_BOTON_BASE);
+            botonEditar.addEventListener("click", editarUsuarioListener);
+            elementoLiEditar.appendChild(botonEditar);
 
-            listaMenu.appendChild(elementoLiAvance);
+            listaMenu.appendChild(elementoLiEditar);
             listaMenu.appendChild(elementoLi);
 
             inicializarOpcionEditarUsuarioInicio();
@@ -165,7 +166,6 @@ function iniciarSesionListener() {
 function llamadaLogin(e) {
     if (e.target.status == 200) {
         resultado = JSON.parse(e.target.responseText);
-        console.log(resultado);
 
         if (resultado["NOMBRE"]) {
             guardarSesionLocal(resultado["NOMBRE"], resultado["PASSWORD"], resultado["esAdmin"], resultado["ID"]);
@@ -191,7 +191,6 @@ function llamadaLogin(e) {
 function llamadaLoginComprobarUsuario(e) {
     if (e.target.status == 200) {
         resultado = JSON.parse(e.target.responseText);
-        console.log(resultado);
 
         if (resultado["NOMBRE"]) {
             guardarSesionLocal(resultado["NOMBRE"], resultado["PASSWORD"], resultado["esAdmin"], resultado["ID"]);
@@ -261,12 +260,12 @@ function inicializarOpcionEditarUsuarioInicio() {
     let contenedor = document.getElementById("contenedorTarjetas");
     if (contenedor) {
         let enlace = document.createElement("a");
-        enlace.href = URL_PAGINAS_HTML + PAGINA_EDITAR_USUARIO;
+        enlace.href = URL_PAGINAS_HTML + PAGINA_AVANCES;
         enlace.innerHTML = `
                             <div class="tarjeta">
-                                <h2>Editar</h2>
-                                <p>Edita tu usuario o cambia de contraseña</p>
-                                <i class="fa-solid fa-user"></i>
+                                <h2>Progreso</h2>
+                                <p>Repasa tus avances en los tests</p>
+                                <i class="fa-solid fa-chart-pie"></i>
                             </div>`;
         enlace.addEventListener("click", editarUsuarioListener);
         contenedor.appendChild(enlace);
@@ -294,13 +293,14 @@ function inicializarOpcionesAdmin() {
 
 // esto es para el formulario de editar usuario en modo administrador
 // habilita el input para dar el permiso de admin al usuario que se está editando
-function inicializarOpcionesAdminFormularioUsuario(){
+function inicializarOpcionesAdminFormularioUsuario() {
     let contenedorForm = document.getElementById(ID_FORMULARIO_EDITAR_USUARIO);
-    if(contenedorForm){
+    if (contenedorForm) {
         let contenedorInputAdmin = document.createElement("div");
+        contenedorInputAdmin.classList.add(CLASE_CONTENEDOR_INPUT_ADMIN);
         let inputCheckAdmin = document.createElement("input");
         let labelAdmin = document.createElement("label");
-        labelAdmin.innerHTML = "Administrador";
+        labelAdmin.innerHTML = "Administrador<i class='fa-solid fa-triangle-exclamation warning-icon'></i>";
         inputCheckAdmin.type = "checkbox";
         inputCheckAdmin.setAttribute("id", ID_INPUT_ADMIN);
         inputCheckAdmin.checked = usuarioLogeado["admin"] == true ? true : false;
@@ -314,6 +314,6 @@ function inicializarOpcionesAdminFormularioUsuario(){
 
 
 
-function editarUsuarioListener(){
+function editarUsuarioListener() {
     localStorage.setItem(LOCAL_EDITAR_USUARIO_ID, usuarioLogeado["id"]);
 }

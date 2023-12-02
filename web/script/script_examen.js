@@ -11,21 +11,20 @@ let elementoContenedorPreguntas;
 
 
 // URL AJAX
-const URL_DESCARGAR_PREGUNTAS = `https://marta.laprimeracloud01.com/prueba/descargar_preguntas.php`;
-const URL_DESCARGAR_PREGUNTAS_FALLOS = `https://marta.laprimeracloud01.com/prueba/descargar_preguntas_fallos.php`;
-const URL_DESCARGAR_SOLUCIONES = `https://marta.laprimeracloud01.com/prueba/descargar_soluciones.php`;
-const URL_GUARDAR_FALLADAS = `https://marta.laprimeracloud01.com/prueba/guardar_falladas.php`;
+const URL_DESCARGAR_PREGUNTAS = `${URL_PHP}descargar_preguntas.php`;
+const URL_DESCARGAR_PREGUNTAS_FALLOS = `${URL_PHP}descargar_preguntas_fallos.php`;
+const URL_DESCARGAR_SOLUCIONES = `${URL_PHP}descargar_soluciones.php`;
+const URL_GUARDAR_FALLADAS = `${URL_PHP}guardar_resultado.php`;
 
 
 function main() {
-    console.log("script_examen.js");
 
     elementoContenedorPreguntas = document.getElementById(ID_CONTENEDOR_PREGUNTAS_FALLOS);
     let url = URL_DESCARGAR_PREGUNTAS_FALLOS;
     let datos = new FormData();
     datos.append("usuario", usuarioLogeado["id"]);
-    if(elementoContenedorPreguntas){
-        if(!usuarioLogeado["nombre"] || !usuarioLogeado["id"] || !usuarioLogeado["password"]){
+    if (elementoContenedorPreguntas) {
+        if (!usuarioLogeado["nombre"] || !usuarioLogeado["id"] || !usuarioLogeado["password"]) {
             location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
         }
     } else {
@@ -49,7 +48,6 @@ function main() {
 function descargarPreguntas(e) {
     if (e.target.status == 200) {
         preguntas = JSON.parse(e.target.responseText);
-        console.log(preguntas)
 
         //let contenedorPreguntas = document.getElementById(ID_CONTENEDOR_PREGUNTAS);
         if (elementoContenedorPreguntas) {
@@ -126,7 +124,7 @@ function corregirExamenListener() {
 
 
 // llamada AJAX para descargar las soluciones y corregir las preguntas
-function descargarSoluciones(e){
+function descargarSoluciones(e) {
     if (e.target.status == 200) {
         soluciones = JSON.parse(e.target.responseText);
 
@@ -140,7 +138,7 @@ function descargarSoluciones(e){
             let preguntasFalladas = [];  // aqui se guardaran los id de las preguntas falladas
             let preguntasAcertadas = [];  // aqui se guardaran los id de las preguntas acertadas
 
-            for (let i = 0 ; i < nodoPreguntas.length ; i++) {
+            for (let i = 0; i < nodoPreguntas.length; i++) {
                 let pregunta = nodoPreguntas[i];
                 let radios = pregunta.querySelectorAll("input[type=radio]");
                 let respuestacorrecta = soluciones[i];
@@ -148,7 +146,7 @@ function descargarSoluciones(e){
                 for (let j = 0; j < radios.length; j++) {
                     if ((j + 1) == respuestacorrecta) {
                         radios[j].classList.add("radio-input-acierto");
-                        if(radios[j].checked){
+                        if (radios[j].checked) {
                             aciertos++;
                             preguntasAcertadas.push(pregunta.dataset.id);
                         }
@@ -159,10 +157,10 @@ function descargarSoluciones(e){
                     }
                 }
             }
-    
+
             alert(`Aciertos: ${aciertos}\nfallos: ${fallos}`);
-    
-            if(usuarioLogeado["nombre"]){
+
+            if (usuarioLogeado["nombre"]) {
                 // guardo las preguntas falladas para los examenes de fallos
                 let preguntasFalladasString = preguntasFalladas.join("-");
                 let preguntasAcertadasString = preguntasAcertadas.join("-");
@@ -172,10 +170,7 @@ function descargarSoluciones(e){
                 datos.append("falladas", preguntasFalladasString);
                 datos.append("acertadas", preguntasAcertadasString);
                 datos.append("usuario", usuarioLogeado["id"]);
-                xhr.addEventListener("load", enviarDatosResultado);
-                console.log(usuarioLogeado["id"])
-                console.log(preguntasAcertadasString)
-        
+
                 xhr.open("POST", URL_GUARDAR_FALLADAS);
                 xhr.send(datos);
             }
@@ -183,14 +178,6 @@ function descargarSoluciones(e){
     }
 }
 
-
-function enviarDatosResultado(e){
-    if (e.target.status == 200) {
-        console.log("enviarDatosResultado")
-        soluciones = JSON.parse(e.target.responseText);
-        console.log(soluciones);
-    }
-}
 
 
 // funcion que comprueba que se han contestado todas las preguntas

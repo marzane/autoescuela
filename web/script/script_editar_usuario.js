@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", main);
 
-const URL_editar_usuario = `https://marta.laprimeracloud01.com/prueba/editar_usuario.php`;
-const URL_descargar_usuario_id = `https://marta.laprimeracloud01.com/prueba/descargar_usuario_id.php`;
+const URL_editar_usuario = `${URL_PHP}editar_usuario.php`;
+const URL_descargar_usuario_id = `${URL_PHP}descargar_usuario_id.php`;
 
 const ID_CONTENEDOR_USUARIOS = "contenedorUsuarios";
 const ID_BOTON_ENVIAR = "botonEnviar";
@@ -14,7 +14,6 @@ let usuarioEditar = [];
 
 
 function main() {
-    console.log("script_editar.js");
 
     let botonEnviar = document.getElementById(ID_BOTON_ENVIAR);
     if (botonEnviar) {
@@ -62,7 +61,6 @@ function habilitarBotonEnviarLlamada() {
 function descargarUsuarioEditar() {
 
     let idUsuarioDescargar = localStorage.getItem(LOCAL_EDITAR_USUARIO_ID);
-    console.log(idUsuarioDescargar)
     if (idUsuarioDescargar) {
         const xhr = new XMLHttpRequest();
         let datos = new FormData();
@@ -110,7 +108,6 @@ function enviarDatosFormListener() {
     let passwordUsuarioForm = document.getElementById(ID_INPUT_USUARIO_PASSWORD)?.value;
     let repetirPasswordUsuarioForm = document.getElementById(ID_INPUT_REPETIR_PASSWORD)?.value;
     let esAdminForm = document.getElementById(ID_INPUT_ADMIN)?.checked;
-    console.log(esAdminForm)
 
     if (nombreUsuarioForm) {
 
@@ -144,7 +141,6 @@ function enviarDatosFormListener() {
 function llamadaEditarUsuario(e) {
     if (e.target.status == 200) {
         resultado = JSON.parse(e.target.responseText);
-        console.log(resultado);
         let mensaje = "";
         let claseCss = "";
 

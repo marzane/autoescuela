@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", main);
 
 const URL_PHP = "/php/";
-const URL_REGISTRAR = `https://marta.laprimeracloud01.com/prueba/registrar.php`;
+const URL_REGISTRAR = `${URL_PHP}registrar.php`;
 
 const ID_CONTENEDOR_USUARIOS = "contenedorUsuarios";
 const ID_BOTON_ENVIAR = "botonEnviar";
@@ -26,7 +26,6 @@ const MENSAJE_REPETIR_CONTRASEÑA_ERROR = "Las contraseñas no coinciden";
 
 
 function main() {
-    console.log("script_registrar.js");
     let botonEnviar = document.getElementById(ID_BOTON_ENVIAR);
     if (botonEnviar) {
         botonEnviar.addEventListener("click", enviarDatosFormListener);
@@ -44,7 +43,6 @@ function main() {
 
 
 function habilitarBotonEnviarLlamada() {
-    console.log("habilitar boton ")
     let botonEnviar = document.getElementById(ID_BOTON_ENVIAR);
     if (botonEnviar) {
         // ...
@@ -63,8 +61,6 @@ function habilitarBotonEnviarLlamada() {
 
 
 function enviarDatosFormListener() {
-
-    console.log("enviar");
     let nombreUsuarioForm = document.getElementById(ID_INPUT_USUARIO_NOMBRE)?.value;
     let passwordUsuarioForm = document.getElementById(ID_INPUT_USUARIO_PASSWORD)?.value;
     let repetirPasswordUsuarioForm = document.getElementById(ID_INPUT_REPETIR_PASSWORD)?.value;
@@ -82,7 +78,7 @@ function enviarDatosFormListener() {
             xhr.send(datos);
         } else {
             let contenedorMensaje = document.getElementById(ID_MENSAJE_ACCION);
-            if(contenedorMensaje){
+            if (contenedorMensaje) {
                 contenedorMensaje.classList.add(MENSAJE_ERROR);
                 contenedorMensaje.innerHTML = `<p>${MENSAJE_REPETIR_CONTRASEÑA_ERROR}</p>`;
             }
@@ -96,7 +92,6 @@ function enviarDatosFormListener() {
 function llamadaRegistroUsuario(e) {
     if (e.target.status == 200) {
         resultado = JSON.parse(e.target.responseText);
-        console.log(resultado);
 
         let contenedorMensaje = document.getElementById(ID_MENSAJE_ACCION);
         if (contenedorMensaje) {
@@ -104,19 +99,16 @@ function llamadaRegistroUsuario(e) {
             let claseCss = "";
             switch (resultado) {
                 case 0: // exito
-                    console.log("usuario registrado correctamente");
                     mensaje = MENSAJE_USUARIO_REGISTRADO_EXITO;
                     claseCss = MENSAJE_EXITO;
 
                     break;
                 case -1: // error: ya existe un usuario con ese nombre
-                    console.log("error: ya existe un usuario con ese nombre");
                     mensaje = MENSAJE_USUARIO_REGISTRADO_ERROR_NOMBRE;
                     claseCss = MENSAJE_ERROR;
 
                     break;
                 case -2: // otro error
-                    console.log("error");
                     mensaje = MENSAJE_USUARIO_REGISTRADO_ERROR;
                     claseCss = MENSAJE_ERROR;
 
