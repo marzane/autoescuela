@@ -540,14 +540,18 @@ h1 {
     }
 
     .pregunta{
-        height: 9em;
+        min-height: 40px;
         margin: 0;
-        padding-bottom: 5em;
+        padding-bottom: 20px;
+        font-size: 11px;
     }
 
     .pregunta-img{
-        width: 12em;
+        width: 170px;
     }
 
+    .contenido-texto p{
+        font-size: 12px;
+    }
 }
 
