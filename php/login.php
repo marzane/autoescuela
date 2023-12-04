@@ -15,10 +15,15 @@
             
             $usuario = $query_usuario->fetch(PDO::FETCH_ASSOC);
         
-            if($usuario["NOMBRE"] != $nombre || $usuario["PASSWORD"] != $passw){
-                // no existe el usuario
+            if($usuario){
+                if($usuario["NOMBRE"] != $nombre || $usuario["PASSWORD"] != $passw){
+                    // no existe el usuario
+                    $usuario = array();
+                } 
+            } else{
                 $usuario = array();
-            } 
+            }
+
         }
         
         

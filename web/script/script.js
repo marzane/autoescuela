@@ -47,7 +47,6 @@ const MENSAJE_USUARIO_EDITADO_ERROR_NOMBRE = "El nombre de usuario ya está en u
 const MENSAJE_USUARIO_EDITADO_ERROR = "Error: no se ha podido actualizar";
 const MENSAJE_REPETIR_EDITADO_ERROR = "Las contraseñas no coinciden";
 
-
 const usuarioLogeado = leerSesionLocal();
 
 function main() {

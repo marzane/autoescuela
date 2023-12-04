@@ -19,7 +19,7 @@
                 $insert_usuario->bindParam(":password", $passw, PDO::PARAM_STR);
                 $insert_usuario->execute();
                 
-                $usuario = 0;
+                $resultado = 0;
             } else {
                 $resultado = -1;
             }
