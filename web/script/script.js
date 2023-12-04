@@ -330,3 +330,4 @@ function editarUsuarioListener() {
     const usuarioLogeado = leerSesionLocal();
     localStorage.setItem(LOCAL_EDITAR_USUARIO_ID, usuarioLogeado["id"]);
 }
+

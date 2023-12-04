@@ -4,6 +4,7 @@ const PREGUNTAS_EXAMEN = 30;
 
 const ID_CONTENEDOR_PREGUNTAS = "contenedorPreguntas";
 const ID_BOTON_CORREGIR = "botonCorregir";
+const CLASE_IMPRIMIR = "imprimir";
 const PREGUNTA_IMAGEN_URL = "/web/img/preguntas/";
 
 let INTERVAL_ID_HABILITAR_CORRECCION;
@@ -64,6 +65,12 @@ function descargarPreguntas(e) {
             botonCorregir.innerHTML = "CORREGIR";
             botonCorregir.addEventListener("click", corregirExamenListener);
             elementoContenedorPreguntas.appendChild(botonCorregir);
+
+            let btnImprimirLista = document.querySelectorAll(`.${CLASE_IMPRIMIR}`);
+            for(btn of btnImprimirLista){
+                btn.addEventListener("click", imprimirPaginaListener);
+            }
+
 
             INTERVAL_ID_HABILITAR_CORRECCION = setInterval(habilitarCorreccionExamen, 1000);
         }
@@ -206,6 +213,11 @@ function rellenarExamen() {
     for (p of preguntas) {
         p.checked = true;
     }
+}
+
+
+function imprimirPaginaListener(){
+    window.print();
 }
 
 
