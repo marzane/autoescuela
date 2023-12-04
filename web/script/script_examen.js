@@ -65,12 +65,11 @@ function descargarPreguntas(e) {
             botonCorregir.innerHTML = "CORREGIR";
             botonCorregir.addEventListener("click", corregirExamenListener);
             elementoContenedorPreguntas.appendChild(botonCorregir);
-
+            
             let btnImprimirLista = document.querySelectorAll(`.${CLASE_IMPRIMIR}`);
             for(btn of btnImprimirLista){
                 btn.addEventListener("click", imprimirPaginaListener);
             }
-
 
             INTERVAL_ID_HABILITAR_CORRECCION = setInterval(habilitarCorreccionExamen, 1000);
         }
@@ -167,8 +166,8 @@ function descargarSoluciones(e) {
             }
 
             alert(`Aciertos: ${aciertos}\nfallos: ${fallos}`);
-
-
+            
+            
             const usuarioLogeado = leerSesionLocal();
 
             if (usuarioLogeado["nombre"]) {

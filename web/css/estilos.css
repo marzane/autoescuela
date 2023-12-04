@@ -526,3 +526,28 @@ h1 {
         min-height: 11em;
     }
 }
+
+
+
+/* imprimir pantalla */
+@media print {
+    .header-pagina, .boton, .footer-pagina{
+        display: none;
+    }
+
+    .contenido-principal{
+        padding: 0;
+    }
+
+    .pregunta{
+        height: 9em;
+        margin: 0;
+        padding-bottom: 5em;
+    }
+
+    .pregunta-img{
+        width: 12em;
+    }
+
+}
+
