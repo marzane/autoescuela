@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", main);
 
 // urls ajax
-const URL_PHP = "https://marta.laprimeracloud01.com/prueba/";
+const URL_PHP = "/php/";
 const URL_LOGIN = `${URL_PHP}login.php`;
 
 // enlaces html
@@ -30,6 +30,7 @@ const ID_FORMULARIO_EDITAR_USUARIO = "formEditarUsuario";
 const ID_MENSAJE_ACCION = "mensajeAccion";
 const ID_ENLACE_EXAMEN_FALLOS = "testFallosEnlace";
 const ID_CONTENEDOR_PREGUNTAS_FALLOS = "contenedorPreguntasFallos";
+const ID_INPUT_MENU_HAMBURGUESA = "menu";
 
 // nombre de atributos que se guardan en LocalStorage
 const LOCAL_ATR_NOMBRE = "nombreUsuario";
@@ -47,9 +48,10 @@ const MENSAJE_USUARIO_EDITADO_ERROR_NOMBRE = "El nombre de usuario ya está en u
 const MENSAJE_USUARIO_EDITADO_ERROR = "Error: no se ha podido actualizar";
 const MENSAJE_REPETIR_EDITADO_ERROR = "Las contraseñas no coinciden";
 
-const usuarioLogeado = leerSesionLocal();
+
 
 function main() {
+    const usuarioLogeado = leerSesionLocal();
 
     let menu = document.getElementById(ID_MENU_ESCRITORIO);
     if (menu) {
@@ -177,6 +179,13 @@ function llamadaLogin(e) {
             if (contenedorMensaje) {
                 contenedorMensaje.classList.add(MENSAJE_ERROR);
                 contenedorMensaje.innerHTML = `<p>${MENSAJE_ERROR_LOGIN}</p>`;
+
+                let inputMenuHamburguesa = document.getElementById(ID_INPUT_MENU_HAMBURGUESA);
+                if (inputMenuHamburguesa) {
+                    inputMenuHamburguesa.checked = false;
+                }
+
+
             }
         }
 
@@ -293,8 +302,12 @@ function inicializarOpcionesAdmin() {
 // esto es para el formulario de editar usuario en modo administrador
 // habilita el input para dar el permiso de admin al usuario que se está editando
 function inicializarOpcionesAdminFormularioUsuario() {
+    const usuarioLogeado = leerSesionLocal();
+
     let contenedorForm = document.getElementById(ID_FORMULARIO_EDITAR_USUARIO);
+
     if (contenedorForm) {
+
         let contenedorInputAdmin = document.createElement("div");
         contenedorInputAdmin.classList.add(CLASE_CONTENEDOR_INPUT_ADMIN);
         let inputCheckAdmin = document.createElement("input");
@@ -314,5 +327,6 @@ function inicializarOpcionesAdminFormularioUsuario() {
 
 
 function editarUsuarioListener() {
+    const usuarioLogeado = leerSesionLocal();
     localStorage.setItem(LOCAL_EDITAR_USUARIO_ID, usuarioLogeado["id"]);
 }

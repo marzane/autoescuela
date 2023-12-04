@@ -15,6 +15,7 @@ const MENSAJE_BORRAR_USUARIO_ERROR = "No se ha podido eliminar";
 
 
 function main() {
+    const usuarioLogeado = leerSesionLocal();
 
     if (usuarioLogeado["nombre"]) {
         const xhr = new XMLHttpRequest();

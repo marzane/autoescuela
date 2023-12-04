@@ -79,6 +79,8 @@ function llamadaDescargarUsuario(e) {
     if (e.target.status == 200) {
         resultado = JSON.parse(e.target.responseText);
 
+        const usuarioLogeado = leerSesionLocal();
+
         if (resultado["NOMBRE"]) {
             if (resultado["ID"] != usuarioLogeado["id"] && usuarioLogeado["admin"] != 1) {
                 location.replace(URL_PAGINAS_HTML + PAGINA_INICIO);
@@ -103,6 +105,7 @@ function llamadaDescargarUsuario(e) {
 
 // listener para comprobar y enviar los datos del formulario
 function enviarDatosFormListener() {
+    const usuarioLogeado = leerSesionLocal();
 
     let nombreUsuarioForm = document.getElementById(ID_INPUT_USUARIO_NOMBRE)?.value;
     let passwordUsuarioForm = document.getElementById(ID_INPUT_USUARIO_PASSWORD)?.value;

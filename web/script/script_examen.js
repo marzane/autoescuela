@@ -18,6 +18,7 @@ const URL_GUARDAR_FALLADAS = `${URL_PHP}guardar_resultado.php`;
 
 
 function main() {
+    const usuarioLogeado = leerSesionLocal();
 
     elementoContenedorPreguntas = document.getElementById(ID_CONTENEDOR_PREGUNTAS_FALLOS);
     let url = URL_DESCARGAR_PREGUNTAS_FALLOS;
@@ -159,6 +160,9 @@ function descargarSoluciones(e) {
             }
 
             alert(`Aciertos: ${aciertos}\nfallos: ${fallos}`);
+
+
+            const usuarioLogeado = leerSesionLocal();
 
             if (usuarioLogeado["nombre"]) {
                 // guardo las preguntas falladas para los examenes de fallos

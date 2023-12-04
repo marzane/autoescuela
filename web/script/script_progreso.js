@@ -6,6 +6,8 @@ const URL_DESCARGAR_PROGRESO = `${URL_PHP}descargar_progreso.php`;
 
 function main() {
 
+    const usuarioLogeado = leerSesionLocal();
+
     const xhr = new XMLHttpRequest();
     let datos = new FormData();
     datos.append("usuario", usuarioLogeado["id"]);
