@@ -1,9 +1,9 @@
 
 <?php
     // parametros
-    $conn = 'mysql:host=localhost;port=3306;dbname=nombreDB';
-    $username = '';
-    $password = '';
+    $conn = 'mysql:host=localhost;port=3306;dbname=nombreDB';  // base de datos
+    $username = '';     // usuario de la base
+    $password = '';     // contraseña del usuario
     $options = array(
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'",  // codificaci贸n de caracteres en UTF8 para evitar problemas con tildes
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // para devolver los datos como objetos en lugar de arrays
