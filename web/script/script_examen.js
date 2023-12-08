@@ -141,6 +141,7 @@ function descargarSoluciones(e) {
 
             let aciertos = 0;
             let fallos = 0;
+            let estado = "Suspenso";
 
             let preguntasFalladas = [];  // aqui se guardaran los id de las preguntas falladas
             let preguntasAcertadas = [];  // aqui se guardaran los id de las preguntas acertadas
@@ -165,7 +166,13 @@ function descargarSoluciones(e) {
                 }
             }
 
-            alert(`Aciertos: ${aciertos}\nfallos: ${fallos}`);
+            if(fallos == 0){
+                estado = "Perfecto";
+            } else if(fallos <= 3 && fallos > 0){
+                estado = "Aprobado";
+            }
+
+            alert(`${estado}\nAciertos: ${aciertos}\nfallos: ${fallos}`);
             
             
             const usuarioLogeado = leerSesionLocal();
