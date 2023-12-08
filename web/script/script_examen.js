@@ -172,7 +172,7 @@ function descargarSoluciones(e) {
                 estado = "Aprobado";
             }
 
-            alert(`${estado}\nAciertos: ${aciertos}\nfallos: ${fallos}`);
+            alert(`${estado}\n\nAciertos: ${aciertos}\nfallos: ${fallos}`);
             
             
             const usuarioLogeado = leerSesionLocal();
